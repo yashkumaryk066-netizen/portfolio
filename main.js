@@ -273,38 +273,79 @@ function initCounters() {
   counters.forEach(c => observer.observe(c));
 }
 
-// ===== CONTACT FORM =====
+// ===== CONTACT FORM — Formspree Backend =====
+// Formspree se messages seedha Gmail pe aate hain (FREE backend)
+// Setup: formspree.io → account banao → form banao → ID yahan dalo
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpwzgqlb'; // yashkumaryk066@gmail.com
+
 function handleFormSubmit(e) {
   e.preventDefault();
   const submitText = document.getElementById('submit-text');
   const submitLoading = document.getElementById('submit-loading');
   const formSuccess = document.getElementById('form-success');
+  const formError = document.getElementById('form-error');
   const form = document.getElementById('contact-form');
+  const btn = document.getElementById('submit-btn');
 
-  // Get form values
-  const name = document.getElementById('form-name').value;
-  const email = document.getElementById('form-email').value;
-  const subject = document.getElementById('form-subject').value;
-  const message = document.getElementById('form-message').value;
+  const name = document.getElementById('form-name').value.trim();
+  const email = document.getElementById('form-email').value.trim();
+  const subject = document.getElementById('form-subject').value.trim();
+  const message = document.getElementById('form-message').value.trim();
 
+  // Show loading
   submitText.style.display = 'none';
-  submitLoading.style.display = 'block';
+  submitLoading.style.display = 'inline-flex';
+  btn.disabled = true;
 
-  // Open mailto as fallback (no backend needed)
-  const mailtoLink = `mailto:yashkumaryk066@gmail.com?subject=${encodeURIComponent(subject + ' — from ' + name)}&body=${encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message)}`;
+  if (formError) formError.style.display = 'none';
 
-  setTimeout(() => {
-    window.open(mailtoLink, '_blank');
-    submitText.style.display = 'flex';
+  // Send via Formspree (real backend — stores in dashboard + emails you)
+  fetch(FORMSPREE_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({ name, email, subject, message,
+      _replyto: email,
+      _subject: `📮 Portfolio Contact: ${subject} — from ${name}`
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    submitText.style.display = 'inline-flex';
     submitLoading.style.display = 'none';
+    btn.disabled = false;
+
+    if (data.ok || data.next) {
+      // SUCCESS
+      formSuccess.style.display = 'flex';
+      form.reset();
+      // Confetti burst on success
+      if (typeof gsap !== 'undefined') {
+        gsap.fromTo(formSuccess,
+          { opacity: 0, scale: 0.8, y: 10 },
+          { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: 'back.out(1.7)' }
+        );
+      }
+      setTimeout(() => { formSuccess.style.display = 'none'; }, 6000);
+    } else {
+      throw new Error('Formspree not activated');
+    }
+  })
+  .catch(() => {
+    // FALLBACK: Open Gmail directly
+    submitText.style.display = 'inline-flex';
+    submitLoading.style.display = 'none';
+    btn.disabled = false;
+
+    const mailtoLink = `mailto:yashkumaryk066@gmail.com?subject=${encodeURIComponent('📮 ' + subject + ' — from ' + name)}&body=${encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message)}`;
+    window.open(mailtoLink, '_blank');
     formSuccess.style.display = 'flex';
     form.reset();
-    setTimeout(() => { formSuccess.style.display = 'none'; }, 5000);
-  }, 1000);
+    setTimeout(() => { formSuccess.style.display = 'none'; }, 6000);
+  });
 }
 
 function initContactForm() {
-  // Already handled by handleFormSubmit which is called via onsubmit
+  // Handled by handleFormSubmit via onsubmit attribute
 }
 
 // ===== BACK TO TOP =====
