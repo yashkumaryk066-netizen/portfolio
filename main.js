@@ -1208,7 +1208,9 @@ function initAIChat() {
     "skills": "Yash is an expert in Python, React, AI (Gemini/OpenAI), and Mobile Dev! ⚡",
     "job": "He currently works at Telepathy Infotech as a Software Developer. 👨‍💻",
     "projects": "He has built 5 live products like Scan Khana, SettleStack, and Y.S.M ERP! 🚀",
-    "hello": "Hi there! Ask me about Yash's career or technical products. 😊"
+    "hello": "Hi there! Ask me about Yash's career or technical products. 😊",
+    "name": "Yash A Mishra",
+    "village":"Bihar,Rangra,853205"
   };
 
   function handleSend() {

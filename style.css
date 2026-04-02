@@ -3495,3 +3495,25 @@ body {
     .section-title { font-size: 1.8rem !important; }
     .trust-card { padding: 20px !important; }
 }
+
+/* ===== 📐 PREMIUM PROPORTIONAL PORTRAIT UPGRADE ===== */
+.about-photo-frame {
+    width: 450px !important;    /* Size Increased for better fit */
+    height: 560px !important;   /* Matches the story text height */
+}
+
+@media (max-width: 1200px) {
+    .about-photo-frame {
+        width: 380px !important;
+        height: 480px !important;
+    }
+}
+
+@media (max-width: 992px) {
+    .about-photo-frame {
+        width: 100% !important;
+        max-width: 320px !important;
+        aspect-ratio: 3 / 4;
+        height: auto !important;
+    }
+}
