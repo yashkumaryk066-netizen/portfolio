@@ -3575,3 +3575,19 @@ body {
         filter: blur(2px) grayscale(50%);
     }
 }
+
+/* ===== 🔄 ELITE LOTTIE PLAYER STYLING ===== */
+.hero-avatar-lottie {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px auto;
+    display: block;
+    filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.4));
+}
+
+@media (max-width: 768px) {
+    .hero-avatar-lottie {
+        width: 150px;
+        height: 150px;
+    }
+}
