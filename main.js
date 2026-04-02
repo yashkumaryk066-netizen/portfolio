@@ -1327,3 +1327,64 @@ function initPdfGenerator() {
         });
     }
 }
+
+/* ===== 🎮 INTERACTIVE DRAGGABLE PLAYGROUND ENGINE ===== */
+function initDraggableElements() {
+    const draggables = document.querySelectorAll('.floating-badge, .fab-btn, .hero-avatar-memoji');
+    
+    draggables.forEach(el => {
+        let isDragging = false;
+        let startX, startY;
+        let initialX, initialY;
+
+        el.style.cursor = 'grab';
+        el.style.transition = 'none'; // Instant response during drag
+
+        el.addEventListener('mousedown', startDrag);
+        el.addEventListener('touchstart', startDrag, { passive: false });
+
+        function startDrag(e) {
+            isDragging = true;
+            el.style.cursor = 'grabbing';
+            el.style.zIndex = '1000'; // Bring to front while dragging
+            
+            const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+            
+            const rect = el.getBoundingClientRect();
+            startX = clientX - rect.left;
+            startY = clientY - rect.top;
+            
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('touchmove', drag, { passive: false });
+            document.addEventListener('mouseup', stopDrag);
+            document.addEventListener('touchend', stopDrag);
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+            if (e.type === 'touchmove') e.preventDefault(); // Prevent scroll while dragging
+
+            const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+            
+            let x = clientX - startX;
+            let y = clientY - startY;
+
+            el.style.position = 'fixed';
+            el.style.left = `${x}px`;
+            el.style.top = `${y}px`;
+            el.style.margin = '0';
+        }
+
+        function stopDrag() {
+            isDragging = false;
+            el.style.cursor = 'grab';
+            document.removeEventListener('mousemove', drag);
+            document.removeEventListener('touchmove', drag);
+        }
+    });
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', initDraggableElements);
