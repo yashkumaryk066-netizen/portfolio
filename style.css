@@ -3387,3 +3387,58 @@ footer {
     opacity: 0.6;
     font-weight: 500;
 }
+
+/* ===== 📐 PRO ABOUT SECTION BALANCE ===== */
+.about-grid-new {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.about-photo-col {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.about-photo-frame {
+    width: 380px;
+    height: 480px;
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+}
+
+.about-photo-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.about-photo-frame:hover img {
+    transform: scale(1.05);
+}
+
+.about-photo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+@media (max-width: 992px) {
+    .about-grid-new { grid-template-columns: 1fr; text-align: center; }
+    .about-photo-col { order: -1; margin-bottom: 40px; }
+    .about-photo-frame { width: 300px; height: 380px; margin: 0 auto; }
+}
