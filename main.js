@@ -795,7 +795,7 @@ function initFuturisticBackground() {
     ctxB.fillText(keyword, 10, 45);
     
     const texture = new THREE.CanvasTexture(canvasB);
-    const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, opacity: 0.25 });
+    const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, opacity: 0.45 }); // Boosted from 0.25
     
     // Aspect ratio plane based on text length
     const geometry = new THREE.PlaneGeometry((textWidth/64) * 0.8, 0.8);
