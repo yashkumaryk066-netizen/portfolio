@@ -560,25 +560,30 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  font-size: 0.75rem;
-  letter-spacing: 2px;
+  gap: 12px;
+  font-size: 0.85rem; /* Larger font */
+  font-weight: 700;
+  letter-spacing: 4px; /* More spacing for premium look */
   text-transform: uppercase;
-  color: var(--text-faint);
+  color: var(--primary-light);
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
   animation: fadeIn 1s 1.5s ease forwards;
   opacity: 0;
 }
 
 .scroll-line {
-  width: 1px;
-  height: 48px;
-  background: linear-gradient(to bottom, var(--primary), transparent);
+  width: 2px; /* Thicker line */
+  height: 60px; /* Taller line */
+  background: linear-gradient(to bottom, #8b5cf6, #06b6d4, transparent);
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.8); /* Brighter glow */
   animation: scrollLine 2s ease-in-out infinite;
+  transform-origin: top;
 }
 
 @keyframes scrollLine {
-  0%, 100% { transform: scaleY(1); opacity: 1; }
-  50% { transform: scaleY(0.5); opacity: 0.5; }
+  0% { transform: scaleY(0); opacity: 0; }
+  50% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(0); opacity: 0; transform-origin: bottom; }
 }
 
 /* Floating badges */
