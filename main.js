@@ -1142,16 +1142,20 @@ function initSoundUX() {
 // ===== RESUME MODAL LOGIC =====
 function initResumeModal() {
   const openBtn = document.getElementById('open-resume-btn');
+  const navBtn = document.getElementById('nav-resume-btn');
   const closeBtn = document.getElementById('close-resume-btn');
   const modal = document.getElementById('resume-modal');
 
-  if (!openBtn || !modal) return;
+  if (!modal) return;
 
-  openBtn.addEventListener('click', (e) => {
+  const openResume = (e) => {
     e.preventDefault();
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent scroll
-  });
+    document.body.style.overflow = 'hidden';
+  };
+
+  if (openBtn) openBtn.addEventListener('click', openResume);
+  if (navBtn) navBtn.addEventListener('click', openResume);
 
   closeBtn.addEventListener('click', () => {
     modal.classList.remove('active');
