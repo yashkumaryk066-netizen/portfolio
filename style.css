@@ -2269,3 +2269,93 @@ html {
 #skill-sphere-container canvas {
   filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.5));
 }
+
+/* ===== LEGENDARY: SOUND TOGGLE & SLIDER ===== */
+.sound-toggle {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  color: #8b5cf6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.sound-toggle:hover {
+  background: rgba(139, 92, 246, 0.3);
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+/* INFINITE TECH SLIDER */
+.infinite-slider-container {
+  width: 100%;
+  background: rgba(13, 0, 26, 0.5);
+  border-top: 1px solid rgba(139, 92, 246, 0.1);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+  padding: 40px 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+}
+
+.slider-track {
+  display: flex;
+  width: max-content;
+  gap: 80px;
+  animation: scroll-left 30s linear infinite;
+}
+
+.slider-track span {
+  font-family: var(--font-main);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-faint);
+  opacity: 0.4;
+  white-space: nowrap;
+  transition: all 0.5s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.slider-track span:hover {
+  opacity: 1;
+  color: #06b6d4;
+  text-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* PROJECT HOLOGRAPHIC PEEK */
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(6,182,212,0.1));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  border-radius: inherit;
+  z-index: 1;
+}
+
+.project-card:hover::after {
+  opacity: 1;
+}
+
+.project-card .project-header, .project-card .project-name, .project-card .project-desc {
+  position: relative;
+  z-index: 2;
+}

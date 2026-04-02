@@ -30,6 +30,7 @@ function initAll() {
   initFuturisticBackground();
   initFloatingDynamics();
   initUltraEffects();
+  initSoundUX();
 }
 
 // ===== YEAR =====
@@ -1090,4 +1091,49 @@ function initSkillSphere() {
 function initSmoothLiquidScroll() {
   // GSAP ScrollTrigger auto handles smooth feel with lerp
   gsap.config({ force3D: true });
+}
+
+// ===== CYBER SOUND UX (CODE-GENERATED BEEPS) =====
+function initSoundUX() {
+  const toggle = document.getElementById('sound-toggle');
+  const icon = document.getElementById('sound-icon');
+  let isMuted = true; // Default mute for clean landing
+
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  
+  function playBeep(freq = 440, type = 'sine', vol = 0.05, duration = 0.1) {
+    if (isMuted) return;
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+    
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  }
+
+  // Hook sounds to buttons and links
+  const interactives = document.querySelectorAll('a, button, .project-card, .skill-pill');
+  interactives.forEach(el => {
+    el.addEventListener('mouseenter', () => playBeep(880, 'sine', 0.03, 0.05));
+    el.addEventListener('click', () => playBeep(440, 'triangle', 0.1, 0.15));
+  });
+
+  // Toggle Logic
+  toggle.addEventListener('click', () => {
+    isMuted = !isMuted;
+    icon.className = isMuted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+    toggle.style.background = isMuted ? 'rgba(255, 95, 86, 0.1)' : 'rgba(139, 92, 246, 0.1)';
+    toggle.style.color = isMuted ? '#ff5f56' : '#8b5cf6';
+    
+    if (!isMuted) playBeep(660, 'sine', 0.1, 0.2); // Feedback sound
+  });
 }
