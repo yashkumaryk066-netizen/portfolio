@@ -2786,3 +2786,47 @@ html {
     0% { opacity: 0.2; transform: scale(0.9); }
     100% { opacity: 1; transform: scale(1); }
 }
+
+/* ===== BURJ KHALIFA LIGHT SHOW ===== */
+.laser-beam {
+    position: absolute;
+    top: -500px;
+    left: 50%;
+    width: 2px;
+    height: 500px;
+    background: linear-gradient(to top, rgba(139, 92, 246, 0.8), transparent);
+    transform: translateX(-50%);
+    opacity: 0;
+    box-shadow: 0 0 15px #8b5cf6;
+    animation: laserScan 6s infinite ease-in-out;
+}
+
+@keyframes laserScan {
+    0%, 100% { opacity: 0; transform: translateX(-50%) scaleY(0.1); }
+    50% { opacity: 0.6; transform: translateX(-50%) scaleY(1.5); }
+}
+
+.spire-light {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 20px white;
+    animation: spireStrobe 1.5s infinite;
+}
+
+@keyframes spireStrobe {
+    0%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+    50% { transform: translateX(-50%) scale(2.5); opacity: 0.2; box-shadow: 0 0 40px #8b5cf6; }
+}
+
+/* Color Wave across buildings */
+.building:nth-child(2n) .win.active { animation-delay: 0.2s; }
+.building:nth-child(3n) .win.active { animation-delay: 0.4s; }
+.building:nth-child(4n) .win.active { animation-delay: 0.6s; }
+.building:nth-child(5n) .win.active { animation-delay: 0.8s; }
+
