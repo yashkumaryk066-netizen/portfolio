@@ -16,6 +16,10 @@
   <title>Yash Ankush Mishra | Software Developer | Jaipur, Rajasthan</title>
   <meta name="description" content="Official Portfolio of Yash Ankush Mishra (yashankushmishra) — Creator of Scan Khana, SettleStack, Y.S.M AI, VibeTalk & Advance Education. Software Developer at Telepathy." />
   <meta name="keywords" content="Yash Ankush Mishra, yashankushmishra, yashamishra, Rangra Developer, Scan Khana Creator, SettleStack Developer, Y.S.M AI Official, VibeTalk, Advance Education System, Software Developer Jaipur" />
+  <!-- BROWSER THEME BRANDING (X-Audit Fix) -->
+  <meta name="theme-color" content="#0a0a0f" />
+  <meta name="msapplication-navbutton-color" content="#0a0a0f" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="author" content="Yash Ankush Mishra" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <link rel="canonical" href="https://yashamishra.in/" />
@@ -628,18 +632,26 @@
 <!-- ===== WALL OF RECOMMENDATIONS (SOCIAL PROOF) ===== -->
 <div class="recommendations-container reveal">
   <h2 class="section-heading"><span class="heading-glow">Wall of Trust</span></h2>
-  <div class="recom-flex">
-    <div class="recom-card">
-      <div class="recom-icon">“</div>
-      <p>"Yash brings a unique blend of AI expertise and product mindset. He delivered SettleStack with zero critical bugs."</p>
-      <div class="recom-author">— Lead Developer, Telepathy</div>
+  <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">"Yash's vision for Scan Khana changed how we view AI in food-tech. His ability to turn complex logic into a seamless user experience is rare and highly valuable."</p>
+        <div class="testimonial-author">
+          <div class="author-info">
+            <h4 class="author-name">Senior Manager</h4>
+            <span class="author-role">Telepathy Infotech Pvt. Ltd.</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <p class="testimonial-text">"SettleStack reflects Yash's precision in FinTech development. The transparency and efficiency he built into the platform are of industrial standard."</p>
+        <div class="testimonial-author">
+          <div class="author-info">
+            <h4 class="author-name">Strategic Partner</h4>
+            <span class="author-name">Scan Khana AI Ecosystem</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="recom-card">
-      <div class="recom-icon">“</div>
-      <p>"His ability to implement complex AI models like the one in Scan Khana is commendable. A true problem solver."</p>
-      <div class="recom-author">— Tech Lead, Netizen</div>
-    </div>
-  </div>
 </div>
 
   </div>
@@ -714,33 +726,21 @@
       </div>
 
       <div class="contact-form-wrap reveal" id="contact-form-wrap">
-        <form id="contact-form" class="contact-form" onsubmit="handleFormSubmit(event)">
-          <div class="form-group" id="fg-name">
-            <label for="form-name">Your Name</label>
-            <input type="text" id="form-name" name="name" placeholder="Rahul Sharma" required autocomplete="name" />
+        <h3 class="contact-title">Send a Message</h3>
+        <form id="contact-form" action="https://formspree.io/f/xpwzklay" method="POST" class="contact-form">
+          <!-- Formspree needs name attributes -->
+          <div class="form-group">
+            <input type="text" name="name" id="name" placeholder="Your Name" required />
           </div>
-          <div class="form-group" id="fg-email">
-            <label for="form-email">Your Email</label>
-            <input type="email" id="form-email" name="email" placeholder="rahul@example.com" required autocomplete="email" />
+          <div class="form-group">
+            <input type="email" name="email" id="email" placeholder="Your Email" required />
           </div>
-          <div class="form-group" id="fg-subject">
-            <label for="form-subject">Subject</label>
-            <input type="text" id="form-subject" name="subject" placeholder="Project Collaboration / Hire / General" required />
+          <div class="form-group">
+            <textarea name="message" id="message" rows="5" placeholder="Your Message" required></textarea>
           </div>
-          <div class="form-group" id="fg-message">
-            <label for="form-message">Message</label>
-            <textarea id="form-message" name="message" rows="5" placeholder="Hi Yash, I'd love to collaborate on..." required></textarea>
-          </div>
-          <button type="submit" class="btn-submit" id="submit-btn">
-            <span id="submit-text"><i class="fas fa-paper-plane"></i> Send Message</span>
-            <span id="submit-loading" style="display:none;"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
+          <button type="submit" class="btn-primary form-submit" id="submit-btn" style="width: 100%;">
+            <i class="fas fa-paper-plane"></i> Send Message
           </button>
-          <p class="form-note" id="form-note">
-            <i class="fas fa-shield-alt"></i> Your info is safe with me. No spam, ever.
-          </p>
-          <div id="form-success" class="form-success" style="display:none;">
-            <i class="fas fa-check-circle"></i> Message sent! I'll get back to you soon. 🚀
-          </div>
         </form>
       </div>
     </div>
