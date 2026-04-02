@@ -3180,3 +3180,18 @@ html, body {
         height: 70px;
     }
 }
+
+/* ===== HERO 3D AVATAR (Final Fixed) ===== */
+.hero-avatar-memoji {
+    width: 100px;
+    height: 100px;
+    vertical-align: middle;
+    margin-right: 15px;
+    filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.4));
+}
+@media (max-width: 768px) {
+    .hero-avatar-memoji {
+        width: 75px;
+        height: 75px;
+    }
+}
