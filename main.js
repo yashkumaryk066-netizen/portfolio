@@ -27,6 +27,7 @@ function initAll() {
   initMagneticButtons();
   initGSAPTitles();
   initHeroParallax();
+  initDraggableBadges();
 }
 
 // ===== YEAR =====
@@ -580,4 +581,84 @@ function initHeroParallax() {
       lottie.style.transition = 'transform 0.8s cubic-bezier(0.4,0,0.2,1)';
     }
   });
+}
+
+// ===== DRAGGABLE FLOATING BADGES =====
+function initDraggableBadges() {
+  const badges = document.querySelectorAll('.floating-badge');
+  if (!badges.length) return;
+  badges.forEach(badge => {
+    let isDragging = false;
+    let startX = 0, startY = 0, currentX = 0, currentY = 0;
+    let velX = 0, velY = 0, animFrameId = null;
+    badge.style.cursor = 'grab';
+    badge.style.userSelect = 'none';
+    badge.style.touchAction = 'none';
+    badge.title = 'Drag me! 🎯';
+    function onDown(e) {
+      e.preventDefault();
+      isDragging = true;
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      const cy = e.touches ? e.touches[0].clientY : e.clientY;
+      startX = cx - currentX; startY = cy - currentY;
+      badge.style.cursor = 'grabbing';
+      badge.style.transition = 'none';
+      badge.style.zIndex = '200';
+      badge.style.boxShadow = '0 16px 48px rgba(139,92,246,0.55)';
+      badge.style.borderColor = 'rgba(139,92,246,0.8)';
+      badge.style.background = 'rgba(139,92,246,0.18)';
+      badge.style.transform = `translate(${currentX}px,${currentY}px) scale(1.18)`;
+      if (animFrameId) cancelAnimationFrame(animFrameId);
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+      document.addEventListener('touchmove', onMove, {passive:false});
+      document.addEventListener('touchend', onUp);
+    }
+    function onMove(e) {
+      if (!isDragging) return;
+      e.preventDefault();
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      const cy = e.touches ? e.touches[0].clientY : e.clientY;
+      const nx = cx - startX, ny = cy - startY;
+      velX = nx - currentX; velY = ny - currentY;
+      currentX = nx; currentY = ny;
+      badge.style.transform = `translate(${currentX}px,${currentY}px) scale(1.14)`;
+    }
+    function onUp() {
+      isDragging = false;
+      badge.style.cursor = 'grab';
+      badge.style.boxShadow = ''; badge.style.borderColor = ''; badge.style.background = '';
+      document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseup', onUp);
+      document.removeEventListener('touchmove', onMove); document.removeEventListener('touchend', onUp);
+      springReturn();
+    }
+    function springReturn() {
+      const k = 0.10, d = 0.72;
+      function tick() {
+        if (isDragging) return;
+        velX = (velX + (0 - currentX) * k) * d;
+        velY = (velY + (0 - currentY) * k) * d;
+        currentX += velX; currentY += velY;
+        badge.style.transform = `translate(${currentX}px,${currentY}px) scale(1)`;
+        if (Math.abs(currentX) < 0.4 && Math.abs(currentY) < 0.4 && Math.abs(velX) < 0.2 && Math.abs(velY) < 0.2) {
+          currentX = 0; currentY = 0;
+          badge.style.transform = ''; badge.style.zIndex = ''; return;
+        }
+        animFrameId = requestAnimationFrame(tick);
+      }
+      animFrameId = requestAnimationFrame(tick);
+    }
+    badge.addEventListener('mousedown', onDown);
+    badge.addEventListener('touchstart', onDown, {passive:false});
+    badge.addEventListener('mouseenter', () => { if (!isDragging) badge.style.transform = `translate(${currentX}px,${currentY}px) scale(1.1)`; });
+    badge.addEventListener('mouseleave', () => { if (!isDragging) badge.style.transform = `translate(${currentX}px,${currentY}px) scale(1)`; });
+  });
+  // Bounce hint after 2.5s
+  setTimeout(() => {
+    badges.forEach((b,i) => setTimeout(() => {
+      b.style.transition = 'transform 0.4s cubic-bezier(0.34,1.56,0.64,1)';
+      b.style.transform = 'scale(1.2)';
+      setTimeout(() => { b.style.transform = ''; }, 350);
+    }, i * 200));
+  }, 2500);
 }
