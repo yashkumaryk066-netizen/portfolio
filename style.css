@@ -3517,3 +3517,30 @@ body {
         height: auto !important;
     }
 }
+
+/* ===== 🚀 AVATAR 3D POP & WAVE LOOP ===== */
+.hero-avatar-memoji {
+    animation: eliteAvatarLoop 4s ease-in-out infinite !important;
+    transform-origin: bottom center;
+    perspective: 1000px;
+}
+
+@keyframes eliteAvatarLoop {
+    0%, 100% { 
+        transform: scale(1) translateY(0); 
+        filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.4));
+    }
+    15% { 
+        transform: scale(1.15) translateY(-20px); /* Coming OUT of the frame */
+        filter: drop-shadow(0 20px 30px rgba(139, 92, 246, 0.6));
+    }
+    20%, 30%, 40%, 50%, 60% { 
+        transform: scale(1.15) translateY(-20px) rotate(-10deg); /* Waving starting position */
+    }
+    25%, 35%, 45%, 55% { 
+        transform: scale(1.15) translateY(-20px) rotate(10deg); /* Waving hand action */
+    }
+    80% { 
+        transform: scale(1) translateY(0); /* Settling back */
+    }
+}
