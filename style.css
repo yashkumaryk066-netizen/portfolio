@@ -648,6 +648,16 @@ body {
   position: relative;
   width: 280px;
   height: 280px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .avatar-frame {
+    width: 240px !important;
+    height: 240px !important;
+    display: block !important;
+    visibility: visible !important;
+  }
 }
 
 .avatar-inner {
@@ -1624,8 +1634,13 @@ body {
   .nav-links { display: none; }
   .hamburger { 
     display: flex; 
-    z-index: 10001 !important; /* Higher than menu overlay */
-    position: relative;
+    z-index: 99999 !important; /* ULTRA HIGH PRIORITY */
+    position: fixed; /* LOCKED POSITION */
+    top: 15px;
+    right: 15px;
+  }
+  #navbar {
+    z-index: 10000;
   }
   body { cursor: auto; }
   #cursor-dot, #cursor-ring { display: none; }
