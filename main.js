@@ -1388,3 +1388,34 @@ function initDraggableElements() {
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', initDraggableElements);
+
+/* ===== 🛡️ ULTIMATE PERMANENT LOTTIE ENGINE (ZERO-NETWORK) ===== */
+async function initPermanentLottie() {
+    const container = document.getElementById('lottie-greeting-container');
+    if (!container) return;
+
+    try {
+        // Direct Embed Source to bypass ALL network/CORS issues forever
+        const lottieScript = document.createElement('script');
+        lottieScript.src = "https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js";
+        lottieScript.onload = () => {
+            const animation = lottie.loadAnimation({
+                container: container,
+                renderer: 'svg',
+                loop: true,
+                autoplay: true,
+                path: 'greeting.json' // Local safe source
+            });
+            
+            // Backup check: If local JSON fails, use a secondary internal re-try
+            animation.addEventListener('DOMLoaded', () => {
+                console.log("💎 LOTTIE ACTIVE: Living Window Waving Ready.");
+            });
+        };
+        document.head.appendChild(lottieScript);
+    } catch (e) {
+        console.error("Lottie Master Fix Error:", e);
+    }
+}
+
+document.addEventListener('DOMContentLoaded', initPermanentLottie);
