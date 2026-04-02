@@ -135,12 +135,14 @@
   <div class="hero-skyline-silhouette" id="hero-skyline"></div>
 </div>
 
+<!-- ===== CRYSTAL SPOTLIGHT OVERLAY ===== -->
+<div id="crystal-spotlight" class="crystal-spotlight" aria-hidden="true"></div>
+
+<!-- ===== CUSTOM FLUID CURSOR 2.0 ===== -->
+<div id="fluid-cursor" class="fluid-cursor"></div>
+
 <!-- ===== NOISE OVERLAY ===== -->
 <div class="noise-overlay" aria-hidden="true"></div>
-
-<!-- ===== CUSTOM CURSOR ===== -->
-<div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
 
 <!-- ===== PARTICLES CANVAS ===== -->
 <canvas id="particles-canvas"></canvas>
@@ -294,6 +296,20 @@
           AI, EdTech, FinTech, Food-Tech, and Communication — reaching real users and solving real problems.
           My philosophy is simple: <em>build things that matter, ship fast, and iterate relentlessly.</em>
         </p>
+        
+        <!-- ===== HOLOGRAPHIC TERMINAL ===== -->
+        <div class="holographic-terminal-container reveal" id="terminal-container">
+          <div class="terminal-header">
+            <div class="terminal-dots"><span></span><span></span><span></span></div>
+            <span class="terminal-title">yash@telepathy_infotech:~/story</span>
+          </div>
+          <div class="terminal-body" id="holographic-terminal">
+            <div class="terminal-line"><span class="terminal-prompt">$</span> <span class="terminal-typing" data-text="Opening origin_story.sh...">Initializing...</span></div>
+            <div class="terminal-line"><span class="terminal-prompt">$</span> <span class="terminal-typing" data-text="Product: Scan Khana — AI FoodTech launched on Vercel."></span></div>
+            <div class="terminal-line"><span class="terminal-prompt">$</span> <span class="terminal-typing" data-text="Product: SettleStack — React Native splitbill shipped."></span></div>
+            <div class="terminal-line"><span class="terminal-prompt">$</span> <span class="terminal-typing" data-text="Status: Building the future at Telepathy Infotech... [Ready]"></span></div>
+          </div>
+        </div>
         <div class="about-highlights">
           <div class="highlight-item" id="hl-location">
             <i class="fas fa-map-marker-alt"></i>
@@ -469,60 +485,13 @@
       <span class="section-tag">Tech Arsenal</span>
       <h2 class="section-title">Skills & <span class="gradient-text">Technologies</span></h2>
     </div>
-    <div class="skills-grid" id="skills-grid">
-      <div class="skill-category reveal" id="sc-languages">
-        <h3 class="skill-cat-title"><i class="fas fa-code"></i> Languages</h3>
-        <div class="skill-items">
-          <div class="skill-pill"><span class="skill-emoji">🐍</span> Python</div>
-          <div class="skill-pill"><span class="skill-emoji">💛</span> JavaScript</div>
-          <div class="skill-pill"><span class="skill-emoji">💙</span> TypeScript</div>
-          <div class="skill-pill"><span class="skill-emoji">🌐</span> HTML/CSS</div>
-        </div>
+    <!-- ===== 3D SKILL SPHERE CONTAINER ===== -->
+    <div class="skill-sphere-wrapper reveal" id="skill-sphere-wrapper">
+      <div id="skill-sphere-container" class="skill-sphere-container">
+        <!-- Three.js will inject canvas here -->
       </div>
-      <div class="skill-category reveal" id="sc-frameworks">
-        <h3 class="skill-cat-title"><i class="fas fa-layer-group"></i> Frameworks</h3>
-        <div class="skill-items">
-          <div class="skill-pill"><span class="skill-emoji">🎸</span> Django</div>
-          <div class="skill-pill"><span class="skill-emoji">⚛️</span> React</div>
-          <div class="skill-pill"><span class="skill-emoji">📱</span> React Native</div>
-          <div class="skill-pill"><span class="skill-emoji">⚡</span> Next.js</div>
-        </div>
-      </div>
-      <div class="skill-category reveal" id="sc-backend">
-        <h3 class="skill-cat-title"><i class="fas fa-server"></i> Backend & DB</h3>
-        <div class="skill-items">
-          <div class="skill-pill"><span class="skill-emoji">🔥</span> Firebase</div>
-          <div class="skill-pill"><span class="skill-emoji">🐘</span> PostgreSQL</div>
-          <div class="skill-pill"><span class="skill-emoji">🌿</span> MongoDB</div>
-          <div class="skill-pill"><span class="skill-emoji">🔴</span> Redis</div>
-        </div>
-      </div>
-      <div class="skill-category reveal" id="sc-ai">
-        <h3 class="skill-cat-title"><i class="fas fa-brain"></i> AI & APIs</h3>
-        <div class="skill-items">
-          <div class="skill-pill"><span class="skill-emoji">🤖</span> OpenAI GPT</div>
-          <div class="skill-pill"><span class="skill-emoji">💎</span> Google Gemini</div>
-          <div class="skill-pill"><span class="skill-emoji">🦙</span> HuggingFace</div>
-          <div class="skill-pill"><span class="skill-emoji">🧠</span> TensorFlow</div>
-        </div>
-      </div>
-      <div class="skill-category reveal" id="sc-devops">
-        <h3 class="skill-cat-title"><i class="fas fa-cloud"></i> Cloud & DevOps</h3>
-        <div class="skill-items">
-          <div class="skill-pill"><span class="skill-emoji">▲</span> Vercel</div>
-          <div class="skill-pill"><span class="skill-emoji">🐍</span> PythonAnywhere</div>
-          <div class="skill-pill"><span class="skill-emoji">🔥</span> Firebase Hosting</div>
-          <div class="skill-pill"><span class="skill-emoji">🐙</span> GitHub</div>
-        </div>
-      </div>
-      <div class="skill-category reveal" id="sc-tools">
-        <h3 class="skill-cat-title"><i class="fas fa-tools"></i> Tools</h3>
-        <div class="skill-items">
-          <div class="skill-pill"><span class="skill-emoji">📦</span> Expo</div>
-          <div class="skill-pill"><span class="skill-emoji">🎨</span> Figma</div>
-          <div class="skill-pill"><span class="skill-emoji">📬</span> REST APIs</div>
-          <div class="skill-pill"><span class="skill-emoji">🔌</span> WebSocket</div>
-        </div>
+      <div class="skill-sphere-overlay">
+        <p>Interactive 3D Skill Sphere — Drag to Rotate icon cloud</p>
       </div>
     </div>
   </div>

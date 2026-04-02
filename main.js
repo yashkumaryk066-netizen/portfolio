@@ -10,7 +10,6 @@ window.addEventListener('load', () => {
 });
 
 function initAll() {
-  initCursor();
   initParticles();
   initNavbar();
   initTyped();
@@ -30,6 +29,7 @@ function initAll() {
   initDraggableBadges();
   initFuturisticBackground();
   initFloatingDynamics();
+  initUltraEffects();
 }
 
 // ===== YEAR =====
@@ -912,4 +912,168 @@ function initFloatingDynamics() {
       }
     });
   });
+}
+
+// ===== 5 ULTRA-PREMIUM EFFECTS CONTROLLER =====
+function initUltraEffects() {
+  initFluidCursor2();
+  initCrystalSpotlight();
+  initHolographicTerminal();
+  initSkillSphere();
+  initSmoothLiquidScroll();
+}
+
+// 1. FLUID CURSOR 2.0
+function initFluidCursor2() {
+  const cursor = document.getElementById('fluid-cursor');
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateCursor() {
+    cursorX += (mouseX - cursorX) * 0.15;
+    cursorY += (mouseY - cursorY) * 0.15;
+    cursor.style.left = `${cursorX}px`;
+    cursor.style.top = `${cursorY}px`;
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // Snapping effect on buttons
+  const buttons = document.querySelectorAll('a, button, .skill-pill');
+  buttons.forEach(btn => {
+    btn.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(4)';
+      cursor.style.background = 'rgba(139, 92, 246, 0.4)';
+    });
+    btn.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      cursor.style.background = 'white';
+    });
+  });
+}
+
+// 2. CRYSTAL SPOTLIGHT
+function initCrystalSpotlight() {
+  window.addEventListener('mousemove', (e) => {
+    const x = (e.clientX / window.innerWidth) * 100;
+    const y = (e.clientY / window.innerHeight) * 100;
+    document.documentElement.style.setProperty('--mouse-x', `${x}%`);
+    document.documentElement.style.setProperty('--mouse-y', `${y}%`);
+  });
+}
+
+// 3. HOLOGRAPHIC TERMINAL TYPING
+function initHolographicTerminal() {
+  const lines = document.querySelectorAll('#holographic-terminal .terminal-typing');
+  let currentLine = 0;
+
+  function typeLine(lineIndex) {
+    if (lineIndex >= lines.length) return;
+    const line = lines[lineIndex];
+    const text = line.getAttribute('data-text');
+    let charIndex = 0;
+
+    function type() {
+      if (charIndex < text.length) {
+        line.textContent += text.charAt(charIndex);
+        charIndex++;
+        setTimeout(type, 30 + Math.random() * 50);
+      } else {
+        setTimeout(() => typeLine(lineIndex + 1), 500);
+      }
+    }
+    type();
+  }
+
+  // Start when terminal is in view
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      typeLine(0);
+      observer.disconnect();
+    }
+  }, { threshold: 0.5 });
+  observer.observe(document.getElementById('terminal-container'));
+}
+
+// 4. 3D SKILL SPHERE (Three.js)
+function initSkillSphere() {
+  const container = document.getElementById('skill-sphere-container');
+  if (!container) return;
+
+  const width = container.clientWidth;
+  const height = container.clientHeight;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+  camera.position.z = 20;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(width, height);
+  container.appendChild(renderer.domElement);
+
+  // Skill labels
+  const skills = [
+    'Python', 'Django', 'React', 'Native', 'Firebase', 'PostgreSQL', 
+    'AI', 'Gemini', 'OpenAI', 'Next.js', 'Vercel', 'GSAP', 'Three.js', 
+    'Figma', 'RestAPI', 'Git', 'Cloud', 'Jaipur'
+  ];
+
+  const group = new THREE.Group();
+  skills.forEach((skill, i) => {
+    const phi = Math.acos(-1 + (2 * i) / skills.length);
+    const theta = Math.sqrt(skills.length * Math.PI) * phi;
+    
+    // Create label canvas
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = 256; canvas.height = 64;
+    ctx.fillStyle = 'rgba(139, 92, 246, 0.8)';
+    ctx.font = 'bold 32px Montserrat';
+    ctx.textAlign = 'center';
+    ctx.fillText(skill, 128, 45);
+
+    const texture = new THREE.CanvasTexture(canvas);
+    const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(5, 1.2), material);
+    
+    mesh.position.setFromSphericalCoords(12, phi, theta);
+    mesh.lookAt(camera.position);
+    group.add(mesh);
+  });
+  scene.add(group);
+
+  // Rotation logic
+  let isDragging = false;
+  let targetRotationX = 0, targetRotationY = 0;
+  
+  container.addEventListener('mousedown', () => isDragging = true);
+  window.addEventListener('mouseup', () => isDragging = false);
+  window.addEventListener('mousemove', (e) => {
+    if (isDragging) {
+      group.rotation.y += e.movementX * 0.005;
+      group.rotation.x += e.movementY * 0.005;
+    }
+  });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    if (!isDragging) {
+      group.rotation.y += 0.003;
+      group.rotation.x += 0.001;
+    }
+    // Make labels always face camera
+    group.children.forEach(m => m.lookAt(camera.position));
+    renderer.render(scene, camera);
+  }
+  animate();
+}
+
+// 5. SMOOTH LIQUID SCROLL
+function initSmoothLiquidScroll() {
+  // GSAP ScrollTrigger auto handles smooth feel with lerp
+  gsap.config({ force3D: true });
 }
