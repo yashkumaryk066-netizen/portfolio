@@ -204,11 +204,6 @@
   </div>
 </nav>
 
-<!-- MOBILE HAMBURGER (Moved Outside for Max Z-index) -->
-<button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
-  <span></span><span></span><span></span>
-</button>
-
 <!-- ===== HERO ===== -->
 <section id="hero" aria-label="Hero section">
   <div class="hero-inner">
@@ -329,19 +324,12 @@
     <div class="section-header reveal">
       <span class="section-tag">Who I Am</span>
       <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+      <!-- REPOSITIONED PHOTO FOR HIGHEST VISIBILITY -->
+      <div id="about-avatar-mobile-fixed">
+          <img src="yash.jpg" alt="Yash Mishra" id="mobile-hero-photo" />
+      </div>
     </div>
     <div class="about-grid">
-      <div class="about-avatar-col"> <!-- Removed reveal for mobile visibility -->
-        <div class="avatar-frame" id="about-avatar">
-          <div class="about-photo-wrapper">
-          <img
-            src="yash.jpg"
-            alt="Yash Ankush Mishra - Advanced Software Developer - yashankushmishra - Rangra"
-            class="about-img"
-            loading="lazy"
-            id="about-profile-img"
-          />
-</div>
           <div class="avatar-ring ring1"></div>
           <div class="avatar-ring ring2"></div>
           <div class="role-badge" id="role-badge">
