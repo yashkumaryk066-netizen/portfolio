@@ -2748,13 +2748,13 @@ html {
     justify-content: space-around;
     z-index: -2;
     pointer-events: none;
-    opacity: 0.15;
-    filter: blur(1.5px);
-    overflow: hidden;
+    opacity: 0.5; /* Brightened for Light Show visibility */
+    filter: blur(0.5px); /* Sharper buildings */
+    overflow: visible; /* CRITICAL: Allows lasers to shoot out */
 }
 .building {
     position: relative;
-    background: linear-gradient(to top, #0a0a0f, #1a1a24);
+    background: linear-gradient(to top, #000, #11111a);
     width: 80px;
     margin: 0 4px;
     display: flex;
@@ -2763,7 +2763,8 @@ html {
     padding: 10px 5px;
     box-shadow: 0 0 50px rgba(0,0,0,1);
     box-sizing: border-box;
-    border-top: 1px solid rgba(139, 92, 246, 0.1);
+    border-top: 1px solid rgba(139, 92, 246, 0.3);
+    overflow: visible; /* CRITICAL */
 }
 .win {
     width: 6px;
@@ -2773,13 +2774,13 @@ html {
     border-radius: 1px;
 }
 .win.active {
-    background: #ffd700;
-    box-shadow: 0 0 12px 2px #ffd700;
+    background: #fff; /* Pure White/Gold Glow */
+    box-shadow: 0 0 15px 3px #fff, 0 0 5px #ffd700;
     animation: winFlicker 3s infinite alternate;
 }
 .win.cyan {
-    background: #06b6d4;
-    box-shadow: 0 0 12px 2px #06b6d4;
+    background: #00f2ff; /* Ultra Cyan */
+    box-shadow: 0 0 15px 3px #00f2ff, 0 0 5px #06b6d4;
     animation: winFlicker 5s infinite alternate-reverse;
 }
 @keyframes winFlicker {
@@ -2790,33 +2791,27 @@ html {
 /* ===== BURJ KHALIFA LIGHT SHOW ===== */
 .laser-beam {
     position: absolute;
-    top: -500px;
+    top: -800px;
     left: 50%;
-    width: 2px;
-    height: 500px;
-    background: linear-gradient(to top, rgba(139, 92, 246, 0.8), transparent);
+    width: 3px;
+    height: 800px;
+    background: linear-gradient(to top, #fff, #8b5cf6, transparent);
     transform: translateX(-50%);
     opacity: 0;
-    box-shadow: 0 0 15px #8b5cf6;
-    animation: laserScan 6s infinite ease-in-out;
+    box-shadow: 0 0 25px #8b5cf6, 0 0 10px #fff;
+    animation: laserScan 5s infinite ease-in-out;
 }
-
-@keyframes laserScan {
-    0%, 100% { opacity: 0; transform: translateX(-50%) scaleY(0.1); }
-    50% { opacity: 0.6; transform: translateX(-50%) scaleY(1.5); }
-}
-
 .spire-light {
     position: absolute;
-    top: -10px;
+    top: -15px;
     left: 50%;
-    width: 12px;
-    height: 12px;
-    background: white;
+    width: 16px;
+    height: 16px;
+    background: #fff;
     border-radius: 50%;
     transform: translateX(-50%);
-    box-shadow: 0 0 20px white;
-    animation: spireStrobe 1.5s infinite;
+    box-shadow: 0 0 30px #fff, 0 0 60px #8b5cf6;
+    animation: spireStrobe 1s infinite alternate;
 }
 
 @keyframes spireStrobe {
@@ -2830,3 +2825,21 @@ html {
 .building:nth-child(4n) .win.active { animation-delay: 0.6s; }
 .building:nth-child(5n) .win.active { animation-delay: 0.8s; }
 
+
+/* ===== PHOTO OVERFLOW FIX ===== */
+.about-photo-wrapper {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+  border: 4px solid rgba(139, 92, 246, 0.4);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+}
+.about-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
