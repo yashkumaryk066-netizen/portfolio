@@ -2843,3 +2843,52 @@ html {
   object-fit: cover;
   display: block;
 }
+
+/* ===== 1. PROJECT HOLOGRAPHIC HOVER ===== */
+.project-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(139, 92, 246, 0.4), transparent);
+    z-index: -1;
+    filter: blur(40px);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.project-card:hover::after {
+    opacity: 1;
+}
+.project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(139, 92, 246, 0.3);
+}
+
+/* ===== 2. DYNAMIC MOOD TOGGLE (Day/Night Theme) ===== */
+body[data-mood="day"] {
+  --bg-color: #f0f2f5;
+  --text-color: #1a1a24;
+  --accent-color: #06b6d4;
+  --card-bg: rgba(255, 255, 255, 0.8);
+}
+body[data-mood="night"] {
+  --bg-color: #050505;
+  --text-color: #ffffff;
+  --accent-color: #8b5cf6;
+}
+
+/* ===== 3. GITHUB STATS SECTION ===== */
+.github-stats-container {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    backdrop-filter: blur(10px);
+}
+.stat-pill {
+    text-align: center;
+}
+.stat-pill i { color: #8b5cf6; font-size: 1.5rem; margin-bottom: 5px; }
+

@@ -34,6 +34,10 @@ function initAll() {
   initResumeModal();
   initAIChat();
   initCitySkyline();
+  // New Magic Features 1-4
+  initMoodToggle();
+  initGitHubStats();
+  initPdfGenerator();
 }
 
 // ===== YEAR =====
@@ -1288,4 +1292,44 @@ function initCitySkyline() {
 
     container.appendChild(b);
   }
+}
+
+/* ===== 1. DYNAMIC MOOD TOGGLE (Day/Night Theme) ===== */
+function initMoodToggle() {
+    const hour = new Date().getHours();
+    if (hour >= 6 && hour < 18) {
+        document.body.dataset.mood = 'day';
+    } else {
+        document.body.dataset.mood = 'night';
+    }
+}
+
+/* ===== 2. LIVE GITHUB STATS (Fetch Real Stats) ===== */
+async function initGitHubStats() {
+    const el = document.getElementById('hero-stats');
+    if (!el) return;
+    try {
+        const res = await fetch('https://api.github.com/users/yashkumaryk066-netizen');
+        const data = await res.json();
+        const statsHtml = `
+            <div class="github-stats-container reveal">
+                <div class="stat-pill"><i class="fab fa-github"></i><div>${data.public_repos}</div><span>Public Repos</span></div>
+                <div class="stat-pill"><i class="fas fa-star"></i><div>${data.followers}</div><span>Followers</span></div>
+                <div class="stat-pill"><i class="fas fa-code-branch"></i><div>${data.following}</div><span>Following</span></div>
+            </div>
+        `;
+        el.insertAdjacentHTML('afterend', statsHtml);
+    } catch (e) {
+        console.log("GitHub stats fetch failed or offline.");
+    }
+}
+
+/* ===== 3. PDF RESUME GENERATOR (Auto-Print Layout) ===== */
+function initPdfGenerator() {
+    const btn = document.getElementById('nav-resume-btn');
+    if (btn) {
+        btn.addEventListener('click', () => {
+            window.open('yash_mishra_resume.html', '_blank');
+        });
+    }
 }
