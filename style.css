@@ -2054,3 +2054,57 @@ button { border: none; background: none; cursor: none; }
 @media (max-width: 1279px) {
   .hero-inner { margin-right: 0; }
 }
+/* ===== HERO THREE.JS BACKGROUND & SKYLINE ===== */
+.hero-canvas-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -2;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 50%, #0d001a 0%, #05000d 100%);
+}
+
+#hero-three-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero-skyline-silhouette {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40vh;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" preserveAspectRatio="none"><path d="M0 400V300h20v-20h20v20h10V200h20v100h10V250h20v50h10v-60h20v60h15V180h30v120h10V240h20v60l20-40 20 40h10V100h30l5-30h10l5 30h30v200h20V240h20v60h15v-90h30v90h10v-50h20v50l15-30 15 30h10V50h40v250h10v-40h20v40h10V200h20v100h10V250h20v50h10v-60h20v60h15V150h30v150h10V220h20v80h10V100h30v200h20V240h20v60h15v-90h30v90h10v-50h20v50h15V300H1200v100H0z" fill="%2305000d"/></svg>');
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: -1;
+  opacity: 0.8;
+  mask-image: linear-gradient(to top, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%);
+  pointer-events: none;
+  filter: drop-shadow(0 -5px 15px rgba(139, 92, 246, 0.3));
+}
+
+#hero {
+  background: transparent !important;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+}
+
+/* Adjust visibility of other elements */
+#about, #projects, #skills, #experience, #contact {
+  background: var(--bg-dark); /* Ensure other sections aren't transparent */
+  position: relative;
+  z-index: 3;
+}
+
+.aurora-bg {
+  display: none; /* Hide old aurora as we use Three.js now */
+}

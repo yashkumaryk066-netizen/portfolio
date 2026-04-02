@@ -28,6 +28,7 @@ function initAll() {
   initGSAPTitles();
   initHeroParallax();
   initDraggableBadges();
+  initFuturisticBackground();
 }
 
 // ===== YEAR =====
@@ -702,4 +703,129 @@ function initDraggableBadges() {
       setTimeout(() => { b.style.transform = ''; }, 350);
     }, i * 200));
   }, 2500);
+}
+
+// ===== PREMIUM FUTURISTIC BACKGROUND (Three.js) =====
+function initFuturisticBackground() {
+  const canvas = document.getElementById('hero-three-canvas');
+  if (!canvas) return;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.z = 5;
+
+  // --- LIGHTS ---
+  const ambientLight = new THREE.AmbientLight(0x443366, 0.5);
+  scene.add(ambientLight);
+  const pointLight = new THREE.PointLight(0x8b5cf6, 1.5, 100);
+  pointLight.position.set(5, 5, 5);
+  scene.add(pointLight);
+
+  // --- FLOATING AURORA GEOMETRY ---
+  const auroraGeometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+  const auroraMaterial = new THREE.MeshPhongMaterial({
+    color: 0x8b5cf6,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.1,
+    emissive: 0x06b6d4,
+  });
+  const aurora = new THREE.Mesh(auroraGeometry, auroraMaterial);
+  aurora.position.z = -15;
+  scene.add(aurora);
+
+  // --- CODE ELEMENTS (Floating Particles) ---
+  const particlesCount = 2000;
+  const positions = new Float32Array(particlesCount * 3);
+  const colors = new Float32Array(particlesCount * 3);
+  const color1 = new THREE.Color(0x8b5cf6); // Purple
+  const color2 = new THREE.Color(0x06b6d4); // Cyan
+
+  for (let i = 0; i < particlesCount * 3; i += 3) {
+    positions[i] = (Math.random() - 0.5) * 20;
+    positions[i + 1] = (Math.random() - 0.5) * 20;
+    positions[i + 2] = (Math.random() - 0.5) * 10;
+
+    const mixedColor = color1.clone().lerp(color2, Math.random());
+    colors[i] = mixedColor.r;
+    colors[i + 1] = mixedColor.g;
+    colors[i + 2] = mixedColor.b;
+  }
+
+  const particlesGeometry = new THREE.BufferGeometry();
+  particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+  const particlesMaterial = new THREE.PointsMaterial({
+    size: 0.05,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.6,
+  });
+
+  const particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
+  scene.add(particleSystem);
+
+  // --- CODE RAIN EFFECT (Background binary) ---
+  const binaryGeometry = new THREE.PlaneGeometry(1, 1);
+  const binaryGroup = new THREE.Group();
+  for (let i = 0; i < 150; i++) {
+    const isOne = Math.random() > 0.5;
+    const canvasB = document.createElement('canvas');
+    const ctxB = canvasB.getContext('2d');
+    canvasB.width = 64; canvasB.height = 64;
+    ctxB.fillStyle = '#06b6d4';
+    ctxB.font = 'bold 48px monospace';
+    ctxB.fillText(isOne ? '1' : '0', 20, 50);
+    
+    const texture = new THREE.CanvasTexture(canvasB);
+    const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, opacity: 0.3 });
+    const mesh = new THREE.Mesh(binaryGeometry, material);
+    mesh.position.set((Math.random() - 0.5) * 30, Math.random() * 20, (Math.random() - 0.5) * 20 - 10);
+    mesh.userData.speed = 0.02 + Math.random() * 0.05;
+    binaryGroup.add(mesh);
+  }
+  scene.add(binaryGroup);
+
+  // --- INTERACTION / MOUSE PARALLAX ---
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX - window.innerWidth / 2) / 100;
+    mouseY = (e.clientY - window.innerHeight / 2) / 100;
+  });
+
+  // --- ANIMATION LOOP ---
+  function animate() {
+    requestAnimationFrame(animate);
+
+    aurora.rotation.x += 0.001;
+    aurora.rotation.y += 0.002;
+    particleSystem.rotation.y += 0.0005;
+
+    // Move binary rain
+    binaryGroup.children.forEach(b => {
+      b.position.y -= b.userData.speed;
+      if (b.position.y < -15) b.position.y = 15;
+    });
+
+    // Parallax
+    camera.position.x += (mouseX - camera.position.x) * 0.05;
+    camera.position.y += (-mouseY - camera.position.y) * 0.05;
+    camera.lookAt(scene.position);
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  // --- HANDLE RESIZE ---
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
 }
