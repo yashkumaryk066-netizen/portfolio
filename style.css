@@ -213,15 +213,19 @@ body {
   flex-direction: column;
   gap: 5px;
   padding: 8px;
+  background: transparent !important; /* Forces transparency to remove white box */
+  border: none;
+  cursor: pointer;
 }
 
 .hamburger span {
   display: block;
-  width: 24px;
-  height: 2px;
-  background: var(--text);
-  border-radius: 2px;
-  transition: var(--transition);
+  width: 28px;
+  height: 3px;
+  background: #ff0000; /* Pure Red as requested */
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Subtle Red Glow */
 }
 
 /* ===== SECTIONS ===== */
