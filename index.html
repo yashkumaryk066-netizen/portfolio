@@ -302,12 +302,33 @@
       </div>
       <div class="about-content-col reveal">
         <h3 class="about-heading">Building the Future, One Product at a Time</h3>
-        <p class="about-para">
-          I'm <strong>Yash Ankush Mishra</strong>, a passionate Software Developer based in
-          <strong>Jaipur, Rajasthan</strong>. I currently work at
-          <strong>Telepathy Infotech Private Limited</strong>, where I build scalable and impactful
-          digital solutions.
-        </p>
+        <p class="about-desc reveal-text" id="about-text-content">
+      I’m a <strong>Software Developer</strong> who thrives on building mission-critical products. From Bihar to Bengaluru, 
+      my journey has been a relentless pursuit of engineering excellence. Whether it’s architecting complex AI-Vision 
+      systems like <strong>Scan Khana</strong> or managing financial transparency in <strong>SettleStack</strong>, I turn 
+      challenging problems into seamless, high-performance code.
+    </p>
+
+    <!-- ===== CAREER JOURNEY TIMELINE (MAGIC FEATURE) ===== -->
+    <div class="journey-section">
+      <h3 class="journey-title"><i class="fas fa-map-marker-alt"></i> The Career Journey</h3>
+      <div class="journey-map">
+        <div class="journey-dot active" data-city="Bihar">
+          <span class="city-name">Bihar</span>
+          <span class="city-edu">BCA Grad @ Bhagalpur</span>
+        </div>
+        <div class="journey-line"></div>
+        <div class="journey-dot active" data-city="Bengaluru">
+          <span class="city-name">Bengaluru</span>
+          <span class="city-edu">MCA Grad @ Bengaluru Uni</span>
+        </div>
+        <div class="journey-line"></div>
+        <div class="journey-dot active" data-city="Jaipur">
+          <span class="city-name">Jaipur</span>
+          <span class="city-edu">Dev @ Telepathy Infotech</span>
+        </div>
+      </div>
+    </div>
         <p class="about-para">
           Over the years, I've independently designed and launched <strong>5 live products</strong> spanning
           AI, EdTech, FinTech, Food-Tech, and Communication — reaching real users and solving real problems.
@@ -579,7 +600,45 @@
   </div>
 </section>
 
-<!-- ===== CONTACT ===== -->
+<!-- ===== WALL OF RECOMMENDATIONS (SOCIAL PROOF) ===== -->
+<div class="recommendations-container reveal">
+  <h2 class="section-heading"><span class="heading-glow">Wall of Trust</span></h2>
+  <div class="recom-flex">
+    <div class="recom-card">
+      <div class="recom-icon">“</div>
+      <p>"Yash brings a unique blend of AI expertise and product mindset. He delivered SettleStack with zero critical bugs."</p>
+      <div class="recom-author">— Lead Developer, Telepathy</div>
+    </div>
+    <div class="recom-card">
+      <div class="recom-icon">“</div>
+      <p>"His ability to implement complex AI models like the one in Scan Khana is commendable. A true problem solver."</p>
+      <div class="recom-author">— Tech Lead, Netizen</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== YASH-AI CHATBOT (MAGIC PIECE) ===== -->
+<div class="ai-chat-bubble" id="ai-chat-toggle">
+  <i class="fas fa-robot"></i>
+  <span class="chat-ping"></span>
+</div>
+
+<div class="ai-chat-window" id="ai-chat-window">
+  <div class="ai-chat-header">
+    <div class="bot-info">
+      <div class="bot-status-dot"></div>
+      <strong>Yash-AI (v2.0)</strong>
+    </div>
+    <button class="ai-chat-close" id="ai-chat-close">&times;</button>
+  </div>
+  <div class="ai-chat-body" id="ai-chat-body">
+    <div class="bot-msg">👋 Hi! I'm Yash's AI clone. Want to know about his Tech Stack or Education?</div>
+  </div>
+  <div class="ai-chat-footer">
+    <input type="text" placeholder="Ask about MCA or Projects..." id="ai-chat-input" />
+    <button id="ai-chat-send"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
 <section id="contact" class="section" aria-label="Contact Yash Ankush Mishra">
   <div class="container">
     <div class="section-header reveal">

@@ -32,6 +32,7 @@ function initAll() {
   initUltraEffects();
   initSoundUX();
   initResumeModal();
+  initAIChat();
 }
 
 // ===== YEAR =====
@@ -1169,4 +1170,63 @@ function initResumeModal() {
       document.body.style.overflow = '';
     }
   });
+}
+
+// ===== YASH-AI CHATBOT LOGIC =====
+function initAIChat() {
+  const toggle = document.getElementById('ai-chat-toggle');
+  const window = document.getElementById('ai-chat-window');
+  const close = document.getElementById('ai-chat-close');
+  const input = document.getElementById('ai-chat-input');
+  const send = document.getElementById('ai-chat-send');
+  const body = document.getElementById('ai-chat-body');
+
+  if (!toggle || !window) return;
+
+  toggle.addEventListener('click', () => {
+    window.style.display = (window.style.display === 'flex') ? 'none' : 'flex';
+    toggle.classList.toggle('active');
+  });
+
+  close.addEventListener('click', () => window.style.display = 'none');
+
+  function addMsg(text, type) {
+    const div = document.createElement('div');
+    div.className = `${type}-msg`;
+    div.innerText = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  const aiRespones = {
+    "mca": "Yash completed his MCA from Bengaluru University! 🎓",
+    "bca": "He did his BCA from Bhagalpur University, Bihar. 📜",
+    "skills": "Yash is an expert in Python, React, AI (Gemini/OpenAI), and Mobile Dev! ⚡",
+    "job": "He currently works at Telepathy Infotech as a Software Developer. 👨‍💻",
+    "projects": "He has built 5 live products like Scan Khana, SettleStack, and Y.S.M ERP! 🚀",
+    "hello": "Hi there! Ask me about Yash's career or technical products. 😊"
+  };
+
+  function handleSend() {
+    const val = input.value.toLowerCase().trim();
+    if (!val) return;
+    
+    addMsg(input.value, 'user');
+    input.value = '';
+
+    setTimeout(() => {
+      let found = false;
+      for (let key in aiRespones) {
+        if (val.includes(key)) {
+          addMsg(aiRespones[key], 'bot');
+          found = true;
+          break;
+        }
+      }
+      if (!found) addMsg("That's a great question! For more details, you can check his Resume modal or Contact him directly. ✉️", 'bot');
+    }, 1000);
+  }
+
+  send.addEventListener('click', handleSend);
+  input.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSend(); });
 }
