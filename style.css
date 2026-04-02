@@ -2482,33 +2482,45 @@ html {
   cursor: pointer;
 }
 
-/* RESUME CONTENT ENHANCEMENTS */
-.res-highlight { color: #8b5cf6; font-size: 1.1rem; }
-.res-meta { font-size: 0.8rem; color: #64748b; font-weight: 600; margin-bottom: 8px; }
+/* RESUME CONTENT ENHANCEMENTS & CONTRAST FIX */
+.resume-page p, .resume-page span, .resume-page li, .resume-page a, .resume-page strong, .resume-page h2, .resume-page h4 {
+  text-shadow: none !important; /* Remove glow for readability */
+}
+
+.resume-page {
+  color: #1e293b !important;
+}
+
+.res-section-title {
+  color: #1e1b4b !important;
+  border-bottom: 2px solid #8b5cf6 !important;
+  font-weight: 800 !important;
+}
+
+.res-highlight { color: #8b5cf6; font-size: 1.1rem; font-weight: 700; }
+.res-meta { font-size: 0.85rem; color: #475569; font-weight: 600; margin-bottom: 8px; }
 .res-list { padding-left: 18px; margin-bottom: 15px; }
-.res-list li { font-size: 0.85rem; color: #475569; margin-bottom: 4px; border: none !important; text-shadow: none !important; }
-.res-desc { font-style: italic; color: #71717a; border: none !important; text-shadow: none !important; }
+.res-list li { font-size: 0.85rem; color: #1e293b !important; margin-bottom: 6px; }
+.res-desc { font-style: normal; color: #475569 !important; font-size: 0.85rem; line-height: 1.4; padding-top: 4px; }
+.res-summary { font-size: 0.9rem; color: #334155; margin-bottom: 20px; line-height: 1.6; }
+
 .res-tag { 
   display: inline-block; 
-  background: #f1f5f9; 
-  padding: 2px 8px; 
-  border-radius: 4px; 
-  font-size: 0.7rem; 
+  background: #ede9fe; 
+  padding: 4px 10px; 
+  border-radius: 6px; 
+  font-size: 0.75rem; 
   font-weight: 700; 
-  color: #8b5cf6; 
-  margin-top: 4px;
+  color: #6d28d9; 
+  margin-top: 6px;
 }
-.res-tech-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
+
 .res-tech-grid span {
-  background: #1e1b4b;
-  color: white;
-  padding: 4px 10px;
-  border-radius: 4px;
-  font-size: 0.75rem;
+  background: #f1f5f9;
+  color: #1e1b4b;
+  border: 1px solid #e2e8f0;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
   font-weight: 600;
-  text-shadow: none !important;
 }
