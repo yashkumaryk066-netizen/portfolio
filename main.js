@@ -1398,39 +1398,11 @@ function initDraggableElements() {
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', initDraggableElements);
 
-/* ===== 🛡️ ULTIMATE PERMANENT LOTTIE ENGINE (ZERO-NETWORK) ===== */
-function initPermanentLottie() {
-    const container = document.getElementById('lottie-greeting-container');
-    if (!container) return;
-
-    // Use the script already loaded in footer
-    const checkLottie = setInterval(() => {
-        if (window.lottie) {
-            clearInterval(checkLottie);
-            lottie.loadAnimation({
-                container: container,
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: 'greeting.json' 
-            });
-            console.log("💎 LOTTIE ACTIVE: Living Window Waving Ready.");
-        }
-    }, 100);
-    
-    // Safety timeout
-    setTimeout(() => clearInterval(checkLottie), 5000);
-}
-
-document.addEventListener('DOMContentLoaded', initPermanentLottie);
-
-/* ===== 🛡️ ZERO-NETWORK ULTIMATE LOTTIE EMBED (FOREVER FIX) ===== */
+/* ===== 🛡️ ULTIMATE PERMANENT LOTTIE ENGINE (ZERO-CONFLICT) ===== */
 function initUltimateLottie() {
     const container = document.getElementById('lottie-greeting-container');
-    if (!container) return;
+    if (!container || container.innerHTML !== "") return; // Prevent double init
 
-    // Direct JSON source to bypass ALL network/path/cors issues forever
-    // This is a minimal but stable 'Hello' animation structure
     const lottieData = {
         "v": "5.5.7", "fr": 60, "ip": 0, "op": 120, "w": 500, "h": 500, "nm": "Window Hello", "ddd": 0, "assets": [],
         "layers": [
@@ -1459,12 +1431,13 @@ function initUltimateLottie() {
                 renderer: 'svg',
                 loop: true,
                 autoplay: true,
-                animationData: lottieData // Using core embed data
+                animationData: lottieData
             });
             console.log("💎 LOTTIE ACTIVE: Bulletproof Local Animation Loaded.");
         }
-    }, 100);
+    }, 200);
     setTimeout(() => clearInterval(checkLottie), 5000);
 }
 
-document.addEventListener('DOMContentLoaded', initUltimateLottie);
+// Single clean listener
+window.addEventListener('load', initUltimateLottie);
