@@ -2949,3 +2949,53 @@ p { font-size: var(--fluid-p); }
 
 /* Fix for 3D Shifting */
 canvas { max-width: 100vw !important; cursor: grab; }
+
+/* ===== RESUME MODAL MOBILE RESPONSIVENESS ===== */
+@media (max-width: 768px) {
+  .resume-modal-content {
+      width: 95%;
+      margin: 10px;
+      max-height: 85vh;
+  }
+  .resume-preview-container {
+      padding: 15px;
+  }
+  .resume-page {
+      padding: 20px;
+      font-size: 0.85rem;
+  }
+  .resume-header-row {
+      flex-direction: column;
+      text-align: center;
+      gap: 10px;
+  }
+  .resume-photo-small {
+      width: 80px;
+      height: 80px;
+  }
+  .resume-grid {
+      grid-template-columns: 1fr; /* Stack columns */
+  }
+  .resume-close-btn {
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      background: rgba(0,0,0,0.5);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .resume-page {
+      padding: 15px;
+      line-height: 1.4;
+  }
+  .resume-section-title {
+      font-size: 1rem;
+  }
+  .resume-name-big {
+      font-size: 1.5rem;
+  }
+}
