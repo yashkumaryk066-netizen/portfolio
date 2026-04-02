@@ -276,7 +276,7 @@ function initCounters() {
 // ===== CONTACT FORM — Formspree Backend =====
 // Formspree se messages seedha Gmail pe aate hain (FREE backend)
 // Setup: formspree.io → account banao → form banao → ID yahan dalo
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpwzgqlb'; // yashkumaryk066@gmail.com
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdaplkny'; // yashkumaryk066@gmail.com
 
 function handleFormSubmit(e) {
   e.preventDefault();
