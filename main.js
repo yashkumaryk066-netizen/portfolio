@@ -33,6 +33,7 @@ function initAll() {
   initSoundUX();
   initResumeModal();
   initAIChat();
+  initCitySkyline();
 }
 
 // ===== YEAR =====
@@ -1240,4 +1241,31 @@ function initAIChat() {
 
   send.addEventListener('click', handleSend);
   input.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleSend(); });
+}
+
+// ===== NIGHT CITY SKYLINE GENERATOR =====
+function initCitySkyline() {
+  const container = document.createElement('div');
+  container.className = 'city-skyline';
+  document.body.appendChild(container);
+
+  const buildingCount = Math.floor(window.innerWidth / 80);
+  for (let i = 0; i < buildingCount; i++) {
+    const b = document.createElement('div');
+    b.className = 'building';
+    b.style.height = (40 + Math.random() * 60) + '%';
+    b.style.width = (60 + Math.random() * 40) + 'px';
+    
+    // Add multiple windows per building
+    for (let j = 0; j < 30; j++) {
+      const win = document.createElement('div');
+      win.className = 'win';
+      if (Math.random() > 0.8) {
+        win.classList.add('active');
+        if (Math.random() > 0.7) win.classList.add('cyan');
+      }
+      b.appendChild(win);
+    }
+    container.appendChild(b);
+  }
 }
