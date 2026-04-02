@@ -2188,7 +2188,13 @@ button { border: none; background: none; cursor: none; }
   display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at center, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+  background: 
+    linear-gradient(rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.05) 1px, transparent 1px),
+    radial-gradient(circle at center, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+  background-size: 40px 40px, 40px 40px, 100% 100%;
+  border: 1px solid rgba(139, 92, 246, 0.1);
+  border-radius: 20px;
 }
 
 .skill-sphere-container {

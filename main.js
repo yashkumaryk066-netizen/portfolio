@@ -1013,7 +1013,13 @@ function initSkillSphere() {
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(width, height);
+  renderer.setClearColor(0x000000, 0);
   container.appendChild(renderer.domElement);
+  
+  // Show a hint if mobile
+  if (window.innerWidth < 768) {
+    camera.position.z = 25;
+  }
 
   // Skill labels
   const skills = [
@@ -1030,15 +1036,23 @@ function initSkillSphere() {
     // Create label canvas
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    canvas.width = 256; canvas.height = 64;
-    ctx.fillStyle = 'rgba(139, 92, 246, 0.8)';
-    ctx.font = 'bold 32px Montserrat';
+    canvas.width = 300; canvas.height = 80;
+    // Brighter glowing text
+    ctx.fillStyle = '#06b6d4'; 
+    ctx.font = 'bold 44px Montserrat, sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText(skill, 128, 45);
+    ctx.shadowColor = '#8b5cf6';
+    ctx.shadowBlur = 10;
+    ctx.fillText(skill, 150, 55);
 
     const texture = new THREE.CanvasTexture(canvas);
-    const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
-    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(5, 1.2), material);
+    const material = new THREE.MeshBasicMaterial({ 
+      map: texture, 
+      transparent: true, 
+      opacity: 0.9,
+      side: THREE.DoubleSide
+    });
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(6, 1.5), material);
     
     mesh.position.setFromSphericalCoords(12, phi, theta);
     mesh.lookAt(camera.position);
