@@ -774,23 +774,34 @@ function initFuturisticBackground() {
   const particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
   scene.add(particleSystem);
 
-  // --- CODE RAIN EFFECT (Background binary) ---
-  const binaryGeometry = new THREE.PlaneGeometry(1, 1);
+  // --- CODE RAIN EFFECT (Syntax keywords instead of binary) ---
+  const syntaxKeywords = ['Python', 'JS', 'React', 'Django', 'AI', 'ML', '=>', '{}', '()', 'class', 'def', 'async', 'await', 'const', 'import', '<div>', '<Yash />', '#Rangra', '01'];
   const binaryGroup = new THREE.Group();
-  for (let i = 0; i < 150; i++) {
-    const isOne = Math.random() > 0.5;
+  for (let i = 0; i < 200; i++) {
+    const keyword = syntaxKeywords[Math.floor(Math.random() * syntaxKeywords.length)];
     const canvasB = document.createElement('canvas');
     const ctxB = canvasB.getContext('2d');
-    canvasB.width = 64; canvasB.height = 64;
+    
+    // Scale canvas based on keyword length to keep text crisp
+    const textWidth = keyword.length * 24;
+    canvasB.width = textWidth + 20; 
+    canvasB.height = 64;
+    
     ctxB.fillStyle = '#06b6d4';
-    ctxB.font = 'bold 48px monospace';
-    ctxB.fillText(isOne ? '1' : '0', 20, 50);
+    ctxB.font = 'bold 32px monospace';
+    ctxB.shadowBlur = 10;
+    ctxB.shadowColor = '#06b6d4';
+    ctxB.fillText(keyword, 10, 45);
     
     const texture = new THREE.CanvasTexture(canvasB);
-    const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, opacity: 0.3 });
-    const mesh = new THREE.Mesh(binaryGeometry, material);
-    mesh.position.set((Math.random() - 0.5) * 30, Math.random() * 20, (Math.random() - 0.5) * 20 - 10);
-    mesh.userData.speed = 0.02 + Math.random() * 0.05;
+    const material = new THREE.MeshBasicMaterial({ map: texture, transparent: true, opacity: 0.25 });
+    
+    // Aspect ratio plane based on text length
+    const geometry = new THREE.PlaneGeometry((textWidth/64) * 0.8, 0.8);
+    const mesh = new THREE.Mesh(geometry, material);
+    
+    mesh.position.set((Math.random() - 0.5) * 40, (Math.random() - 0.5) * 30, (Math.random() - 0.5) * 20 - 15);
+    mesh.userData.speed = 0.01 + Math.random() * 0.03;
     binaryGroup.add(mesh);
   }
   scene.add(binaryGroup);
