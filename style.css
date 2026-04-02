@@ -2481,3 +2481,34 @@ html {
   font-weight: 700;
   cursor: pointer;
 }
+
+/* RESUME CONTENT ENHANCEMENTS */
+.res-highlight { color: #8b5cf6; font-size: 1.1rem; }
+.res-meta { font-size: 0.8rem; color: #64748b; font-weight: 600; margin-bottom: 8px; }
+.res-list { padding-left: 18px; margin-bottom: 15px; }
+.res-list li { font-size: 0.85rem; color: #475569; margin-bottom: 4px; border: none !important; text-shadow: none !important; }
+.res-desc { font-style: italic; color: #71717a; border: none !important; text-shadow: none !important; }
+.res-tag { 
+  display: inline-block; 
+  background: #f1f5f9; 
+  padding: 2px 8px; 
+  border-radius: 4px; 
+  font-size: 0.7rem; 
+  font-weight: 700; 
+  color: #8b5cf6; 
+  margin-top: 4px;
+}
+.res-tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.res-tech-grid span {
+  background: #1e1b4b;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-shadow: none !important;
+}
