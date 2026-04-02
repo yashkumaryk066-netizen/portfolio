@@ -31,6 +31,7 @@ function initAll() {
   initFloatingDynamics();
   initUltraEffects();
   initSoundUX();
+  initResumeModal();
 }
 
 // ===== YEAR =====
@@ -1135,5 +1136,33 @@ function initSoundUX() {
     toggle.style.color = isMuted ? '#ff5f56' : '#8b5cf6';
     
     if (!isMuted) playBeep(660, 'sine', 0.1, 0.2); // Feedback sound
+  });
+}
+
+// ===== RESUME MODAL LOGIC =====
+function initResumeModal() {
+  const openBtn = document.getElementById('open-resume-btn');
+  const closeBtn = document.getElementById('close-resume-btn');
+  const modal = document.getElementById('resume-modal');
+
+  if (!openBtn || !modal) return;
+
+  openBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent scroll
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+
+  // Close common modal area
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
   });
 }

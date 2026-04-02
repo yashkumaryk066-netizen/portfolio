@@ -122,7 +122,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="yash.jpg" type="image/jpeg" />
 </head>
 <body>
 
@@ -214,9 +214,9 @@
         <i class="fas fa-rocket"></i> View My Work
         <span class="btn-sparkle"></span>
       </a>
-      <a href="#contact" class="btn-secondary magnetic-btn" id="contact-hero-btn">
-        <i class="fas fa-paper-plane"></i> Get In Touch
-      </a>
+      <button class="btn-secondary magnetic-btn" id="open-resume-btn">
+        <i class="fas fa-file-pdf"></i> View Resume
+      </button>
     </div>
 
     <div class="hero-socials animate-fade-in" id="hero-socials">
@@ -714,6 +714,57 @@
 <button class="fab-btn fab-top draggable-fab" id="back-to-top" aria-label="Back to top" onclick="scrollToTop()" style="display:none;">
   <i class="fas fa-arrow-up"></i>
 </button>
+
+<!-- ===== RESUME MODAL ===== -->
+<div id="resume-modal" class="resume-modal">
+  <div class="resume-modal-content">
+    <button class="resume-close-btn" id="close-resume-btn">&times;</button>
+    <div class="resume-preview-container">
+      <div class="resume-page">
+        <div class="resume-header-row">
+          <img src="yash.jpg" alt="Yash Mishra" class="resume-photo-small" />
+          <div class="resume-title-group">
+            <h2 class="res-name">Yash Ankush Mishra</h2>
+            <p class="res-subtitle">Software Developer | Full Stack & AI Enthusiast</p>
+          </div>
+        </div>
+        
+        <div class="resume-grid">
+          <div class="resume-col-left">
+            <h4 class="res-section-title">Experience</h4>
+            <div class="res-item">
+              <strong>Software Developer</strong>
+              <p>Telepathy Infotech Pvt. Ltd. | Jaipur</p>
+            </div>
+            
+            <h4 class="res-section-title">Education</h4>
+            <div class="res-item">
+              <strong>MCA (Master of Computer Applications)</strong>
+              <p>Bengaluru University, Bengaluru 🎓</p>
+            </div>
+            <div class="res-item">
+              <strong>BCA (Bachelor of Computer Applications)</strong>
+              <p>Bhagalpur University, Bihar 🎓</p>
+            </div>
+          </div>
+          <div class="resume-col-right">
+            <h4 class="res-section-title">Top Skills</h4>
+            <p>Python/Django, React/Native, Firebase, AI (Gemini, OpenAI), PostgreSQL, GSAP, WebGL</p>
+            
+            <h4 class="res-section-title">Contact</h4>
+            <p>yashamishra.in</p>
+            <p>Jaipur, Rajasthan</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="resume-footer">
+      <a href="yash_mishra_resume.pdf" download class="btn-primary btn-download-resume">
+        <i class="fas fa-download"></i> Download Full Resume
+      </a>
+    </div>
+  </div>
+</div>
 
 <!-- ===== SCRIPTS ===== -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
