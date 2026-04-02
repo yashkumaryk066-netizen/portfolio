@@ -201,11 +201,13 @@
       <li><a href="#contact" class="nav-link" id="nav-contact">Contact</a></li>
     </ul>
     <a href="#contact" class="btn-hire" id="hire-btn">Hire Me</a>
-    <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
   </div>
 </nav>
+
+<!-- MOBILE HAMBURGER (Moved Outside for Max Z-index) -->
+<button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
+  <span></span><span></span><span></span>
+</button>
 
 <!-- ===== HERO ===== -->
 <section id="hero" aria-label="Hero section">
@@ -329,7 +331,7 @@
       <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
     </div>
     <div class="about-grid">
-      <div class="about-avatar-col reveal">
+      <div class="about-avatar-col"> <!-- Removed reveal for mobile visibility -->
         <div class="avatar-frame" id="about-avatar">
           <div class="about-photo-wrapper">
           <img
