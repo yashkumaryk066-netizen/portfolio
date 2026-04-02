@@ -1253,17 +1253,17 @@ function initCitySkyline() {
   container.className = 'city-skyline';
   document.body.appendChild(container);
 
-  const buildingCount = Math.floor(window.innerWidth / 120); // Fewer buildings
+  const buildingCount = Math.floor(window.innerWidth / 100); 
   for (let i = 0; i < buildingCount; i++) {
-    const isTall = Math.random() > 0.7;
+    const isTall = Math.random() > 0.6;
     const b = document.createElement('div');
     b.className = 'building' + (isTall ? ' tall' : '');
-    b.style.height = (isTall ? (85 + Math.random() * 20) : (40 + Math.random() * 45)) + '%';
+    b.style.height = (isTall ? (85 + Math.random() * 20) : (45 + Math.random() * 40)) + '%';
     b.style.width = (70 + Math.random() * 50) + 'px';
-    b.style.animationDelay = (i * 0.1) + 's';
+    b.style.animationDelay = (i * 0.15) + 's';
     
-    // LIGHTWEIGHT WINDOWS: Using CSS Pattern instead of many Divs
-    b.style.backgroundImage = 'radial-gradient(circle at 2px 2px, rgba(255,215,0,0.1) 1px, transparent 0)';
+    // LIGHTWEIGHT WINDOWS: CSS Pattern
+    b.style.backgroundImage = 'radial-gradient(circle at 2px 2px, rgba(255,215,0,0.15) 1px, transparent 0)';
     b.style.backgroundSize = '8px 8px';
 
     if (isTall) {
@@ -1272,21 +1272,23 @@ function initCitySkyline() {
        b.appendChild(spire);
     }
 
-    if (Math.random() > 0.5) {
+    // High Chance of Lasers (80% for tall buildings)
+    if (Math.random() > 0.4 || isTall) {
        const laser = document.createElement('div');
        laser.className = 'laser-beam';
-       laser.style.animationDelay = (Math.random() * 5) + 's';
+       laser.style.animationDelay = (Math.random() * 6) + 's';
        b.appendChild(laser);
     }
     
-    // Add only a FEW active glowing windows to save CPU
-    for (let j = 0; j < 5; j++) {
+    // Active Glowing Windows (Balanced for performance)
+    for (let j = 0; j < 8; j++) {
       const win = document.createElement('div');
       win.className = 'win active';
-      if (Math.random() > 0.5) win.classList.add('cyan');
-      win.style.top = Math.random() * 90 + '%';
-      win.style.left = Math.random() * 80 + '%';
+      if (Math.random() > 0.6) win.classList.add('cyan');
+      win.style.top = Math.random() * 95 + '%';
+      win.style.left = Math.random() * 85 + '%';
       win.style.position = 'absolute';
+      win.style.animationDelay = (Math.random() * 3) + 's';
       b.appendChild(win);
     }
 
