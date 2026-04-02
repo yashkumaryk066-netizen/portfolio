@@ -976,14 +976,23 @@ function initCrystalSpotlight() {
 
 // 3. HOLOGRAPHIC TERMINAL TYPING
 function initHolographicTerminal() {
-  const lines = document.querySelectorAll('#holographic-terminal .terminal-typing');
-  let currentLine = 0;
+  const terminal = document.getElementById('holographic-terminal');
+  const termContainer = document.getElementById('terminal-container');
+  if (!terminal || !termContainer) return;
+
+  const lines = terminal.querySelectorAll('.terminal-typing');
+  if (!lines || lines.length === 0) return;
 
   function typeLine(lineIndex) {
     if (lineIndex >= lines.length) return;
     const line = lines[lineIndex];
+    if (!line) return;
+    
     const text = line.getAttribute('data-text');
+    if (!text) return;
+
     let charIndex = 0;
+    line.textContent = ''; // Reset
 
     function type() {
       if (charIndex < text.length) {
@@ -999,12 +1008,12 @@ function initHolographicTerminal() {
 
   // Start when terminal is in view
   const observer = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
+    if (entries[0] && entries[0].isIntersecting) {
       typeLine(0);
       observer.disconnect();
     }
-  }, { threshold: 0.5 });
-  observer.observe(document.getElementById('terminal-container'));
+  }, { threshold: 0.1 });
+  observer.observe(termContainer);
 }
 
 // 4. 3D SKILL SPHERE (Three.js)
@@ -1390,32 +1399,27 @@ function initDraggableElements() {
 document.addEventListener('DOMContentLoaded', initDraggableElements);
 
 /* ===== 🛡️ ULTIMATE PERMANENT LOTTIE ENGINE (ZERO-NETWORK) ===== */
-async function initPermanentLottie() {
+function initPermanentLottie() {
     const container = document.getElementById('lottie-greeting-container');
     if (!container) return;
 
-    try {
-        // Direct Embed Source to bypass ALL network/CORS issues forever
-        const lottieScript = document.createElement('script');
-        lottieScript.src = "https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js";
-        lottieScript.onload = () => {
-            const animation = lottie.loadAnimation({
+    // Use the script already loaded in footer
+    const checkLottie = setInterval(() => {
+        if (window.lottie) {
+            clearInterval(checkLottie);
+            lottie.loadAnimation({
                 container: container,
                 renderer: 'svg',
                 loop: true,
                 autoplay: true,
-                path: 'greeting.json' // Local safe source
+                path: 'greeting.json' 
             });
-            
-            // Backup check: If local JSON fails, use a secondary internal re-try
-            animation.addEventListener('DOMLoaded', () => {
-                console.log("💎 LOTTIE ACTIVE: Living Window Waving Ready.");
-            });
-        };
-        document.head.appendChild(lottieScript);
-    } catch (e) {
-        console.error("Lottie Master Fix Error:", e);
-    }
+            console.log("💎 LOTTIE ACTIVE: Living Window Waving Ready.");
+        }
+    }, 100);
+    
+    // Safety timeout
+    setTimeout(() => clearInterval(checkLottie), 5000);
 }
 
 document.addEventListener('DOMContentLoaded', initPermanentLottie);
