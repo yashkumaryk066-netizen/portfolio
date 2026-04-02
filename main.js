@@ -1253,35 +1253,37 @@ function initCitySkyline() {
   container.className = 'city-skyline';
   document.body.appendChild(container);
 
-  const buildingCount = Math.floor(window.innerWidth / 100); 
+  const isMobile = window.innerWidth <= 768;
+  const buildingCount = Math.floor(window.innerWidth / (isMobile ? 60 : 100)); 
+  
   for (let i = 0; i < buildingCount; i++) {
-    const isTall = Math.random() > 0.6;
+    const isTall = Math.random() > 0.7;
     const b = document.createElement('div');
     b.className = 'building' + (isTall ? ' tall' : '');
     b.style.height = (isTall ? (85 + Math.random() * 20) : (45 + Math.random() * 40)) + '%';
-    b.style.width = (70 + Math.random() * 50) + 'px';
+    b.style.width = (isMobile ? (40 + Math.random() * 30) : (70 + Math.random() * 50)) + 'px';
     b.style.animationDelay = (i * 0.15) + 's';
     
     // LIGHTWEIGHT WINDOWS: CSS Pattern
     b.style.backgroundImage = 'radial-gradient(circle at 2px 2px, rgba(255,215,0,0.15) 1px, transparent 0)';
     b.style.backgroundSize = '8px 8px';
 
-    if (isTall) {
+    if (isTall && !isMobile) {
        const spire = document.createElement('div');
        spire.className = 'spire-light';
        b.appendChild(spire);
     }
 
-    // High Chance of Lasers (80% for tall buildings)
-    if (Math.random() > 0.4 || isTall) {
+    if ((Math.random() > 0.4 || isTall) && !isMobile) {
        const laser = document.createElement('div');
        laser.className = 'laser-beam';
        laser.style.animationDelay = (Math.random() * 6) + 's';
        b.appendChild(laser);
     }
     
-    // Active Glowing Windows (Balanced for performance)
-    for (let j = 0; j < 8; j++) {
+    // Active Glowing Windows (Reduced on Mobile)
+    const activeWinCount = isMobile ? 3 : 8;
+    for (let j = 0; j < activeWinCount; j++) {
       const win = document.createElement('div');
       win.className = 'win active';
       if (Math.random() > 0.6) win.classList.add('cyan');

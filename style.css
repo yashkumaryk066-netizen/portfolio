@@ -2892,3 +2892,39 @@ body[data-mood="night"] {
 }
 .stat-pill i { color: #8b5cf6; font-size: 1.5rem; margin-bottom: 5px; }
 
+
+/* ===== ADVANCED GLOBAL RESPONSIVENESS ===== */
+:root {
+    --fluid-h1: clamp(2.5rem, 8vw, 4.5rem);
+    --fluid-h2: clamp(2rem, 5vw, 3rem);
+    --fluid-p: clamp(1rem, 2vw, 1.15rem);
+}
+
+.hero-name { font-size: var(--fluid-h1) !important; }
+.section-title { font-size: var(--fluid-h2) !important; }
+p { font-size: var(--fluid-p); }
+
+@media (max-width: 1200px) {
+    .container { width: 92%; }
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .hero-inner { padding-top: 120px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+    .about-avatar-col { justify-content: center; margin-bottom: 20px; }
+    .city-skyline { height: 25vh; opacity: 0.3; } /* Less intrusive on mobile */
+    .hero-stats { flex-direction: column; gap: 15px; }
+    .stat-divider { display: none; }
+}
+
+@media (max-width: 480px) {
+    .section { padding: 60px 0; }
+    .hero-badge { font-size: 0.75rem; }
+    .nav-inner { padding: 0 15px; }
+    .btn-hire { display: none; } /* Hide in mini-nav to avoid clutter */
+}
+
+/* Fix for 3D Shifting */
+canvas { max-width: 100vw !important; cursor: grab; }
