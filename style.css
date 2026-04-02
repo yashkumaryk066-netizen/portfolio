@@ -2121,7 +2121,13 @@ button { border: none; background: none; cursor: none; }
   inset: 0;
   z-index: 5;
   pointer-events: none;
-  background: radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), transparent 0%, rgba(5, 0, 13, 0.8) 100%);
+  /* Reduced baseline darkness (0.5 instead of 0.8) and added a subtle inner glow */
+  background: radial-gradient(
+    circle 450px at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+    rgba(16, 185, 129, 0.05) 0%, 
+    transparent 40%, 
+    rgba(5, 0, 13, 0.45) 100%
+  );
 }
 
 .fluid-cursor {
@@ -2223,11 +2229,20 @@ html {
   animation: text-glitch 0.3s infinite;
 }
 
-@keyframes text-glitch {
-  0% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(-2px, -2px); }
-  60% { transform: translate(2px, 2px); }
-  80% { transform: translate(2px, -2px); }
-  100% { transform: translate(0); }
+/* ===== SPOTLIGHT PROJECT GLOW (CHAMKE EFFECT) ===== */
+.project-card:hover {
+  border-color: rgba(139, 92, 246, 1) !important;
+  box-shadow: 0 0 50px rgba(139, 92, 246, 0.4) !important;
+  transform: translateY(-10px) scale(1.02);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.project-card:hover .project-name {
+  color: white;
+  text-shadow: 0 0 10px rgba(139, 92, 246, 1);
+}
+
+/* Make skill sphere canvas more luminous */
+#skill-sphere-container canvas {
+  filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.5));
 }
