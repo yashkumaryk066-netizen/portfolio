@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://yashankushmishra.dev/sitemap.xml
+Sitemap: https://yashamishra.in/sitemap.xml
