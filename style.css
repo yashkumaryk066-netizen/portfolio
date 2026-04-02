@@ -1622,7 +1622,11 @@ body {
   .footer-inner { grid-template-columns: 1fr; gap: 32px; }
   .footer-bottom { flex-direction: column; text-align: center; }
   .nav-links { display: none; }
-  .hamburger { display: flex; }
+  .hamburger { 
+    display: flex; 
+    z-index: 10001 !important; /* Higher than menu overlay */
+    position: relative;
+  }
   body { cursor: auto; }
   #cursor-dot, #cursor-ring { display: none; }
 
