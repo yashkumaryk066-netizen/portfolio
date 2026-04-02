@@ -29,6 +29,7 @@ function initAll() {
   initHeroParallax();
   initDraggableBadges();
   initFuturisticBackground();
+  initFloatingDynamics();
 }
 
 // ===== YEAR =====
@@ -827,5 +828,88 @@ function initFuturisticBackground() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+}
+
+// ===== DRAGGABLE & PULSING FLOATING BUTTONS (WhatsApp & Top) =====
+function initFloatingDynamics() {
+  const fabs = document.querySelectorAll('.draggable-fab');
+  if (!fabs.length) return;
+
+  // Add floating pulse animation via CSS if not already there
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fab-pulse {
+      0%, 100% { transform: scale(1); filter: brightness(1); }
+      50% { transform: scale(1.1); filter: brightness(1.2); box-shadow: 0 0 20px rgba(139,92,246,0.6); }
+    }
+    .draggable-fab:not(.is-dragging) {
+      animation: fab-pulse 2.5s ease-in-out infinite;
+    }
+  `;
+  document.head.appendChild(style);
+
+  fabs.forEach(fab => {
+    let isDragging = false;
+    let startX, startY, initialX, initialY;
+    let currentX = 0, currentY = 0;
+
+    fab.style.cursor = 'grab';
+    fab.style.touchAction = 'none';
+
+    function onDown(e) {
+      // Don't drag if clicking link/icon normally (only if long press or move)
+      isDragging = true;
+      fab.classList.add('is-dragging');
+      fab.style.cursor = 'grabbing';
+      fab.style.transition = 'none';
+      fab.style.zIndex = '1000';
+
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      const cy = e.touches ? e.touches[0].clientY : e.clientY;
+
+      startX = cx - currentX;
+      startY = cy - currentY;
+
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+      document.addEventListener('touchmove', onMove, { passive: false });
+      document.addEventListener('touchend', onUp);
+    }
+
+    function onMove(e) {
+      if (!isDragging) return;
+      e.preventDefault();
+
+      const cx = e.touches ? e.touches[0].clientX : e.clientX;
+      const cy = e.touches ? e.touches[0].clientY : e.clientY;
+
+      currentX = cx - startX;
+      currentY = cy - startY;
+
+      fab.style.transform = `translate(${currentX}px, ${currentY}px) scale(1.1)`;
+    }
+
+    function onUp() {
+      isDragging = false;
+      fab.classList.remove('is-dragging');
+      fab.style.cursor = 'grab';
+      fab.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+      
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+      document.removeEventListener('touchmove', onMove);
+      document.removeEventListener('touchend', onUp);
+    }
+
+    fab.addEventListener('mousedown', onDown);
+    fab.addEventListener('touchstart', onDown, { passive: false });
+    
+    // Prevent link click during drag
+    fab.addEventListener('click', (e) => {
+      if (Math.abs(currentX) > 5 || Math.abs(currentY) > 5) {
+        e.preventDefault();
+      }
+    });
   });
 }
