@@ -1440,18 +1440,50 @@ body {
 }
 
 .form-success {
-  margin-top: 16px;
+  margin-top: 20px;
   padding: 16px;
   background: rgba(16, 185, 129, 0.1);
   border: 1px solid rgba(16, 185, 129, 0.3);
   border-radius: var(--radius-sm);
-  color: var(--green);
+  color: #10b981;
   font-weight: 600;
   text-align: center;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: center;
+  gap: 10px;
+  animation: slideUp 0.4s ease;
+}
+
+.form-error {
+  margin-top: 20px;
+  padding: 16px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-sm);
+  color: #ef4444;
+  font-weight: 600;
+  text-align: center;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  animation: slideUp 0.4s ease;
+}
+
+#submit-loading {
+  display: inline-flex;
+  align-items: center;
   gap: 8px;
+}
+
+.fa-spin {
+  animation: fa-spin 1s infinite linear;
+}
+
+@keyframes fa-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* ===== FOOTER ===== */

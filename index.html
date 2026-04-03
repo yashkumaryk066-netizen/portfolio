@@ -758,20 +758,31 @@
 
       <div class="contact-form-wrap reveal" id="contact-form-wrap">
         <h3 class="contact-title">Send a Message</h3>
-        <form id="contact-form" action="https://formspree.io/f/xpwzklay" method="POST" class="contact-form">
+        <form id="contact-form" action="https://formspree.io/f/mdaplkny" method="POST" onsubmit="handleFormSubmit(event)" class="contact-form">
           <!-- Formspree needs name attributes -->
           <div class="form-group">
-            <input type="text" name="name" id="name" placeholder="Your Name" required />
+            <input type="text" name="name" id="form-name" placeholder="Your Name" required />
           </div>
           <div class="form-group">
-            <input type="email" name="email" id="email" placeholder="Your Email" required />
+            <input type="email" name="email" id="form-email" placeholder="Your Email" required />
+          </div>
+          <div class="form-group" style="display: none;">
+            <input type="text" name="subject" id="form-subject" value="Portfolio Message" />
           </div>
           <div class="form-group">
-            <textarea name="message" id="message" rows="5" placeholder="Your Message" required></textarea>
+            <textarea name="message" id="form-message" rows="5" placeholder="Your Message" required></textarea>
           </div>
           <button type="submit" class="btn-primary form-submit" id="submit-btn" style="width: 100%;">
-            <i class="fas fa-paper-plane"></i> Send Message
+            <span id="submit-text"><i class="fas fa-paper-plane" style="margin-right: 8px;"></i> Send Message</span>
+            <span id="submit-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
           </button>
+          
+          <div id="form-success" class="form-success" style="display: none;">
+            <i class="fas fa-check-circle"></i> Message sent successfully!
+          </div>
+          <div id="form-error" class="form-error" style="display: none;">
+            <i class="fas fa-exclamation-circle"></i> Oops! Something went wrong.
+          </div>
         </form>
       </div>
     </div>
