@@ -1572,11 +1572,11 @@ body {
   100% { transform: rotate(360deg); }
 }
 
-/* ===== FOOTER ===== */
 #footer {
-  background: linear-gradient(rgba(5, 5, 20, 0.95), rgba(5, 5, 20, 0.85)), url('footer-bg.png');
+  background: linear-gradient(rgba(5, 5, 20, 0.7), rgba(5, 5, 20, 0.5)), url('footer-bg.png');
   background-size: cover;
   background-position: center;
+  background-attachment: fixed; /* Parallax effect for "real" feel */
   border-top: 1px solid var(--bg-glass-border);
   padding: 80px 0 32px;
   position: relative;
