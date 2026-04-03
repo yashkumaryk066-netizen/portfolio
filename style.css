@@ -1592,10 +1592,10 @@ body {
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: conic-gradient(from 0deg, transparent 70%, var(--primary) 90%, var(--cyan) 100%);
+  background: conic-gradient(from 0deg, transparent 60%, #8b5cf6 80%, #800000 90%, #8b5cf6 100%);
   z-index: -1;
   animation: rotateLight 4s linear infinite;
-  opacity: 0.8;
+  opacity: 1;
 }
 
 @keyframes rotateLight {
