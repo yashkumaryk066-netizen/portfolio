@@ -1680,13 +1680,15 @@ body {
 
 .footer-links ul li a {
   font-size: 0.95rem;
-  color: #cbd5e1 !important;
+  color: #ffffff !important;
   transition: var(--transition);
   font-weight: 500;
+  opacity: 0.8;
 }
 
 .footer-links ul li a:hover {
-  color: var(--primary-light) !important;
+  color: var(--cyan) !important;
+  opacity: 1;
   padding-left: 8px;
 }
 
