@@ -3,6 +3,92 @@
    Premium Dark Theme | 2025
    ========================================= */
 
+/* ===== PREMIUM PRELOADER ===== */
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: #05050f;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.loaded .preloader {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-inner {
+  text-align: center;
+  max-width: 300px;
+  width: 90%;
+}
+
+.loader-logo {
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+  animation: pulse-glow 2s infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0% { text-shadow: 0 0 10px rgba(139, 92, 246, 0.3); transform: scale(0.98); }
+  100% { text-shadow: 0 0 30px rgba(139, 92, 246, 0.6); transform: scale(1.02); }
+}
+
+.loader-progress {
+  height: 2px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.loader-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--gradient);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 15px var(--primary);
+}
+
+.loader-status {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-faint);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: block;
+}
+
+/* Coming Soon Pulse */
+.wip-badge {
+  background: rgba(255, 165, 0, 0.1) !important;
+  border-color: rgba(255, 165, 0, 0.3) !important;
+  color: #ffa500 !important;
+  animation: badge-pulse 2s infinite;
+}
+
+@keyframes badge-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(255, 165, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0); }
+}
+
+/* Accessibility Fixes */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .loader-logo { font-size: 1.8rem; }
+}
+
 /* ===== CSS VARIABLES ===== */
 :root {
   --primary: #8b5cf6;
@@ -1448,7 +1534,7 @@ body {
   color: #10b981;
   font-weight: 600;
   text-align: center;
-  display: flex !important;
+  display: none;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -1464,7 +1550,7 @@ body {
   color: #ef4444;
   font-weight: 600;
   text-align: center;
-  display: flex !important;
+  display: none;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -1488,9 +1574,11 @@ body {
 
 /* ===== FOOTER ===== */
 #footer {
-  background: rgba(5, 5, 15, 0.95);
+  background: linear-gradient(rgba(5, 5, 20, 0.95), rgba(5, 5, 20, 0.85)), url('footer-bg.png');
+  background-size: cover;
+  background-position: center;
   border-top: 1px solid var(--bg-glass-border);
-  padding: 60px 0 32px;
+  padding: 80px 0 32px;
   position: relative;
   z-index: 1;
 }
@@ -1500,6 +1588,8 @@ body {
   grid-template-columns: 1.5fr 1fr 1fr;
   gap: 48px;
   margin-bottom: 48px;
+  position: relative;
+  z-index: 2;
 }
 
 .footer-logo {

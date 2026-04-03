@@ -1,0 +1,21 @@
+{
+  "name": "Yash Ankush Mishra | Software Developer",
+  "short_name": "Yash AI",
+  "description": "Personal portfolio of Yash Ankush Mishra, Software Developer & AI Specialist.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "icons": [
+    {
+      "src": "yash.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "yash.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

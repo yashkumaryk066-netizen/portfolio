@@ -3,9 +3,28 @@
    Premium Interactions & Animations
    ============================================= */
 
-// ===== LOADING =====
+// ===== LOADING & PRELOADER =====
 window.addEventListener('load', () => {
-  document.body.classList.add('loaded');
+  const loaderBar = document.getElementById('loader-bar');
+  const status = document.querySelector('.loader-status');
+  
+  // Fake progress for visual appeal
+  let progress = 0;
+  const interval = setInterval(() => {
+    progress += Math.random() * 15;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(interval);
+      setTimeout(() => {
+        document.body.classList.add('loaded');
+        console.log("%c Namaste from Jaipur! 🏰 | Portfolio Loaded Successfully.", "color: #8b5cf6; font-weight: bold; font-size: 1.2rem;");
+      }, 500);
+    }
+    if (loaderBar) loaderBar.style.width = progress + '%';
+    if (status && progress > 30) status.textContent = "Loading Neural Networks...";
+    if (status && progress > 70) status.textContent = "Synthesizing UI Elements...";
+  }, 100);
+
   initAll();
 });
 
@@ -37,7 +56,7 @@ function initAll() {
   // New Magic Features 1-4
   initMoodToggle();
   initGitHubStats();
-  initPdfGenerator();
+  initDraggableElements();
 }
 
 // ===== YEAR =====
@@ -1197,8 +1216,16 @@ function initAIChat() {
   if (!toggle || !window) return;
 
   toggle.addEventListener('click', () => {
-    window.style.display = (window.style.display === 'flex') ? 'none' : 'flex';
+    const isVisible = window.style.display === 'flex';
+    window.style.display = isVisible ? 'none' : 'flex';
     toggle.classList.toggle('active');
+    
+    // Greeting if first time
+    if (!isVisible && body.children.length === 1) {
+      setTimeout(() => {
+        addMsg("Namaste! I'm Yash's AI. How can I help you today? 🙏", 'bot');
+      }, 500);
+    }
   });
 
   close.addEventListener('click', () => window.style.display = 'none');
@@ -1327,15 +1354,7 @@ async function initGitHubStats() {
     }
 }
 
-/* ===== 3. PDF RESUME GENERATOR (Auto-Print Layout) ===== */
-function initPdfGenerator() {
-    const btn = document.getElementById('nav-resume-btn');
-    if (btn) {
-        btn.addEventListener('click', () => {
-            window.open('yash_mishra_resume.html', '_blank');
-        });
-    }
-}
+// Consolidation: initPdfGenerator logic moved to initResumeModal or handled via HTML links.
 
 /* ===== 🎮 INTERACTIVE DRAGGABLE PLAYGROUND ENGINE ===== */
 function initDraggableElements() {
