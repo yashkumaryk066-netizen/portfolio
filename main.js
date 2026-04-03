@@ -1058,9 +1058,18 @@ function initSkillSphere() {
 
   // Skill labels
   const skills = [
-    'Python', 'Django', 'React', 'Native', 'Firebase', 'PostgreSQL', 
-    'AI', 'Gemini', 'OpenAI', 'Next.js', 'Vercel', 'GSAP', 'Three.js', 
-    'Figma', 'RestAPI', 'Git', 'Cloud', 'Jaipur'
+    'Python', 'Django', 'React', 'React Native', 'Firebase', 'PostgreSQL', 
+    'AI / ML', 'Gemini', 'OpenAI', 'Next.js', 'Vercel', 'GSAP', 'Three.js', 
+    'Figma', 'REST API', 'Git', 'Cloud', 'Node.js'
+  ];
+
+  // Color pairs [border/glow, text] for variety
+  const colorPairs = [
+    ['#8b5cf6', '#ffffff'],
+    ['#06b6d4', '#ffffff'],
+    ['#10b981', '#ffffff'],
+    ['#f59e0b', '#ffffff'],
+    ['#ec4899', '#ffffff'],
   ];
 
   const group = new THREE.Group();
@@ -1068,26 +1077,59 @@ function initSkillSphere() {
     const phi = Math.acos(-1 + (2 * i) / skills.length);
     const theta = Math.sqrt(skills.length * Math.PI) * phi;
     
-    // Create label canvas
+    // Pick a color pair cyclically
+    const [accentColor] = colorPairs[i % colorPairs.length];
+
+    // Create pill/badge style canvas
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
-    canvas.width = 300; canvas.height = 80;
-    // Brighter glowing text
-    ctx.fillStyle = '#06b6d4'; 
-    ctx.font = 'bold 44px Montserrat, sans-serif';
+    const padding = 28;
+    const fontSize = 38;
+    ctx.font = `bold ${fontSize}px Inter, Montserrat, sans-serif`;
+    const textW = ctx.measureText(skill).width;
+    canvas.width = textW + padding * 2 + 16;
+    canvas.height = 80;
+
+    // Dark pill background
+    const rx = 20; // corner radius
+    ctx.beginPath();
+    ctx.moveTo(rx, 0);
+    ctx.lineTo(canvas.width - rx, 0);
+    ctx.quadraticCurveTo(canvas.width, 0, canvas.width, rx);
+    ctx.lineTo(canvas.width, canvas.height - rx);
+    ctx.quadraticCurveTo(canvas.width, canvas.height, canvas.width - rx, canvas.height);
+    ctx.lineTo(rx, canvas.height);
+    ctx.quadraticCurveTo(0, canvas.height, 0, canvas.height - rx);
+    ctx.lineTo(0, rx);
+    ctx.quadraticCurveTo(0, 0, rx, 0);
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(10, 5, 30, 0.82)';
+    ctx.fill();
+
+    // Accent border
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = accentColor;
+    ctx.stroke();
+
+    // White text, bold, crisp
+    ctx.fillStyle = '#ffffff';
+    ctx.font = `bold ${fontSize}px Inter, Montserrat, sans-serif`;
     ctx.textAlign = 'center';
-    ctx.shadowColor = '#8b5cf6';
-    ctx.shadowBlur = 10;
-    ctx.fillText(skill, 150, 55);
+    ctx.textBaseline = 'middle';
+    ctx.shadowColor = accentColor;
+    ctx.shadowBlur = 12;
+    ctx.fillText(skill, canvas.width / 2, canvas.height / 2);
 
     const texture = new THREE.CanvasTexture(canvas);
     const material = new THREE.MeshBasicMaterial({ 
       map: texture, 
       transparent: true, 
-      opacity: 0.9,
+      opacity: 1.0,
       side: THREE.DoubleSide
     });
-    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(6, 1.5), material);
+    // Wider plane to match pill aspect ratio
+    const aspect = canvas.width / canvas.height;
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(6 * aspect / 3.75, 1.6), material);
     
     mesh.position.setFromSphericalCoords(12, phi, theta);
     mesh.lookAt(camera.position);
