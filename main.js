@@ -1363,54 +1363,70 @@ function initDraggableElements() {
     draggables.forEach(el => {
         let isDragging = false;
         let startX, startY;
-        let initialX, initialY;
+        let startClientX, startClientY;
+        let hasMovedSignificantly = false;
 
         el.style.cursor = 'grab';
-        el.style.transition = 'none'; // Instant response during drag
+        el.style.transition = 'none';
 
-        el.addEventListener('mousedown', startDrag);
-        el.addEventListener('touchstart', startDrag, { passive: false });
-
-        function startDrag(e) {
+        const startMove = (e) => {
             isDragging = true;
+            hasMovedSignificantly = false;
             el.style.cursor = 'grabbing';
-            el.style.zIndex = '1000'; // Bring to front while dragging
+            el.style.zIndex = '10000';
             
-            const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-            const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+            startClientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+            startClientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
             
             const rect = el.getBoundingClientRect();
-            startX = clientX - rect.left;
-            startY = clientY - rect.top;
+            startX = startClientX - rect.left;
+            startY = startClientY - rect.top;
             
-            document.addEventListener('mousemove', drag);
-            document.addEventListener('touchmove', drag, { passive: false });
-            document.addEventListener('mouseup', stopDrag);
-            document.addEventListener('touchend', stopDrag);
-        }
+            document.addEventListener('mousemove', move);
+            document.addEventListener('touchmove', move, { passive: false });
+            document.addEventListener('mouseup', endMove);
+            document.addEventListener('touchend', endMove);
+        };
 
-        function drag(e) {
+        const move = (e) => {
             if (!isDragging) return;
-            if (e.type === 'touchmove') e.preventDefault(); // Prevent scroll while dragging
-
+            
             const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
             const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
             
-            let x = clientX - startX;
-            let y = clientY - startY;
+            const deltaX = Math.abs(clientX - startClientX);
+            const deltaY = Math.abs(clientY - startClientY);
+            
+            if (deltaX > 5 || deltaY > 5) {
+                hasMovedSignificantly = true;
+                if (e.type === 'touchmove') e.preventDefault();
+                
+                el.style.position = 'fixed';
+                el.style.left = `${clientX - startX}px`;
+                el.style.top = `${clientY - startY}px`;
+                el.style.margin = '0';
+            }
+        };
 
-            el.style.position = 'fixed';
-            el.style.left = `${x}px`;
-            el.style.top = `${y}px`;
-            el.style.margin = '0';
-        }
-
-        function stopDrag() {
+        const endMove = (e) => {
             isDragging = false;
             el.style.cursor = 'grab';
-            document.removeEventListener('mousemove', drag);
-            document.removeEventListener('touchmove', drag);
-        }
+            document.removeEventListener('mousemove', move);
+            document.removeEventListener('touchmove', move);
+            document.removeEventListener('mouseup', endMove);
+            document.removeEventListener('touchend', endMove);
+
+            if (hasMovedSignificantly) {
+              const captureClick = (ev) => {
+                ev.stopImmediatePropagation();
+                el.removeEventListener('click', captureClick, true);
+              };
+              el.addEventListener('click', captureClick, true);
+            }
+        };
+
+        el.addEventListener('mousedown', startMove);
+        el.addEventListener('touchstart', startMove, { passive: false });
     });
 }
 
