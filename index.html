@@ -228,7 +228,27 @@
       Available for Opportunities
     </div>
 
-    <div id="lottie-greeting-container" class="hero-avatar-lottie waving-hand"></div>
+    <div id="waving-guy" class="hero-avatar-person waving-guy-container">
+      <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- BODY / SUIT -->
+        <rect x="110" y="160" width="80" height="120" rx="30" fill="#2E5BFF" /> 
+        <path d="M125 160H175L150 210L125 160Z" fill="white" /> <!-- SHIRT -->
+        <path d="M110 160L150 230L190 160" stroke="#1A3AA1" stroke-width="2" /> <!-- LAPELS -->
+
+        <!-- NECK -->
+        <rect x="140" y="150" width="20" height="15" fill="#FFD2B1" />
+
+        <!-- HEAD -->
+        <circle cx="150" cy="115" r="30" fill="#FFD2B1" />
+        <path d="M125 110C125 90 175 90 175 110" fill="#2C1A1A" /> <!-- HAIR -->
+
+        <!-- WAVING ARM -->
+        <g id="waving-arm-group" style="transform-origin: 190px 170px; animation: namaste-wave 2s infinite ease-in-out;">
+          <rect x="180" y="100" width="20" height="80" rx="8" fill="#2E5BFF" /> <!-- SLEEVE -->
+          <circle cx="190" cy="90" r="15" fill="#FFD2B1" /> <!-- HAND -->
+        </g>
+      </svg>
+    </div>
     <h1 class="hero-name animate-slide-up gsap-hero-name" id="hero-name">
       Hello! I am <br/> <span class="name-white">Yash A&nbsp;</span><span class="gradient-text name-shimmer">Mishra</span>
     </h1>
