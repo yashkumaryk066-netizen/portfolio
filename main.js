@@ -1440,39 +1440,52 @@ function initUltimateLottie() {
 
     // PREMIUM 3D-STYLE HUMAN WAVING LOTTIE (OPTIMIZED)
     const lottieData = {
-        "v": "5.7.1", "fr": 60, "ip": 0, "op": 120, "w": 300, "h": 300, "nm": "3D Developer Wave", "ddd": 0, "assets": [],
+        "v": "5.7.1", "fr": 60, "ip": 0, "op": 120, "w": 300, "h": 300, "nm": "Professional Waving Developer", "ddd": 0, "assets": [],
         "layers": [
-            {
-                "ddd": 0, "ind": 1, "ty": 4, "nm": "Waving Arm", "sr": 1, "ks": {
-                    "r": {"a": 1, "k": [{"t": 0, "s": [-20]}, {"t": 30, "s": [15]}, {"t": 60, "s": [-20]}]},
-                    "p": {"k": [180, 150]}, "a": {"k": [0, 0]}
+            { // WAVING ARM
+                "ddd": 0, "ind": 1, "ty": 4, "nm": "Right Arm", "sr": 1, 
+                "ks": {
+                    "r": {"a": 1, "k": [{"t": 0, "s": [-15]}, {"t": 30, "s": [25]}, {"t": 60, "s": [-15]}]},
+                    "p": {"k": [195, 140]}, "a": {"k": [10, 50]}
                 },
                 "shapes": [
                     { "ty": "gr", "it": [
-                        {"ty": "rc", "s": {"k": [15, 60]}, "p": {"k": [0, -30]}, "r": {"k": 10}, "nm": "Forearm"},
-                        {"ty": "fl", "c": {"k": [1, 0.8, 0.6, 1]}} // Light Skin
+                        {"ty": "rc", "s": {"k": [20, 80]}, "r": {"k": 10}, "nm": "Sleeve"},
+                        {"ty": "fl", "c": {"k": [0.15, 0.35, 0.75, 1]}} // Professional Royal Blue Suit
+                    ]},
+                    { "ty": "gr", "it": [
+                        {"ty": "rc", "s": {"k": [25, 25]}, "p": {"k": [0, -45]}, "r": {"k": 12}, "nm": "Hand"},
+                        {"ty": "fl", "c": {"k": [1, 0.8, 0.6, 1]}} // Flesh
                     ]}
                 ]
             },
-            {
-                "ddd": 0, "ind": 2, "ty": 4, "nm": "Head", "sr": 1, "ks": { "p": {"k": [150, 90]} },
+            { // HEAD & HAIR
+                "ddd": 0, "ind": 2, "ty": 4, "nm": "Head", "sr": 1, "ks": { "p": {"k": [150, 85]} },
                 "shapes": [
                     { "ty": "gr", "it": [
-                        {"ty": "rc", "s": {"k": [40, 45]}, "r": {"k": 20}, "nm": "Face"},
+                        {"ty": "rc", "s": {"k": [12, 25]}, "p": {"k": [0, 25]}, "r": {"k": 5}, "nm": "Neck"},
+                        {"ty": "fl", "c": {"k": [0.9, 0.7, 0.5, 1]}}
+                    ]},
+                    { "ty": "gr", "it": [
+                        {"ty": "rc", "s": {"k": [45, 50]}, "r": {"k": 22}, "nm": "Face"},
                         {"ty": "fl", "c": {"k": [1, 0.8, 0.6, 1]}}
                     ]},
                     { "ty": "gr", "it": [
-                        {"ty": "rc", "s": {"k": [45, 20]}, "p": {"k": [0, -20]}, "r": {"k": 10}, "nm": "Hair"},
-                        {"ty": "fl", "c": {"k": [0.2, 0.1, 0.1, 1]}} // Dark Hair
+                        {"ty": "rc", "s": {"k": [50, 25]}, "p": {"k": [0, -22]}, "r": {"k": 12}, "nm": "Styled Hair"},
+                        {"ty": "fl", "c": {"k": [0.15, 0.1, 0.1, 1]}}
                     ]}
                 ]
             },
-            {
-                "ddd": 0, "ind": 3, "ty": 4, "nm": "Body", "sr": 1, "ks": { "p": {"k": [150, 180]} },
+            { // BODY - SUIT
+                "ddd": 0, "ind": 3, "ty": 4, "nm": "Body", "sr": 1, "ks": { "p": {"k": [150, 190]} },
                 "shapes": [
                     { "ty": "gr", "it": [
-                        {"ty": "rc", "s": {"k": [80, 110]}, "r": {"k": 25}, "nm": "Torso"},
-                        {"ty": "fl", "c": {"k": [0.55, 0.36, 1, 1]}} // Purple Shirt (matches brand)
+                        {"ty": "rc", "s": {"k": [110, 140]}, "r": {"k": 30}, "nm": "Suit Jacket"},
+                        {"ty": "fl", "c": {"k": [0.15, 0.35, 0.75, 1]}} // Matches Arm
+                    ]},
+                    { "ty": "gr", "it": [
+                        {"ty": "rc", "s": {"k": [40, 60]}, "p": {"k": [0, -40]}, "nm": "Shirt V-Neck"},
+                        {"ty": "fl", "c": {"k": [1, 1, 1, 1]}} // White Shirt underneath
                     ]}
                 ]
             }
