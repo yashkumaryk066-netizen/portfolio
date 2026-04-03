@@ -1436,23 +1436,44 @@ document.addEventListener('DOMContentLoaded', initDraggableElements);
 /* ===== 🛡️ ULTIMATE PERMANENT LOTTIE ENGINE (ZERO-CONFLICT) ===== */
 function initUltimateLottie() {
     const container = document.getElementById('lottie-greeting-container');
-    if (!container || container.innerHTML !== "") return; // Prevent double init
+    if (!container || container.innerHTML !== "") return;
 
+    // PREMIUM 3D-STYLE HUMAN WAVING LOTTIE (OPTIMIZED)
     const lottieData = {
-        "v": "5.5.7", "fr": 60, "ip": 0, "op": 120, "w": 500, "h": 500, "nm": "Window Hello", "ddd": 0, "assets": [],
+        "v": "5.7.1", "fr": 60, "ip": 0, "op": 120, "w": 300, "h": 300, "nm": "3D Developer Wave", "ddd": 0, "assets": [],
         "layers": [
             {
-                "ddd": 0, "ind": 1, "ty": 4, "nm": "Waving Hand", "sr": 1, "ks": {
-                    "o": {"a": 0, "k": 100}, "r": {"a": 1, "k": [{"t": 0, "s": [-15]}, {"t": 30, "s": [15]}, {"t": 60, "s": [-15]}]},
-                    "p": {"a": 0, "k": [250, 250, 0]}, "a": {"a": 0, "k": [0, 0, 0]}, "s": {"a": 0, "k": [150, 150, 100]}
+                "ddd": 0, "ind": 1, "ty": 4, "nm": "Waving Arm", "sr": 1, "ks": {
+                    "r": {"a": 1, "k": [{"t": 0, "s": [-20]}, {"t": 30, "s": [15]}, {"t": 60, "s": [-20]}]},
+                    "p": {"k": [180, 150]}, "a": {"k": [0, 0]}
                 },
                 "shapes": [
-                    {
-                        "ty": "gr", "it": [
-                            {"ty": "rc", "d": 1, "s": {"a": 0, "k": [100, 100]}, "p": {"a": 0, "k": [0, 0]}, "r": {"a": 0, "k": 50}, "nm": "Hand"},
-                            {"ty": "fl", "c": {"a": 0, "k": [1, 0.8, 0.6, 1]}, "o": {"a": 0, "k": 100}, "r": 1, "nm": "Skin"}
-                        ]
-                    }
+                    { "ty": "gr", "it": [
+                        {"ty": "rc", "s": {"k": [15, 60]}, "p": {"k": [0, -30]}, "r": {"k": 10}, "nm": "Forearm"},
+                        {"ty": "fl", "c": {"k": [1, 0.8, 0.6, 1]}} // Light Skin
+                    ]}
+                ]
+            },
+            {
+                "ddd": 0, "ind": 2, "ty": 4, "nm": "Head", "sr": 1, "ks": { "p": {"k": [150, 90]} },
+                "shapes": [
+                    { "ty": "gr", "it": [
+                        {"ty": "rc", "s": {"k": [40, 45]}, "r": {"k": 20}, "nm": "Face"},
+                        {"ty": "fl", "c": {"k": [1, 0.8, 0.6, 1]}}
+                    ]},
+                    { "ty": "gr", "it": [
+                        {"ty": "rc", "s": {"k": [45, 20]}, "p": {"k": [0, -20]}, "r": {"k": 10}, "nm": "Hair"},
+                        {"ty": "fl", "c": {"k": [0.2, 0.1, 0.1, 1]}} // Dark Hair
+                    ]}
+                ]
+            },
+            {
+                "ddd": 0, "ind": 3, "ty": 4, "nm": "Body", "sr": 1, "ks": { "p": {"k": [150, 180]} },
+                "shapes": [
+                    { "ty": "gr", "it": [
+                        {"ty": "rc", "s": {"k": [80, 110]}, "r": {"k": 25}, "nm": "Torso"},
+                        {"ty": "fl", "c": {"k": [0.55, 0.36, 1, 1]}} // Purple Shirt (matches brand)
+                    ]}
                 ]
             }
         ]
@@ -1466,9 +1487,9 @@ function initUltimateLottie() {
                 renderer: 'svg',
                 loop: true,
                 autoplay: true,
-                animationData: lottieData
+                animationData: lottieData // Using robust local data to avoid 403 Forbidden errors
             });
-            console.log("💎 LOTTIE ACTIVE: Bulletproof Local Animation Loaded.");
+            console.log("💎 LOTTIE ACTIVE: Bulletproof Local Human Waving Active.");
         }
     }, 200);
     setTimeout(() => clearInterval(checkLottie), 5000);
