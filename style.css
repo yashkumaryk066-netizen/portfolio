@@ -1135,14 +1135,25 @@ body {
   color: var(--primary-light);
   transition: var(--transition);
   position: relative;
-  z-index: 25;
+  z-index: 50; /* Above all card content */
   cursor: pointer;
   pointer-events: auto !important;
 }
 
+/* ===== EXPANDED CLICK AREA (WHOLE CARD IS LINK) ===== */
+.project-link::after {
+  content: "";
+  position: absolute;
+  inset: -500px; /* Covers the whole card from any anchor position */
+  z-index: 10;
+}
+
+.project-card { position: relative; overflow: hidden; }
+
 .project-link:hover {
   gap: 12px;
   color: var(--primary);
+  transform: translateX(5px);
 }
 
 .project-link-wip {
