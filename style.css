@@ -768,9 +768,11 @@ h1, h2, h3, h4, h5, h6 {
 
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.6fr;
-  gap: 80px;
+  grid-template-columns: 1fr 1fr; /* Balanced: 50/50 split */
+  gap: 60px;
   align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 .about-avatar-col {
@@ -3328,8 +3330,20 @@ html, body {
 .glass-card:hover::before { opacity: 1; }
 
 /* ===== 📐 CONSISTENT SPACING SYSTEM ===== */
-.section-header { margin-bottom: 60px !important; }
-.container { max-width: 1300px !important; }
+.section-header { 
+    margin-bottom: 60px !important; 
+    text-align: center !important; 
+    max-width: 800px; 
+    margin-left: auto !important; 
+    margin-right: auto !important; 
+}
+.container { 
+    max-width: 1200px !important; 
+    margin-left: auto !important; 
+    margin-right: auto !important; 
+    padding: 0 20px;
+}
+
 
 /* ===== �� PROJECT CASE STUDY LABELS ===== */
 .project-label {
@@ -3416,11 +3430,12 @@ h1, h2, h3 {
 #hero {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center; /* RESTORED: Centered vertically */
     align-items: center;
     text-align: center;
-    min-height: 80vh;
-    padding-top: 140px; /* Space for the fixed navbar */
+    min-height: 95vh;
+    padding-top: 80px; /* Balanced space for navbar */
+    position: relative;
 }
 
 .hero-avatar-memoji {
