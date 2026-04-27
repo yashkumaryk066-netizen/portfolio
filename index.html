@@ -884,6 +884,72 @@
   </div>
 </section>
 
+<!-- ===== CONTACT SECTION ===== -->
+<section id="contact" class="section" aria-label="Contact Yash Ankush Mishra">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Let's Connect</span>
+      <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
+      <p class="section-sub">Have a project idea, collaboration, or just want to say hi? I'm always open!</p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="contact-card">
+          <div class="cc-icon"><i class="fas fa-phone"></i></div>
+          <div class="cc-content">
+            <span class="cc-label">Phone / WhatsApp</span>
+            <a href="tel:+918356926231" class="cc-value">+91 8356926231</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon"><i class="fas fa-envelope"></i></div>
+          <div class="cc-content">
+            <span class="cc-label">Email</span>
+            <a href="mailto:yashkumaryk066@gmail.com" class="cc-value">yashkumaryk066@gmail.com</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon"><i class="fab fa-linkedin-in"></i></div>
+          <div class="cc-content">
+            <span class="cc-label">LinkedIn</span>
+            <a href="https://linkedin.com/in/yash-kumar-342330213" target="_blank" rel="noopener noreferrer" class="cc-value">yash-kumar-342330213</a>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="cc-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="cc-content">
+            <span class="cc-label">Location</span>
+            <span class="cc-value">Jaipur, Rajasthan / Rangra, Bihar 🏰</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap reveal">
+        <h3 class="contact-title">Send a Message</h3>
+        <form id="contact-form" action="https://formspree.io/f/mdaplkny" method="POST" onsubmit="handleFormSubmit(event)" class="contact-form">
+          <div class="form-group">
+            <input type="text" name="name" id="form-name" placeholder="Your Name" required />
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" id="form-email" placeholder="Your Email" required />
+          </div>
+          <div class="form-group">
+            <textarea name="message" id="form-message" rows="5" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit" id="submit-btn" style="width: 100%;">
+            <span id="submit-text"><i class="fas fa-paper-plane" style="margin-right: 8px;"></i> Send Message</span>
+            <span id="submit-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
+          </button>
+          <div id="form-success" class="form-success" style="display: none;">
+            <i class="fas fa-check-circle"></i> Message sent successfully!
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== LOCAL SEO FOOTER: ALL BIHAR COVERAGE ===== -->
 <div class="footer-seo-links" style="padding: 40px 0; background: rgba(139, 92, 246, 0.02); border-top: 1px solid var(--bg-glass-border);">
   <div class="container" style="text-align: center;">
@@ -896,9 +962,6 @@
       <a href="#" style="color: inherit;">Motihari</a> • <a href="#" style="color: inherit;">Hajipur</a> • <a href="#" style="color: inherit;">Sasaram</a> • <a href="#" style="color: inherit;">Siwan</a> • 
       <strong>Rangra Chowk</strong> • <strong>Rangra Bihar Developer</strong>
     </p>
-    <p style="margin-top: 20px; font-size: 0.9rem;">
-      <i class="fas fa-code"></i> Expert <strong>Django & Next.js Developer</strong> for the entire Bihar Region.
-    </p>
   </div>
 </div>
 
@@ -908,39 +971,35 @@
     <div class="footer-inner">
       <div class="footer-brand">
         <span class="footer-logo">Yash <span class="gradient-text">Ankush Mishra</span></span>
-        <p class="footer-tagline">
-          Building mission-critical products globally from Jaipur 🏰 and Bihar. <br/>
-          Specializing in AI, FinTech, and Scalable Architectures.
-        </p>
+        <p class="footer-tagline">Building mission-critical products globally from Jaipur 🏰 and Bihar.</p>
         <div class="footer-socials">
-          <a href="https://linkedin.com/in/yash-kumar-342330213" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" id="footer-linkedin"><i class="fab fa-linkedin-in"></i></a>
-          <a href="mailto:yashkumaryk066@gmail.com" aria-label="Email" id="footer-email"><i class="fas fa-envelope"></i></a>
-          <a href="https://wa.me/918356926231" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" id="footer-whatsapp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://linkedin.com/in/yash-kumar-342330213" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:yashkumaryk066@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://wa.me/918356926231" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
         </div>
       </div>
       <div class="footer-links">
         <h4>Navigation</h4>
         <ul>
-          <li><a href="#about" id="f-about">About</a></li>
-          <li><a href="#projects" id="f-projects">Projects</a></li>
-          <li><a href="#skills" id="f-skills">Skills</a></li>
-          <li><a href="#experience" id="f-exp">Experience</a></li>
-          <li><a href="#contact" id="f-contact">Contact</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="blog.html">Blog</a></li>
         </ul>
       </div>
       <div class="footer-links">
         <h4>Live Products</h4>
         <ul>
-          <li><a href="https://yashamishra.pythonanywhere.com/" target="_blank" rel="noopener noreferrer" id="f-ysm">Y.S.M AI + Edu System</a></li>
-          <li><a href="https://scan-khana.vercel.app/" target="_blank" rel="noopener noreferrer" id="f-scankhana">Scan Khana</a></li>
-          <li><a href="https://splitbalance-b552b.web.app/login" target="_blank" rel="noopener noreferrer" id="f-settlestack">SettleStack</a></li>
-          <li><a href="#projects" id="f-vibetalk">VibeTalk (Coming Soon)</a></li>
+          <li><a href="https://yashamishra.pythonanywhere.com/" target="_blank" rel="noopener noreferrer">Y.S.M AI + Edu System</a></li>
+          <li><a href="https://scan-khana.vercel.app/" target="_blank" rel="noopener noreferrer">Scan Khana</a></li>
+          <li><a href="https://splitbalance-b552b.web.app/login" target="_blank" rel="noopener noreferrer">SettleStack</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; <span id="year-footer">2026</span> Yash Ankush Mishra. All rights reserved.</p>
-      <p>Crafted with <span class="heart">❤️</span> in Jaipur and Rangra, India</p>
+      <p>&copy; 2026 Yash Ankush Mishra. All rights reserved.</p>
+      <p>Crafted with <span class="heart">❤️</span> in Jaipur and Rangra</p>
     </div>
   </div>
 </footer>
@@ -950,11 +1009,11 @@
   <i class="fab fa-whatsapp"></i>
   <span class="fab-tooltip">Chat on WhatsApp</span>
 </a>
-
 <button class="fab-btn fab-top draggable-fab" id="back-to-top" aria-label="Back to top" onclick="scrollToTop()" style="display:none;">
   <i class="fas fa-arrow-up"></i>
 </button>
 
+<!-- ===== AI CHAT WINDOW ===== -->
 <div class="ai-chat-window" id="ai-chat-window">
   <div class="ai-chat-header">
     <div class="bot-info">
@@ -972,135 +1031,6 @@
   </div>
 </div>
 
-<section id="contact" class="section" aria-label="Contact Yash Ankush Mishra">
-  <div class="container">
-    <div class="section-header reveal">
-      <span class="section-tag">Let's Connect</span>
-      <h2 class="section-title">Get In <span class="gradient-text">Touch</span></h2>
-      <p class="section-sub">Have a project idea, collaboration, or just want to say hi? I'm always open!</p>
-    </div>
-
-    <div class="contact-grid">
-      <div class="contact-info reveal" id="contact-info">
-        <div class="contact-card" id="cc-phone">
-          <div class="cc-icon"><i class="fas fa-phone"></i></div>
-          <div class="cc-content">
-            <span class="cc-label">Phone / WhatsApp</span>
-            <a href="tel:+918356926231" class="cc-value">+91 8356926231</a>
-          </div>
-        </div>
-        <div class="contact-card" id="cc-email">
-          <div class="cc-icon"><i class="fas fa-envelope"></i></div>
-          <div class="cc-content">
-            <span class="cc-label">Email</span>
-            <a href="mailto:yashkumaryk066@gmail.com" class="cc-value">yashkumaryk066@gmail.com</a>
-          </div>
-        </div>
-        <div class="contact-card" id="cc-linkedin">
-          <div class="cc-icon"><i class="fab fa-linkedin-in"></i></div>
-          <div class="cc-content">
-            <span class="cc-label">LinkedIn</span>
-            <a href="https://linkedin.com/in/yash-kumar-342330213" target="_blank" rel="noopener noreferrer" class="cc-value">yash-kumar-342330213</a>
-          </div>
-        </div>
-        <div class="contact-card" id="cc-location">
-          <div class="cc-icon"><i class="fas fa-map-marker-alt"></i></div>
-          <div class="cc-content">
-            <span class="cc-label">Location</span>
-            <span class="cc-value">Jaipur, Rajasthan / Rangra, Bihar 🏰</span>
-          </div>
-        </div>
-
-        <div class="contact-quicklinks" id="quick-links">
-          <a href="https://wa.me/918356926231" target="_blank" rel="noopener noreferrer" class="quicklink-btn whatsapp-btn" id="whatsapp-contact">
-            <i class="fab fa-whatsapp"></i> WhatsApp Me
-          </a>
-          <a href="mailto:yashkumaryk066@gmail.com" class="quicklink-btn email-btn" id="email-contact">
-            <i class="fas fa-envelope"></i> Send Email
-          </a>
-          <a href="https://linkedin.com/in/yash-kumar-342330213" target="_blank" rel="noopener noreferrer" class="quicklink-btn linkedin-contact-btn" id="linkedin-contact">
-            <i class="fab fa-linkedin"></i> Connect on LinkedIn
-          </a>
-        </div>
-      </div>
-
-      <div class="contact-form-wrap reveal" id="contact-form-wrap">
-        <h3 class="contact-title">Send a Message</h3>
-        <form id="contact-form" action="https://formspree.io/f/mdaplkny" method="POST" onsubmit="handleFormSubmit(event)" class="contact-form">
-          <div class="form-group">
-            <input type="text" name="name" id="form-name" placeholder="Your Name" required />
-          </div>
-          <div class="form-group">
-            <input type="email" name="email" id="form-email" placeholder="Your Email" required />
-          </div>
-          <div class="form-group" style="display: none;">
-            <input type="text" name="subject" id="form-subject" value="Portfolio Message" />
-          </div>
-          <div class="form-group">
-            <textarea name="message" id="form-message" rows="5" placeholder="Your Message" required></textarea>
-          </div>
-          <button type="submit" class="btn-primary form-submit" id="submit-btn" style="width: 100%;">
-            <span id="submit-text"><i class="fas fa-paper-plane" style="margin-right: 8px;"></i> Send Message</span>
-            <span id="submit-loading" style="display: none;"><i class="fas fa-spinner fa-spin"></i> Sending...</span>
-          </button>
-          
-          <div id="form-success" class="form-success" style="display: none;">
-            <i class="fas fa-check-circle"></i> Message sent successfully!
-          </div>
-          <div id="form-error" class="form-error" style="display: none;">
-            <i class="fas fa-exclamation-circle"></i> Oops! Something went wrong.
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-          Specializing in AI, FinTech, and Scalable Architectures.
-        </p>
-        <div class="footer-socials">
-          <a href="https://linkedin.com/in/yash-kumar-342330213" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" id="footer-linkedin"><i class="fab fa-linkedin-in"></i></a>
-          <a href="mailto:yashkumaryk066@gmail.com" aria-label="Email" id="footer-email"><i class="fas fa-envelope"></i></a>
-          <a href="https://wa.me/918356926231" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" id="footer-whatsapp"><i class="fab fa-whatsapp"></i></a>
-        </div>
-      </div>
-      <div class="footer-links">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="#about" id="f-about">About</a></li>
-          <li><a href="#projects" id="f-projects">Projects</a></li>
-          <li><a href="#skills" id="f-skills">Skills</a></li>
-          <li><a href="#experience" id="f-exp">Experience</a></li>
-          <li><a href="#contact" id="f-contact">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>Live Products</h4>
-        <ul>
-          <li><a href="https://yashamishra.pythonanywhere.com/" target="_blank" rel="noopener noreferrer" id="f-ysm">Y.S.M AI + Edu System</a></li>
-          <li><a href="https://scan-khana.vercel.app/" target="_blank" rel="noopener noreferrer" id="f-scankhana">Scan Khana</a></li>
-          <li><a href="https://splitbalance-b552b.web.app/login" target="_blank" rel="noopener noreferrer" id="f-settlestack">SettleStack</a></li>
-          <li><a href="#projects" id="f-vibetalk">VibeTalk (Coming Soon)</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; <span id="year-footer">2026</span> Yash Ankush Mishra. All rights reserved.</p>
-      <p>Crafted with <span class="heart">❤️</span> in Jaipur, India</p>
-    </div>
-  </div>
-</footer>
-
-<!-- ===== FLOATING BUTTONS ===== -->
-<a href="https://wa.me/918356926231" target="_blank" rel="noopener noreferrer" class="fab-btn fab-wa draggable-fab" id="fab-whatsapp" aria-label="Chat on WhatsApp">
-  <i class="fab fa-whatsapp"></i>
-  <span class="fab-tooltip">Chat on WhatsApp</span>
-</a>
-
-<button class="fab-btn fab-top draggable-fab" id="back-to-top" aria-label="Back to top" onclick="scrollToTop()" style="display:none;">
-  <i class="fas fa-arrow-up"></i>
-</button>
-
 <!-- ===== RESUME MODAL ===== -->
 <div id="resume-modal" class="resume-modal">
   <div class="resume-modal-content">
@@ -1114,65 +1044,28 @@
             <p class="res-subtitle">Software Developer | Full Stack & AI Specialist</p>
           </div>
         </div>
-        
         <div class="res-summary">
           Versatile Software Developer with 3+ years of experience in architecting scalable Full Stack applications and AI-integrated systems. 
-          Successfully launched 5+ production-ready products across FinTech, EdTech, and Food-Tech sectors. Expert in Python, React, and 
-          Advanced AI implementations. Focused on delivering high-performance code and seamless user experiences.
         </div>
-        
         <div class="resume-grid">
           <div class="resume-col-left">
-            <h4 class="res-section-title">Professional Experience</h4>
+            <h4 class="res-section-title">Experience</h4>
             <div class="res-item">
               <strong class="res-highlight">Software Developer</strong>
-              <p class="res-meta">Telepathy Infotech Pvt. Ltd. | 2025 - Present</p>
-              <ul class="res-list">
-                <li>Building scalable software solutions with AI/ML integration.</li>
-                <li>Architecting end-to-end product delivery in FinTech & EdTech.</li>
-              </ul>
-            </div>
-            
-            <h4 class="res-section-title">Major Live Products (Developed & Scaled)</h4>
-            <div class="res-item">
-              <strong>Scan Khana — AI FoodTech</strong>
-              <p class="res-desc">Vision-based food detection using Python & AI models.</p>
-            </div>
-            <div class="res-item">
-              <strong>SettleStack — FinTech</strong>
-              <p class="res-desc">Mobile bill-splitting ecosystem with React Native & Firebase.</p>
-            </div>
-            <div class="res-item">
-              <strong>Y.S.M ERP — AI OS</strong>
-              <p class="res-desc">Multi-AI (Gemini/OpenAI) powered management system.</p>
+              <p class="res-meta">Telepathy Infotech | 2025 - Present</p>
             </div>
           </div>
-          
           <div class="resume-col-right">
-            <h4 class="res-section-title">Education Journey</h4>
-            <div class="res-item">
-              <strong>MCA</strong>
-              <p>Bengaluru University, Bengaluru 🎓</p>
-              <span class="res-tag">Post-Grad</span>
-            </div>
-            <div class="res-item">
-              <strong>BCA</strong>
-              <p>Bhagalpur University, Bihar 🎓</p>
-              <span class="res-tag">Undergrad</span>
-            </div>
-            
             <h4 class="res-section-title">Tech Toolkit</h4>
             <div class="res-tech-grid">
-              <span>Python</span><span>Django</span><span>Node.js</span><span>React/Native</span><span>AI / Machine Learning</span><span>PostgreSQL</span><span>Firebase</span><span>WebGL</span>
+              <span>Python</span><span>Django</span><span>Node.js</span><span>React/Native</span>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="resume-footer">
-      <a href="yash_mishra_resume.html" download="Yash_Ankush_Mishra_Resume.html" class="btn-primary btn-download-resume">
-        <i class="fas fa-download"></i> Download Full Resume
-      </a>
+      <a href="yash_mishra_resume.html" download class="btn-primary">Download Full Resume</a>
     </div>
   </div>
 </div>
@@ -1181,7 +1074,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.9.6/lottie.min.js"></script>
 <script src="main.js"></script>
 </body>
 </html>
