@@ -115,7 +115,7 @@ function initParticles() {
   const ctx = canvas.getContext('2d');
 
   let particles = [];
-  const PARTICLE_COUNT = window.innerWidth < 768 ? 40 : 90;
+  const PARTICLE_COUNT = window.innerWidth < 768 ? 25 : 50; /* Optimized: Reduced from 90 to 50 for performance */
 
   function resize() {
     canvas.width = window.innerWidth;
@@ -159,16 +159,18 @@ function initParticles() {
   }
 
   function drawConnections() {
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
+    // Optimized: Only check a subset of particles for connections to prevent O(N^2) hang
+    const step = window.innerWidth < 768 ? 4 : 2; 
+    for (let i = 0; i < particles.length; i += step) {
+      for (let j = i + 1; j < particles.length; j += step) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
+        const dist = dx * dx + dy * dy; // Use squared distance to avoid Math.sqrt overhead
+        if (dist < 14400) { // 120 * 120
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(139, 92, 246, ${0.06 * (1 - dist / 120)})`;
+          ctx.strokeStyle = `rgba(139, 92, 246, ${0.04 * (1 - Math.sqrt(dist) / 120)})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
