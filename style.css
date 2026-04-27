@@ -89,7 +89,7 @@ body.loaded .preloader {
   .loader-logo { font-size: 1.8rem; }
 }
 
-/* ===== CSS VARIABLES ===== */
+/* ===== CSS VARIABLES (CONSOLIDATED A-TO-Z) ===== */
 :root {
   --primary: #8b5cf6;
   --primary-dark: #6d28d9;
@@ -98,20 +98,13 @@ body.loaded .preloader {
   --cyan-light: #67e8f9;
   --green: #10b981;
   --orange: #f97316;
+  --red: #ef4444;
   --bg: #05050f;
-  --bg-card: #0d0d1f;
+  --bg-card: #0a0a1a;
   --bg-glass: rgba(255, 255, 255, 0.03);
-  --bg-glass-border: rgba(255, 255, 255, 0.08);
-  --text: #f1f5f9;
+  --bg-glass-border: rgba(255, 255, 255, 0.1);
+  --text: #ffffff;
   --text-muted: #94a3b8;
-  --text-faint: #475569;
-  --gradient: linear-gradient(135deg, #8b5cf6, #06b6d4);
-  --gradient-warm: linear-gradient(135deg, #8b5cf6, #f97316);
-  --shadow-glow: 0 0 60px rgba(139, 92, 246, 0.15);
-  --radius-sm: 8px;
-  --radius: 16px;
-  --radius-lg: 24px;
-  --radius-xl: 32px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --font-main: 'Space Grotesk', 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -3147,11 +3140,8 @@ body[data-mood="night"] {
 
 
 /* ===== ADVANCED GLOBAL RESPONSIVENESS ===== */
-:root {
-    --fluid-h1: clamp(2.5rem, 8vw, 4.5rem);
-    --fluid-h2: clamp(2rem, 5vw, 3rem);
-    --fluid-p: clamp(1rem, 2vw, 1.15rem);
-}
+/* Fluid Typography Optimized */
+
 
 .hero-name { font-size: var(--fluid-h1) !important; }
 .section-title { font-size: var(--fluid-h2) !important; }
@@ -3416,10 +3406,8 @@ html, body {
 }
 
 /* ===== 📐 WORLD-CLASS SPACING & TYPOGRAPHY SYSTEM ===== */
-:root {
-    --section-padding: 140px 0;
-    --container-max-width: 1200px;
-}
+/* Section Spacing Consolidated */
+
 
 h1, h2, h3 { 
     letter-spacing: -0.03em !important; 
