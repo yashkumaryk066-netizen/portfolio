@@ -3475,12 +3475,58 @@ h1, h2, h3 {
 
 /* ===== 🪐 ELITE SUPREME FOOTER REDESIGN ===== */
 footer {
-    backdrop-filter: blur(25px);
-    border-top: 2px solid rgba(139, 92, 246, 0.2);
-    padding: 80px 0 30px 0;
     position: relative;
+    padding: 60px 0;
     overflow: hidden;
     z-index: 5;
+    background: transparent;
+}
+
+.footer-magic-wrap {
+    position: relative;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 4px; /* Border thickness */
+    border-radius: 30px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+.footer-magic-wrap::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    /* 5-Color Rotating Border Magic */
+    background: conic-gradient(
+        #8b5cf6, /* Purple */
+        #06b6d4, /* Cyan */
+        #10b981, /* Green */
+        #f59e0b, /* Amber */
+        #ef4444, /* Red */
+        #8b5cf6  /* Loop back */
+    );
+    animation: rotate-border 4s linear infinite;
+}
+
+@keyframes rotate-border {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.footer-magic-inner {
+    position: relative;
+    z-index: 2;
+    background: rgba(5, 5, 20, 0.85);
+    background-image: linear-gradient(rgba(5, 5, 20, 0.7), rgba(5, 5, 20, 0.7)), url('footer-magic-bg.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 26px;
+    padding: 60px 50px;
+    backdrop-filter: blur(25px);
 }
 
 .footer-inner {
@@ -3489,6 +3535,7 @@ footer {
     gap: 60px !important;
     margin-bottom: 50px;
 }
+
 
 .footer-brand .footer-logo {
     font-size: 1.8rem;
