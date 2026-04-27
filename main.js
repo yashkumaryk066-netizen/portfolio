@@ -53,6 +53,7 @@ function initAll() {
   initResumeModal();
   initAIChat();
   initCitySkyline();
+  initFAQ();
   // New Magic Features 1-4
   initMoodToggle();
   initGitHubStats();
@@ -217,12 +218,12 @@ function initTyped() {
   const el = document.getElementById('typed-text');
   if (!el) return;
   const words = [
-    'AI Systems',
-    'Web Apps',
-    'Mobile Apps',
-    'EdTech Products',
-    'FinTech Tools',
-    'Full Stack Magic',
+    'Bhagalpur\'s Best Dev',
+    'Django Specialist India',
+    'Next.js for Startups',
+    'Freelance Web Dev Bihar',
+    'AI Solutions Expert',
+    'Custom Software Pro',
   ];
   let wordIndex = 0;
   let charIndex = 0;
@@ -520,6 +521,13 @@ function initGSAP() {
     { opacity: 0, x: 30 },
     { opacity: 1, x: 0, duration: 0.7, ease: 'power3.out',
       scrollTrigger: { trigger: '#contact', start: 'top 72%', once: true } }
+  );
+
+  // Location Cards Stagger
+  gsap.fromTo('.location-card',
+    { opacity: 0, y: 40, scale: 0.9 },
+    { opacity: 1, y: 0, scale: 1, duration: 0.8, stagger: 0.2, ease: 'back.out(1.4)',
+      scrollTrigger: { trigger: '.location-grid', start: 'top 85%', once: true } }
   );
 
   // Floating badge parallax on scroll
@@ -1280,15 +1288,13 @@ function initAIChat() {
     body.scrollTop = body.scrollHeight;
   }
 
-  const aiRespones = {
-    "mca": "Yash completed his MCA from Bengaluru University! 🎓",
-    "bca": "He did his BCA from Bhagalpur University, Bihar. 📜",
-    "skills": "Yash is an expert in Python, React, AI (Gemini/OpenAI), and Mobile Dev! ⚡",
-    "job": "He currently works at Telepathy Infotech as a Software Developer. 👨‍💻",
-    "projects": "He has built 5 live products like Scan Khana, SettleStack, and Y.S.M ERP! 🚀",
-    "hello": "Hi there! Ask me about Yash's career or technical products. 😊",
-    "name": "Yash A Mishra",
-    "village":"Bihar,Rangra,853205"
+  const responses = {
+    'stack': 'Yash is a specialized **Django Developer in India** and **Next.js Developer for startups**. He uses Python, React Native, Firebase, and Gemini AI to build industrial-grade products.',
+    'projects': 'Yash has launched 5+ live products including Y.S.M AI, Scan Khana, and SettleStack. He is known as the **best software developer in Bhagalpur** for his product-building speed.',
+    'location': 'Yash provides **custom software development near me** services in **Jaipur** and is a top **freelance web developer in Bihar (Bhagalpur)**.',
+    'contact': 'You can hire Yash for **affordable web development in Jaipur** or remote projects. WhatsApp him at +91 8356926231.',
+    'mca': 'Yash completed his MCA from Bengaluru University and BCA from Bhagalpur University. He combines academic excellence with 3+ years of professional engineering.',
+    'default': 'I can tell you about Yash\'s experience as a **Django Developer**, his work in **Bhagalpur**, or his **Next.js startups** projects. What would you like to know?'
   };
 
   function handleSend() {
@@ -1471,7 +1477,18 @@ function initDraggableElements() {
         el.addEventListener('touchstart', startMove, { passive: false });
     });
 }
-
+// ===== FAQ ACCORDION =====
+function initFAQ() {
+  const faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    question.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+      faqItems.forEach(i => i.classList.remove('active'));
+      if (!isActive) item.classList.add('active');
+    });
+  });
+}
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', initDraggableElements);
 
