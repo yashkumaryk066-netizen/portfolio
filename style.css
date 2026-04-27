@@ -106,10 +106,18 @@ body.loaded .preloader {
   --text: #ffffff;
   --text-muted: #94a3b8;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --font-main: 'Space Grotesk', 'Inter', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-main: 'Plus Jakarta Sans', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  
+  /* FLUID TYPOGRAPHY */
+  --fluid-h1: clamp(2.5rem, 8vw, 4.5rem);
+  --fluid-h2: clamp(2rem, 5vw, 3rem);
+  --fluid-p: clamp(1rem, 2vw, 1.15rem);
+  --section-padding: 140px 0;
+  --container-max-width: 1200px;
 }
+
 
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
