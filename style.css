@@ -3476,10 +3476,14 @@ h1, h2, h3 {
 /* ===== 🪐 ELITE SUPREME FOOTER REDESIGN ===== */
 footer {
     position: relative;
-    padding: 60px 0;
+    padding: 80px 0;
     overflow: hidden;
     z-index: 5;
-    background: transparent;
+    /* FULL WIDTH BACKGROUND CONSISTENCY */
+    background-image: linear-gradient(rgba(5, 5, 20, 0.9), rgba(5, 5, 20, 0.9)), url('footer-magic-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .footer-magic-wrap {
@@ -3490,7 +3494,7 @@ footer {
     border-radius: 30px;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
 }
 
 .footer-magic-wrap::before {
@@ -3500,14 +3504,8 @@ footer {
     left: -50%;
     width: 200%;
     height: 200%;
-    /* 5-Color Rotating Border Magic */
     background: conic-gradient(
-        #8b5cf6, /* Purple */
-        #06b6d4, /* Cyan */
-        #10b981, /* Green */
-        #f59e0b, /* Amber */
-        #ef4444, /* Red */
-        #8b5cf6  /* Loop back */
+        #8b5cf6, #06b6d4, #10b981, #f59e0b, #ef4444, #8b5cf6
     );
     animation: rotate-border 4s linear infinite;
 }
@@ -3520,14 +3518,12 @@ footer {
 .footer-magic-inner {
     position: relative;
     z-index: 2;
-    background: rgba(5, 5, 20, 0.85);
-    background-image: linear-gradient(rgba(5, 5, 20, 0.7), rgba(5, 5, 20, 0.7)), url('footer-magic-bg.png');
-    background-size: cover;
-    background-position: center;
+    background: rgba(5, 5, 20, 0.4); /* Transparent to show footer bg */
     border-radius: 26px;
-    padding: 60px 50px;
-    backdrop-filter: blur(25px);
+    padding: 60px 40px;
+    backdrop-filter: blur(30px);
 }
+
 
 .footer-inner {
     display: grid !important;
