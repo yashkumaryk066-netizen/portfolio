@@ -1404,35 +1404,49 @@ async function initGitHubStats() {
 
 // Consolidation: initPdfGenerator logic moved to initResumeModal or handled via HTML links.
 
-/* ===== 🎮 MAGIC DRAG ENGINE (PREMIUM) ===== */
+/* ===== 🎮 ULTRA-SMOOTH MAGIC DRAG ENGINE (LIQUID PHYSICS) ===== */
 function initDraggableElements() {
-    const draggables = document.querySelectorAll('.floating-badge, .github-stats-container, .hero-avatar-person, .stat-item');
+    const draggables = document.querySelectorAll('.floating-badge, .github-stats-container, .hero-avatar-person, .stat-item, .hero-badge');
     
     draggables.forEach(el => {
         let isDragging = false;
-        let startX, startY;
-        
-        el.style.cursor = 'grab';
-        el.style.userSelect = 'none';
+        let targetX = 0, targetY = 0;
+        let currentX = 0, currentY = 0;
+        let startMouseX = 0, startMouseY = 0;
+        let startElX = 0, startElY = 0;
+
+        const update = () => {
+            if (!isDragging && Math.abs(targetX - currentX) < 0.1 && Math.abs(targetY - currentY) < 0.1) return;
+            
+            // LERP for liquid smooth movement
+            currentX += (targetX - currentX) * 0.15;
+            currentY += (targetY - currentY) * 0.15;
+            
+            gsap.set(el, { x: currentX, y: currentY });
+            requestAnimationFrame(update);
+        };
 
         const startMove = (e) => {
             isDragging = true;
             el.style.cursor = 'grabbing';
-            el.style.zIndex = '1000';
+            el.style.zIndex = '2000';
             
             const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
             const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
             
-            const rect = el.getBoundingClientRect();
-            startX = clientX - rect.left;
-            startY = clientY - rect.top;
-            
-            gsap.to(el, { scale: 1.05, boxShadow: "0 30px 60px rgba(139, 92, 246, 0.3)", duration: 0.3 });
+            startMouseX = clientX;
+            startMouseY = clientY;
+            startElX = targetX;
+            startElY = targetY;
+
+            gsap.to(el, { scale: 1.1, filter: "brightness(1.2)", duration: 0.3 });
             
             document.addEventListener('mousemove', move);
             document.addEventListener('touchmove', move, { passive: false });
             document.addEventListener('mouseup', endMove);
             document.addEventListener('touchend', endMove);
+            
+            requestAnimationFrame(update);
         };
 
         const move = (e) => {
@@ -1440,16 +1454,8 @@ function initDraggableElements() {
             const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
             const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
             
-            const x = clientX - startX;
-            const y = clientY - startY;
-            
-            // Magical Elastic Follow
-            gsap.to(el, {
-                x: x - el.offsetLeft,
-                y: y - el.offsetTop,
-                duration: 0.2,
-                ease: "power2.out"
-            });
+            targetX = startElX + (clientX - startMouseX);
+            targetY = startElY + (clientY - startMouseY);
             
             if (e.type === 'touchmove') e.preventDefault();
         };
@@ -1457,7 +1463,7 @@ function initDraggableElements() {
         const endMove = () => {
             isDragging = false;
             el.style.cursor = 'grab';
-            gsap.to(el, { scale: 1, boxShadow: "none", duration: 0.5, ease: "elastic.out(1, 0.5)" });
+            gsap.to(el, { scale: 1, filter: "brightness(1)", duration: 0.6, ease: "elastic.out(1, 0.3)" });
             
             document.removeEventListener('mousemove', move);
             document.removeEventListener('touchmove', move);
@@ -1466,9 +1472,10 @@ function initDraggableElements() {
         };
 
         el.addEventListener('mousedown', startMove);
-        el.addEventListener('touchstart', startMove);
+        el.addEventListener('touchstart', startMove, { passive: false });
     });
 }
+
 
 // ===== FAQ ACCORDION =====
 function initFAQ() {
