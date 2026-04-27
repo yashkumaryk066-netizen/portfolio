@@ -1404,31 +1404,30 @@ async function initGitHubStats() {
 
 // Consolidation: initPdfGenerator logic moved to initResumeModal or handled via HTML links.
 
-/* ===== 🎮 INTERACTIVE DRAGGABLE PLAYGROUND ENGINE ===== */
+/* ===== 🎮 MAGIC DRAG ENGINE (PREMIUM) ===== */
 function initDraggableElements() {
-    const draggables = document.querySelectorAll('.floating-badge, .fab-btn, .hero-avatar-memoji');
+    const draggables = document.querySelectorAll('.floating-badge, .github-stats-container, .hero-avatar-person, .stat-item');
     
     draggables.forEach(el => {
         let isDragging = false;
         let startX, startY;
-        let startClientX, startClientY;
-        let hasMovedSignificantly = false;
-
+        
         el.style.cursor = 'grab';
-        el.style.transition = 'none';
+        el.style.userSelect = 'none';
 
         const startMove = (e) => {
             isDragging = true;
-            hasMovedSignificantly = false;
             el.style.cursor = 'grabbing';
-            el.style.zIndex = '10000';
+            el.style.zIndex = '1000';
             
-            startClientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-            startClientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+            const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
             
             const rect = el.getBoundingClientRect();
-            startX = startClientX - rect.left;
-            startY = startClientY - rect.top;
+            startX = clientX - rect.left;
+            startY = clientY - rect.top;
+            
+            gsap.to(el, { scale: 1.05, boxShadow: "0 30px 60px rgba(139, 92, 246, 0.3)", duration: 0.3 });
             
             document.addEventListener('mousemove', move);
             document.addEventListener('touchmove', move, { passive: false });
@@ -1438,45 +1437,39 @@ function initDraggableElements() {
 
         const move = (e) => {
             if (!isDragging) return;
-            
             const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
             const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
             
-            const deltaX = Math.abs(clientX - startClientX);
-            const deltaY = Math.abs(clientY - startClientY);
+            const x = clientX - startX;
+            const y = clientY - startY;
             
-            if (deltaX > 5 || deltaY > 5) {
-                hasMovedSignificantly = true;
-                if (e.type === 'touchmove') e.preventDefault();
-                
-                el.style.position = 'fixed';
-                el.style.left = `${clientX - startX}px`;
-                el.style.top = `${clientY - startY}px`;
-                el.style.margin = '0';
-            }
+            // Magical Elastic Follow
+            gsap.to(el, {
+                x: x - el.offsetLeft,
+                y: y - el.offsetTop,
+                duration: 0.2,
+                ease: "power2.out"
+            });
+            
+            if (e.type === 'touchmove') e.preventDefault();
         };
 
-        const endMove = (e) => {
+        const endMove = () => {
             isDragging = false;
             el.style.cursor = 'grab';
+            gsap.to(el, { scale: 1, boxShadow: "none", duration: 0.5, ease: "elastic.out(1, 0.5)" });
+            
             document.removeEventListener('mousemove', move);
             document.removeEventListener('touchmove', move);
             document.removeEventListener('mouseup', endMove);
             document.removeEventListener('touchend', endMove);
-
-            if (hasMovedSignificantly) {
-              const captureClick = (ev) => {
-                ev.stopImmediatePropagation();
-                el.removeEventListener('click', captureClick, true);
-              };
-              el.addEventListener('click', captureClick, true);
-            }
         };
 
         el.addEventListener('mousedown', startMove);
-        el.addEventListener('touchstart', startMove, { passive: false });
+        el.addEventListener('touchstart', startMove);
     });
 }
+
 // ===== FAQ ACCORDION =====
 function initFAQ() {
   const faqItems = document.querySelectorAll('.faq-item');
