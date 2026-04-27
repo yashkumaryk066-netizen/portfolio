@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yash-portfolio-v1';
+const CACHE_NAME = 'yash-portfolio-v3';
 const assets = [
   '/',
   '/index.html',
@@ -18,10 +18,28 @@ self.addEventListener('install', e => {
   );
 });
 
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) return caches.delete(key);
+        })
+      );
+    })
+  );
+});
+
 self.addEventListener('fetch', e => {
   e.respondWith(
-    caches.match(e.request).then(response => {
-      return response || fetch(e.request);
+    caches.match(e.request).then(cachedResponse => {
+      const fetchPromise = fetch(e.request).then(networkResponse => {
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(e.request, networkResponse.clone());
+        });
+        return networkResponse;
+      });
+      return cachedResponse || fetchPromise;
     })
   );
 });
