@@ -598,8 +598,64 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   gap: 16px;
   justify-content: center;
+  margin-top: 20px;
   animation-delay: 0.7s;
 }
+
+/* GitHub Stats Injected Style */
+.github-stats-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin: 30px auto;
+  padding: 12px 35px;
+  background: rgba(139, 92, 246, 0.05);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: 100px;
+  backdrop-filter: blur(15px);
+  width: fit-content;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.stat-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.stat-pill i {
+  font-size: 0.8rem;
+  color: var(--primary-light);
+  margin-bottom: 4px;
+}
+
+.stat-pill div {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+
+.stat-pill span {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .github-stats-container {
+    gap: 20px;
+    padding: 10px 20px;
+    border-radius: 20px;
+  }
+  .stat-pill div { font-size: 1rem; }
+  .stat-pill span { font-size: 0.5rem; }
+}
+
 
 .social-icon {
   display: flex;
