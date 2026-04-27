@@ -383,11 +383,23 @@ function initContactForm() {
 // ===== BACK TO TOP =====
 function initBackToTop() {
   const btn = document.getElementById('back-to-top');
-  if (!btn) return;
+  const progressBar = btn?.querySelector('.progress-bar');
+  if (!btn || !progressBar) return;
+
+  const totalLength = 283; // 2 * PI * r (45)
 
   window.addEventListener('scroll', () => {
-    btn.style.display = window.scrollY > 400 ? 'flex' : 'none';
-  });
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const progress = scrollTop / docHeight;
+    
+    // Update Visibility
+    btn.style.display = scrollTop > 400 ? 'flex' : 'none';
+    
+    // Update Progress Ring
+    const offset = totalLength - (progress * totalLength);
+    progressBar.style.strokeDashoffset = offset;
+  }, { passive: true });
 }
 
 function scrollToTop() {

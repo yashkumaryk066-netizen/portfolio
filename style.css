@@ -1787,9 +1787,23 @@ h1, h2, h3, h4, h5, h6 {
 .fab-top {
   bottom: 36px;
   right: 24px;
-  background: var(--gradient);
+  background: var(--bg-card); /* Darker base for visibility */
   color: #fff;
+  border: 1px solid rgba(255,255,255,0.05);
 }
+
+.progress-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.progress-bar {
+  transition: stroke-dashoffset 0.1s linear;
+}
+
 
 .fab-btn:hover {
   transform: translateY(-4px) scale(1.05);
