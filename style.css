@@ -203,8 +203,10 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.1;
   background: linear-gradient(135deg, #fff 30%, #8b5cf6 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: #ffffff; /* Fallback for transparency issues */
 }
+
 
 .city-highlight {
   color: var(--primary-light);
@@ -541,12 +543,56 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-ctas {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+  margin-top: 40px;
   margin-bottom: 40px;
   animation-delay: 0.6s;
 }
+
+.btn-primary, .btn-secondary, .btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-family: 'Outfit', sans-serif;
+  cursor: pointer;
+  transition: var(--transition);
+  text-decoration: none;
+  font-size: 0.95rem;
+  border: none;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-primary {
+  background: var(--gradient);
+  color: #fff !important;
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff !important;
+  border: 1px solid var(--bg-glass-border);
+  backdrop-filter: blur(10px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #fff !important;
+  border: 1px solid var(--bg-glass-border);
+}
+
+.btn-primary:hover, .btn-secondary:hover, .btn-outline:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(139, 92, 246, 0.4);
+}
+
 
 .hero-socials {
   display: flex;
