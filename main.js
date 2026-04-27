@@ -1406,10 +1406,11 @@ async function initGitHubStats() {
 
 /* ===== 🎮 ULTRA-SMOOTH MAGIC DRAG ENGINE (LIQUID PHYSICS) ===== */
 function initDraggableElements() {
-    const draggables = document.querySelectorAll('.floating-badge, .github-stats-container, .hero-avatar-person, .stat-item, .hero-badge');
+    const draggables = document.querySelectorAll('.floating-badge, .github-stats-container, .hero-avatar-person, .stat-item, .hero-badge, .nav-logo');
     
     draggables.forEach(el => {
         let isDragging = false;
+        let hasMoved = false;
         let targetX = 0, targetY = 0;
         let currentX = 0, currentY = 0;
         let startMouseX = 0, startMouseY = 0;
@@ -1417,17 +1418,15 @@ function initDraggableElements() {
 
         const update = () => {
             if (!isDragging && Math.abs(targetX - currentX) < 0.1 && Math.abs(targetY - currentY) < 0.1) return;
-            
-            // LERP for liquid smooth movement
             currentX += (targetX - currentX) * 0.15;
             currentY += (targetY - currentY) * 0.15;
-            
             gsap.set(el, { x: currentX, y: currentY });
             requestAnimationFrame(update);
         };
 
         const startMove = (e) => {
             isDragging = true;
+            hasMoved = false;
             el.style.cursor = 'grabbing';
             el.style.zIndex = '2000';
             
@@ -1454,13 +1453,20 @@ function initDraggableElements() {
             const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
             const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
             
-            targetX = startElX + (clientX - startMouseX);
-            targetY = startElY + (clientY - startMouseY);
+            const dx = clientX - startMouseX;
+            const dy = clientY - startMouseY;
+            
+            if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
+                hasMoved = true;
+            }
+
+            targetX = startElX + dx;
+            targetY = startElY + dy;
             
             if (e.type === 'touchmove') e.preventDefault();
         };
 
-        const endMove = () => {
+        const endMove = (e) => {
             isDragging = false;
             el.style.cursor = 'grab';
             gsap.to(el, { scale: 1, filter: "brightness(1)", duration: 0.6, ease: "elastic.out(1, 0.3)" });
@@ -1469,12 +1475,23 @@ function initDraggableElements() {
             document.removeEventListener('touchmove', move);
             document.removeEventListener('mouseup', endMove);
             document.removeEventListener('touchend', endMove);
+
+            // If we moved significantly, prevent the next click/link action
+            if (hasMoved) {
+                const preventClick = (ev) => {
+                    ev.stopImmediatePropagation();
+                    ev.preventDefault();
+                    el.removeEventListener('click', preventClick, true);
+                };
+                el.addEventListener('click', preventClick, true);
+            }
         };
 
         el.addEventListener('mousedown', startMove);
         el.addEventListener('touchstart', startMove, { passive: false });
     });
 }
+
 
 
 // ===== FAQ ACCORDION =====
