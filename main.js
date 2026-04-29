@@ -1301,6 +1301,11 @@ function initAIChat() {
   }
 
   const aiResponses = {
+    'bhagalpur': 'Yash is widely recognized as the **Best Software Developer in Bhagalpur**, building high-scale products like Y.S.M AI right from his roots.',
+    'katihar': 'Yash provides elite **Software Development services in Katihar**, specializing in Flutter apps and secure backend systems for local businesses.',
+    'naugachia': 'As an expert in **Flutter & Next.js**, Yash is the top tech talent in **Naugachia**, delivering premium digital solutions.',
+    'rangra': 'Yash was born and raised in **Rangra**, and he is committed to making it a tech hub through projects like **RangraGo**.',
+    'developer': 'Yash is a Top-Rated Software Developer specializing in Django, Next.js, and DevOps across **Bhagalpur, Katihar, and Jaipur**.',
     'stack': 'Yash is a specialized **Django Developer** and **Next.js Developer**. He uses Python, React Native, Firebase, and Gemini AI to build industrial-grade products.',
     'projects': 'Yash has launched 6 live products including Y.S.M AI, Scan Khana, SettleStack, and Vibe Talk. He is known as the **best software developer in Bhagalpur**.',
     'location': 'Yash provides expert services in **Jaipur**, **Bhagalpur**, **Katihar**, **Naugachia**, and **Rangra**.',
