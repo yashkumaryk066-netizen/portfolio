@@ -1419,7 +1419,8 @@ async function initGitHubStats() {
         const statsDoc = await db.collection('stats').doc('followers').get();
         if (statsDoc.exists) {
             const rawCount = statsDoc.data().count || 2100;
-            followers = rawCount >= 1000 ? (rawCount / 1000).toFixed(1) + 'k' : rawCount;
+            // Show full number for precision (2100, 2101...) unless it's extremely large
+            followers = rawCount >= 100000 ? (rawCount / 1000).toFixed(1) + 'k' : rawCount.toLocaleString();
         } else {
             // Initialize if first time
             await db.collection('stats').doc('followers').set({ count: 2100 });
