@@ -21,8 +21,9 @@ window.addEventListener('load', () => {
       }, 500);
     }
     if (loaderBar) loaderBar.style.width = progress + '%';
-    if (status && progress > 30) status.textContent = "Loading Neural Networks...";
-    if (status && progress > 70) status.textContent = "Synthesizing UI Elements...";
+    if (status && progress > 30) status.textContent = "Neural Synapse Syncing...";
+    if (status && progress > 60) status.textContent = "Quantum UI Rendering...";
+    if (status && progress > 85) status.textContent = "Ready to Launch...";
   }, 100);
 
   initAll();

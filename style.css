@@ -3,91 +3,42 @@
    Premium Dark Theme | 2025
    ========================================= */
 
-/* ===== PREMIUM PRELOADER ===== */
-.preloader {
-  position: fixed;
-  inset: 0;
-  background: #05050f;
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+/* ===== PREMIUM PRELOADER STYLES ===== */
+.preloader { 
+    position: fixed; 
+    inset: 0; 
+    background: #05050f; 
+    z-index: 10000; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    overflow: hidden; 
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
+body.loaded .preloader { opacity: 0; pointer-events: none; }
 
-body.loaded .preloader {
-  opacity: 0;
-  pointer-events: none;
+.preloader-backdrop { 
+    position: absolute; 
+    inset: 0; 
+    background: radial-gradient(circle at center, rgba(46, 91, 255, 0.1) 0%, transparent 70%); 
+    animation: pulse-bg 4s infinite alternate; 
 }
+.loader-inner { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 30px; }
+.loader-visual { position: relative; width: 120px; height: 120px; display: flex; align-items: center; justify-content: center; }
+.loader-logo-wrap { font-family: 'Outfit', sans-serif; font-size: 2.2rem; font-weight: 900; letter-spacing: 2px; color: white; display: flex; align-items: center; }
+.logo-ysm { text-shadow: 0 0 20px rgba(46, 91, 255, 0.8); }
+.logo-dot { color: #2E5BFF; animation: blink 1s infinite; }
+.loader-pulse { position: absolute; inset: 0; border: 2px solid rgba(46, 91, 255, 0.3); border-radius: 50%; animation: loader-pulse 2s infinite ease-out; }
+.loader-ring { position: absolute; inset: -10px; border: 1px solid rgba(46, 91, 255, 0.1); border-radius: 50%; animation: loader-rotate 3s infinite linear; }
+.loader-ring:nth-child(2) { inset: -20px; border-style: dashed; animation-duration: 5s; animation-direction: reverse; }
+.loader-progress-container { width: 240px; height: 4px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; position: relative; }
+.loader-bar { height: 100%; background: linear-gradient(90deg, #2E5BFF, #8b5cf6); width: 0; transition: width 0.3s ease; box-shadow: 0 0 15px #2E5BFF; }
+.loader-status-container { font-family: 'Outfit', sans-serif; color: rgba(255,255,255,0.5); font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
 
-.loader-inner {
-  text-align: center;
-  max-width: 300px;
-  width: 90%;
-}
-
-.loader-logo {
-  font-size: 2.2rem;
-  font-weight: 900;
-  margin-bottom: 24px;
-  letter-spacing: 2px;
-  animation: pulse-glow 2s infinite alternate;
-}
-
-@keyframes pulse-glow {
-  0% { text-shadow: 0 0 10px rgba(139, 92, 246, 0.3); transform: scale(0.98); }
-  100% { text-shadow: 0 0 30px rgba(139, 92, 246, 0.6); transform: scale(1.02); }
-}
-
-.loader-progress {
-  height: 2px;
-  width: 100%;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 100px;
-  overflow: hidden;
-  margin-bottom: 12px;
-}
-
-.loader-bar {
-  height: 100%;
-  width: 0%;
-  background: var(--gradient);
-  transition: width 0.3s ease;
-  box-shadow: 0 0 15px var(--primary);
-}
-
-.loader-status {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--text-faint);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  display: block;
-}
-
-/* Coming Soon Pulse */
-.wip-badge {
-  background: rgba(255, 165, 0, 0.1) !important;
-  border-color: rgba(255, 165, 0, 0.3) !important;
-  color: #ffa500 !important;
-  animation: badge-pulse 2s infinite;
-}
-
-@keyframes badge-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(255, 165, 0, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(255, 165, 0, 0); }
-}
-
-/* Accessibility Fixes */
-:focus-visible {
-  outline: 2px solid var(--primary);
-  outline-offset: 4px;
-}
-
-@media (max-width: 768px) {
-  .loader-logo { font-size: 1.8rem; }
-}
+@keyframes loader-pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.5); opacity: 0; } }
+@keyframes loader-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes pulse-bg { 0% { opacity: 0.5; } 100% { opacity: 1; } }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
 /* ===== CSS VARIABLES (CONSOLIDATED A-TO-Z) ===== */
 :root {
