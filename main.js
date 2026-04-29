@@ -1413,7 +1413,18 @@ async function initGitHubStats() {
         const data = await res.json();
         
         // Use realistic stats as requested by user
-        const followers = "2.1k"; 
+        let followers = "2.1k"; 
+        
+        // Fetch real-time count from Firestore
+        const statsDoc = await db.collection('stats').doc('followers').get();
+        if (statsDoc.exists) {
+            const rawCount = statsDoc.data().count || 2100;
+            followers = rawCount >= 1000 ? (rawCount / 1000).toFixed(1) + 'k' : rawCount;
+        } else {
+            // Initialize if first time
+            await db.collection('stats').doc('followers').set({ count: 2100 });
+        }
+
         const following = "109";
         const repos = data.public_repos || 6;
 
@@ -1492,8 +1503,10 @@ async function initGitHubStats() {
                     followedAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
 
-                // Increment Global Count (Optional: handled via Firestore count aggregate or static increment)
-                // For this demo, we'll just update UI. Real global count would be fetched from a stats doc.
+                // Increment Global Count in Firestore
+                await db.collection('stats').doc('followers').update({
+                    count: firebase.firestore.FieldValue.increment(1)
+                });
                 
                 updateFollowUI(true);
                 alert("Thank you for following Yash! Your support is locked in. ✨");
