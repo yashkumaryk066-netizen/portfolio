@@ -3480,7 +3480,7 @@ html, body {
 }
 
 
-/* ===== �� PROJECT CASE STUDY LABELS ===== */
+/* =====  PROJECT CASE STUDY LABELS ===== */
 .project-label {
     display: inline-block;
     font-size: 0.75rem;
@@ -3942,11 +3942,23 @@ body {
 }
 
 .waving-guy-container {
-    width: 300px;
-    height: 300px;
-    margin: 0 auto 10px auto;
-    display: block;
-    filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.4));
+    width: 250px;
+    height: 250px;
+    margin: -10px auto 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 0 30px rgba(46, 91, 255, 0.4));
+    transition: transform 0.3s ease;
+}
+
+.waving-guy-container:hover {
+    transform: scale(1.1) translateY(-10px);
+}
+
+.waving-guy-container svg {
+    width: 100%;
+    height: 100%;
 }
 
 @keyframes namaste-wave {

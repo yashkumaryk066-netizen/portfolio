@@ -1411,12 +1411,21 @@ async function initGitHubStats() {
     try {
         const res = await fetch('https://api.github.com/users/yashkumaryk066-netizen');
         const data = await res.json();
+        
+        // Use realistic stats as requested by user
+        const followers = "2.1k"; 
+        const following = "109";
+        const repos = data.public_repos || 6;
+
         const statsHtml = `
-            <div class="github-stats-container reveal">
-                <div class="stat-pill"><i class="fab fa-github"></i><div>${data.public_repos}</div><span>Public Repos</span></div>
-                <div class="stat-pill"><i class="fas fa-star"></i><div>${data.followers}</div><span>Followers</span></div>
-                <div class="stat-pill"><i class="fas fa-code-branch"></i><div>${data.following}</div><span>Following</span></div>
-            </div>
+            <a href="https://github.com/yashkumaryk066-netizen" target="_blank" rel="noopener noreferrer" class="github-stats-container reveal" style="text-decoration:none;">
+                <div class="stat-pill"><i class="fab fa-github"></i><div>${repos}</div><span>Repos</span></div>
+                <div class="stat-pill"><i class="fas fa-users"></i><div>${followers}</div><span>Followers</span></div>
+                <div class="stat-pill"><i class="fas fa-code-branch"></i><div>${following}</div><span>Following</span></div>
+                <div class="stat-pill" style="margin-left: 10px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 15px;">
+                    <span style="color: #8b5cf6; font-weight:bold;">Follow +</span>
+                </div>
+            </a>
         `;
         el.insertAdjacentHTML('afterend', statsHtml);
         
