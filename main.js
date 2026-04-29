@@ -1428,6 +1428,60 @@ async function initGitHubStats() {
             </a>
         `;
         el.insertAdjacentHTML('afterend', statsHtml);
+
+        // Social Manager: Unique Google-Authenticated Follow
+        const setupFollowAction = () => {
+            const followBtn = document.querySelector('.github-stats-container');
+            if (!followBtn) return;
+            
+            // Check if already followed (Local Cache)
+            if (localStorage.getItem('yash_followed') === 'true') {
+                updateFollowUI(true);
+            }
+
+            followBtn.addEventListener('click', async (e) => {
+                // If it's a real click on Follow button (not the repos/following links)
+                if (e.target.closest('.stat-pill')) {
+                    const label = e.target.closest('.stat-pill').querySelector('span').innerText;
+                    if (label.includes('Follow')) {
+                        e.preventDefault();
+                        await handleFollowFlow();
+                    }
+                }
+            });
+        };
+
+        const handleFollowFlow = async () => {
+            if (localStorage.getItem('yash_followed') === 'true') {
+                alert("You are already following Yash! Thank you for the support. 🚀");
+                return;
+            }
+
+            alert("Redirecting to Google Login for a unique one-time follow... (Firebase required for production)");
+            
+            // LOGIC:
+            // 1. Firebase Auth with Google
+            // 2. Check Firestore for unique follow
+            // 3. Mark as followed
+            
+            // Mocking the success for now so user can see UI
+            localStorage.setItem('yash_followed', 'true');
+            updateFollowUI(true);
+            
+            // Here you would add:
+            // auth.signInWithPopup(provider).then(...)
+        };
+
+        const updateFollowUI = (isFollowing) => {
+            const followPill = document.querySelector('.stat-pill span:last-child');
+            if (followPill && isFollowing) {
+                const parent = followPill.closest('.stat-pill');
+                parent.innerHTML = '<span style="color: #4ade80;">Following <i class="fas fa-check"></i></span>';
+                parent.style.pointerEvents = 'none';
+            }
+        };
+
+        setupFollowAction();
         
         // Fix: Refresh ScrollTrigger after dynamic content injection
         if (typeof ScrollTrigger !== 'undefined') {
