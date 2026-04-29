@@ -1076,9 +1076,11 @@ function initSkillSphere() {
 
   // Skill labels
   const skills = [
-    'Python', 'Django', 'React', 'React Native', 'Firebase', 'PostgreSQL', 
-    'AI / ML', 'Gemini', 'OpenAI', 'Next.js', 'Vercel', 'GSAP', 'Three.js', 
-    'Figma', 'REST API', 'Git', 'Cloud', 'Node.js'
+    "Python", "Django", "React", "Next.js", "Flutter", 
+    "Dart", "Firebase", "PostgreSQL", "JavaScript", 
+    "TypeScript", "DevOps", "Cybersecurity", "Docker", 
+    "Nginx", "Linux Scripting", "Redis", "WebSockets", 
+    "REST APIs", "AWS", "GitHub Actions"
   ];
 
   // Color pairs [border/glow, text] for variety
