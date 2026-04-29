@@ -1300,13 +1300,16 @@ function initAIChat() {
     body.scrollTop = body.scrollHeight;
   }
 
-  const responses = {
-    'stack': 'Yash is a specialized **Django Developer in India** and **Next.js Developer for startups**. He uses Python, React Native, Firebase, and Gemini AI to build industrial-grade products.',
-    'projects': 'Yash has launched 5+ live products including Y.S.M AI, Scan Khana, and SettleStack. He is known as the **best software developer in Bhagalpur** for his product-building speed.',
-    'location': 'Yash provides **custom software development near me** services in **Jaipur** and is a top **freelance web developer in Bihar (Bhagalpur)**.',
-    'contact': 'You can hire Yash for **affordable web development in Jaipur** or remote projects. WhatsApp him at +91 8356926231.',
-    'mca': 'Yash completed his MCA from Bengaluru University and BCA from Bhagalpur University. He combines academic excellence with 3+ years of professional engineering.',
-    'default': 'I can tell you about Yash\'s experience as a **Django Developer**, his work in **Bhagalpur**, or his **Next.js startups** projects. What would you like to know?'
+  const aiResponses = {
+    'stack': 'Yash is a specialized **Django Developer** and **Next.js Developer**. He uses Python, React Native, Firebase, and Gemini AI to build industrial-grade products.',
+    'projects': 'Yash has launched 6 live products including Y.S.M AI, Scan Khana, SettleStack, and Vibe Talk. He is known as the **best software developer in Bhagalpur**.',
+    'location': 'Yash provides expert services in **Jaipur**, **Bhagalpur**, **Katihar**, **Naugachia**, and **Rangra**.',
+    'contact': 'You can hire Yash for premium development. WhatsApp him at +91 8356926231.',
+    'mca': 'Yash completed his MCA from Bengaluru University and BCA from Bhagalpur University.',
+    'devops': 'Yash is an expert in **DevOps & Cybersecurity**, using Docker, Nginx, and Linux scripting to build secure infrastructure.',
+    'flutter': 'Yash builds high-performance mobile apps using **Flutter & Dart**, like his live project **RangraGo**.',
+    'cyber': 'Yash has a strong background in **Cybersecurity**, writing custom scripts to protect digital assets.',
+    'default': 'I can tell you about Yash\'s expertise in **Django**, **Next.js**, **Flutter**, or **DevOps**. What would you like to know?'
   };
 
   function handleSend() {
@@ -1318,14 +1321,14 @@ function initAIChat() {
 
     setTimeout(() => {
       let found = false;
-      for (let key in aiRespones) {
+      for (let key in aiResponses) {
         if (val.includes(key)) {
-          addMsg(aiRespones[key], 'bot');
+          addMsg(aiResponses[key], 'bot');
           found = true;
           break;
         }
       }
-      if (!found) addMsg("That's a great question! For more details, you can check his Resume modal or Contact him directly. ✉️", 'bot');
+      if (!found) addMsg("That's a great question! Yash is an expert in Django, Flutter, and DevOps. You can check his Resume for more or Contact him directly. ✉️", 'bot');
     }, 1000);
   }
 
