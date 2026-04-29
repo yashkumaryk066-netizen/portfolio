@@ -163,8 +163,8 @@ body.loaded .preloader {
 }
 
 .nav-links {
-  display: flex !important;
-  flex-direction: row !important;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 35px;
   list-style: none;
@@ -3816,7 +3816,6 @@ body {
     80% { 
         transform: scale(1) translateY(0); /* Settling back */
     }
-}
 }
 
 .waving-guy-container {

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yash-portfolio-v3';
+const CACHE_NAME = 'yash-portfolio-v4';
 const assets = [
   '/',
   '/index.html',
@@ -7,10 +7,11 @@ const assets = [
   '/main.js',
   '/yash.jpg',
   '/favicon.svg',
-  'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap'
 ];
 
+// Install Event
 self.addEventListener('install', e => {
+  self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       return cache.addAll(assets);
@@ -18,6 +19,7 @@ self.addEventListener('install', e => {
   );
 });
 
+// Activate Event
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys => {
@@ -26,20 +28,40 @@ self.addEventListener('activate', e => {
           if (key !== CACHE_NAME) return caches.delete(key);
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
 
+// Fetch Event
 self.addEventListener('fetch', e => {
-  e.respondWith(
-    caches.match(e.request).then(cachedResponse => {
-      const fetchPromise = fetch(e.request).then(networkResponse => {
-        caches.open(CACHE_NAME).then(cache => {
-          cache.put(e.request, networkResponse.clone());
+  const url = new URL(e.request.url);
+  
+  // Strategy: Network First for HTML, CSS, JS
+  if (url.pathname.endsWith('.html') || url.pathname.endsWith('.css') || url.pathname.endsWith('.js') || url.pathname === '/') {
+    e.respondWith(
+      fetch(e.request)
+        .then(res => {
+          const resClone = res.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(e.request, resClone);
+          });
+          return res;
+        })
+        .catch(() => caches.match(e.request))
+    );
+  } else {
+    // Strategy: Cache First for Images, Fonts, etc.
+    e.respondWith(
+      caches.match(e.request).then(cachedResponse => {
+        const fetchPromise = fetch(e.request).then(networkResponse => {
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(e.request, networkResponse.clone());
+          });
+          return networkResponse;
         });
-        return networkResponse;
-      });
-      return cachedResponse || fetchPromise;
-    })
-  );
+        return cachedResponse || fetchPromise;
+      })
+    );
+  }
 });
+

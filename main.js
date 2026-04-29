@@ -58,6 +58,14 @@ function initAll() {
   initMoodToggle();
   initGitHubStats();
   initDraggableElements();
+  
+  // Final Layout Refresh
+  if (typeof ScrollTrigger !== 'undefined') {
+    setTimeout(() => {
+        ScrollTrigger.refresh();
+        console.log("ScrollTrigger Refreshed.");
+    }, 1000);
+  }
 }
 
 // ===== YEAR =====
@@ -408,7 +416,7 @@ function scrollToTop() {
 
 // ===== MOBILE MENU =====
 function initMobileMenu() {
-  const hamburger = document.getElementById('hamburger-btn');
+  const hamburger = document.getElementById('hamburger');
   const menu = document.getElementById('nav-menu');
   if (!hamburger || !menu) return;
 
@@ -1411,6 +1419,11 @@ async function initGitHubStats() {
             </div>
         `;
         el.insertAdjacentHTML('afterend', statsHtml);
+        
+        // Fix: Refresh ScrollTrigger after dynamic content injection
+        if (typeof ScrollTrigger !== 'undefined') {
+            setTimeout(() => ScrollTrigger.refresh(), 500);
+        }
     } catch (e) {
         console.log("GitHub stats fetch failed or offline.");
     }
@@ -1520,7 +1533,7 @@ function initFAQ() {
     });
   });
 }
-// Initialize when page loads
-document.addEventListener('DOMContentLoaded', initDraggableElements);
+// Initialize when everything is fully loaded to prevent layout issues
+// document.addEventListener('DOMContentLoaded', initDraggableElements); // Removed: Causes broken layout on first load
 
 // Consistently Waving Developer is now handled via high-performance SVG in HTML.

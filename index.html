@@ -275,6 +275,7 @@
     body.loaded .preloader { opacity: 0; pointer-events: none; }
     .loader-inner { text-align: center; width: 90%; max-width: 300px; }
     .loader-logo { font-size: 2.2rem; font-weight: 900; margin-bottom: 24px; color: #fff; animation: pulse-glow 2s infinite alternate; font-family: sans-serif; }
+    .hamburger { display: none; }
     @keyframes pulse-glow { 0% { text-shadow: 0 0 10px rgba(139, 92, 246, 0.3); transform: scale(0.98); } 100% { text-shadow: 0 0 30px rgba(139, 92, 246, 0.6); transform: scale(1.02); } }
     .loader-progress { height: 2px; width: 100%; background: rgba(255, 255, 255, 0.05); border-radius: 100px; overflow: hidden; margin-bottom: 12px; }
     .loader-bar { height: 100%; width: 0%; background: var(--gradient); transition: width 0.3s ease; }
@@ -344,7 +345,7 @@
       <li><a href="#contact" class="nav-link" id="nav-contact">Contact</a></li>
       <li><a href="blog.html" class="nav-link" id="nav-blog">Blog</a></li>
     </ul>
-    <div class="hamburger" id="hamburger" aria-label="Toggle navigation" style="display:none;">
+    <div class="hamburger" id="hamburger" aria-label="Toggle navigation">
       <span></span>
       <span></span>
       <span></span>
