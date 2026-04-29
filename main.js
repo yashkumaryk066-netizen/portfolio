@@ -505,19 +505,6 @@ function initGSAP() {
       scrollTrigger: { trigger: '.about-highlights', start: 'top 80%', once: true } }
   );
 
-  // Skills
-  gsap.fromTo('.skill-category',
-    { opacity: 0, y: 40, scale: 0.95 },
-    { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.08, ease: 'power3.out',
-      scrollTrigger: { trigger: '#skills', start: 'top 70%', once: true } }
-  );
-
-  gsap.fromTo('.skill-pill',
-    { opacity: 0, scale: 0.8 },
-    { opacity: 1, scale: 1, duration: 0.4, stagger: 0.04, ease: 'back.out(1.5)',
-      scrollTrigger: { trigger: '#skills', start: 'top 60%', once: true } }
-  );
-
   // Projects
   gsap.fromTo('.project-card',
     { opacity: 0, y: 50 },
@@ -1428,18 +1415,6 @@ async function initGitHubStats() {
         `;
         el.insertAdjacentHTML('afterend', statsHtml);
 
-        // Fetch real-time count from Firestore in background
-        db.collection('stats').doc('followers').get().then(statsDoc => {
-            if (statsDoc.exists) {
-                const rawCount = statsDoc.data().count || 2100;
-                const formatted = rawCount >= 100000 ? (rawCount / 1000).toFixed(1) + 'k' : rawCount.toLocaleString();
-                const displayEl = document.getElementById('follower-count-display');
-                if (displayEl) displayEl.innerText = formatted;
-            } else {
-                db.collection('stats').doc('followers').set({ count: 2100 });
-            }
-        }).catch(err => console.log("Firestore count fetch failed:", err));
-
         // Firebase Configuration (Found from project: splitbalance)
         const firebaseConfig = {
             apiKey: "AIzaSyB3ASP-dHS0OryBlWdl3CaPvtEkB_i-ZXs",
@@ -1451,12 +1426,24 @@ async function initGitHubStats() {
             measurementId: "G-ZCPR6WVZN3"
         };
 
-        // Initialize Firebase
+        // Initialize Firebase first
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
         const auth = firebase.auth();
         const db = firebase.firestore();
+
+        // Fetch real-time count from Firestore in background
+        db.collection('stats').doc('followers').get().then(statsDoc => {
+            if (statsDoc.exists) {
+                const rawCount = statsDoc.data().count || 2100;
+                const formatted = rawCount >= 100000 ? (rawCount / 1000).toFixed(1) + 'k' : rawCount.toLocaleString();
+                const displayEl = document.getElementById('follower-count-display');
+                if (displayEl) displayEl.innerText = formatted;
+            } else {
+                db.collection('stats').doc('followers').set({ count: 2100 });
+            }
+        }).catch(err => console.log("Firestore count fetch failed:", err));
 
         // Social Manager: Unique Google-Authenticated Follow
         const setupFollowAction = async () => {
