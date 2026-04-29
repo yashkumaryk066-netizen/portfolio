@@ -1418,14 +1418,14 @@ async function initGitHubStats() {
         const repos = data.public_repos || 6;
 
         const statsHtml = `
-            <a href="https://github.com/yashkumaryk066-netizen" target="_blank" rel="noopener noreferrer" class="github-stats-container reveal" style="text-decoration:none;">
+            <div class="github-stats-container reveal">
                 <div class="stat-pill"><i class="fab fa-github"></i><div>${repos}</div><span>Repos</span></div>
                 <div class="stat-pill"><i class="fas fa-users"></i><div>${followers}</div><span>Followers</span></div>
                 <div class="stat-pill"><i class="fas fa-code-branch"></i><div>${following}</div><span>Following</span></div>
-                <div class="stat-pill" style="margin-left: 10px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 15px;">
+                <div class="stat-pill" id="follow-trigger-pill" style="margin-left: 10px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 15px;">
                     <span style="color: #8b5cf6; font-weight:bold;">Follow +</span>
                 </div>
-            </a>
+            </div>
         `;
         el.insertAdjacentHTML('afterend', statsHtml);
 
@@ -1449,8 +1449,8 @@ async function initGitHubStats() {
 
         // Social Manager: Unique Google-Authenticated Follow
         const setupFollowAction = async () => {
-            const followBtn = document.querySelector('.github-stats-container');
-            if (!followBtn) return;
+            const followPill = document.getElementById('follow-trigger-pill');
+            if (!followPill) return;
             
             // Check if already followed (Sync with Auth)
             auth.onAuthStateChanged(async (user) => {
@@ -1462,14 +1462,9 @@ async function initGitHubStats() {
                 }
             });
 
-            followBtn.addEventListener('click', async (e) => {
-                if (e.target.closest('.stat-pill')) {
-                    const label = e.target.closest('.stat-pill').querySelector('span').innerText;
-                    if (label.includes('Follow')) {
-                        e.preventDefault();
-                        await handleFollowFlow();
-                    }
-                }
+            followPill.addEventListener('click', async (e) => {
+                e.preventDefault();
+                await handleFollowFlow();
             });
         };
 
