@@ -1452,88 +1452,73 @@ async function initGitHubStats() {
         }
     }).catch(err => console.log("Firestore count fetch failed."));
 
-    // 6. Follow Action Logic
+    // 6. Follow Action Logic (The "No-Login" Jugar)
     const updateFollowUI = (isFollowing) => {
-        const followText = document.querySelector('#follow-trigger-pill span');
-        if (followText && isFollowing) {
-            const parent = followText.closest('.stat-pill');
-            // Premium Gradient + Success Color
-            parent.style.background = "linear-gradient(135deg, #059669 0%, #10b981 100%)";
-            parent.style.boxShadow = "0 0 20px rgba(16, 185, 129, 0.4)";
-            parent.style.borderColor = "rgba(255, 255, 255, 0.2)";
-            parent.innerHTML = '<span style="color: white; font-weight:bold; display: flex; align-items: center; gap: 5px;">Following <i class="fas fa-check-circle"></i></span>';
-            parent.style.pointerEvents = 'none';
-            
-            // Success animation
-            gsap.fromTo(parent, { scale: 0.8 }, { scale: 1.1, duration: 0.4, ease: "back.out(2)", onComplete: () => {
-                gsap.to(parent, { scale: 1, duration: 0.2 });
-            }});
-            
+        const followPill = document.getElementById('follow-trigger-pill');
+        if (followPill && isFollowing) {
+            followPill.style.background = "linear-gradient(135deg, #059669 0%, #10b981 100%)";
+            followPill.style.boxShadow = "0 0 25px rgba(16, 185, 129, 0.5)";
+            followPill.style.borderColor = "rgba(255, 255, 255, 0.3)";
+            followPill.innerHTML = '<span style="color: white; font-weight:bold; display: flex; align-items: center; gap: 8px;">Following <i class="fas fa-check-circle"></i></span>';
+            followPill.style.pointerEvents = 'none';
+            followPill.style.transform = 'scale(1)';
             localStorage.setItem('yash_followed', 'true');
         }
     };
 
-    auth.onAuthStateChanged(async (user) => {
-        if (user) {
-            const doc = await db.collection('followers').doc(user.uid).get();
-            if (doc.exists) updateFollowUI(true);
-        } else if (localStorage.getItem('yash_followed') === 'true') {
-            updateFollowUI(true);
-        }
-    });
+    // Check if already followed
+    if (localStorage.getItem('yash_followed') === 'true') {
+        updateFollowUI(true);
+    }
 
     const followPill = document.getElementById('follow-trigger-pill');
     if (followPill) {
-        // Hover effect (Manual for extra control)
+        // High-End Hover Interaction (CSS fallback + GSAP)
         followPill.addEventListener('mouseenter', () => {
-            gsap.to(followPill, { scale: 1.15, duration: 0.3, ease: "power2.out" });
+            gsap.to(followPill, { scale: 1.15, filter: "brightness(1.2)", duration: 0.3, ease: "back.out(1.7)" });
         });
         followPill.addEventListener('mouseleave', () => {
-            gsap.to(followPill, { scale: 1, duration: 0.3, ease: "power2.in" });
+            gsap.to(followPill, { scale: 1, filter: "brightness(1)", duration: 0.3, ease: "power2.inOut" });
         });
 
         followPill.addEventListener('click', async (e) => {
             e.preventDefault();
             
-            // Check Local Storage first for instant response
-            if (localStorage.getItem('yash_followed') === 'true') {
-                alert("You are already following Yash! 🚀");
-                updateFollowUI(true);
-                return;
+            if (localStorage.getItem('yash_followed') === 'true') return;
+
+            // Generate a Unique ID for this browser if not exists
+            let uid = localStorage.getItem('yash_uid');
+            if (!uid) {
+                uid = 'user_' + Math.random().toString(36).substr(2, 9) + Date.now();
+                localStorage.setItem('yash_uid', uid);
             }
 
             try {
-                // Anonymous Sign-In (No Popup/Login required)
-                const result = await auth.signInAnonymously();
-                const user = result.user;
-                if (!user) return;
-
-                const followerRef = db.collection('followers').doc(user.uid);
+                // Use a simple Firestore check (No Auth needed if rules allow)
+                const followerRef = db.collection('followers').doc(uid);
                 const doc = await followerRef.get();
 
-                if (doc.exists) {
-                    updateFollowUI(true);
-                } else {
-                    // Start visual transition
+                if (!doc.exists) {
+                    // Success Animation Start
                     gsap.to(followPill, { scale: 0.9, duration: 0.1 });
-                    
+
                     await followerRef.set({
-                        isAnonymous: true,
+                        uid: uid,
                         followedAt: firebase.firestore.FieldValue.serverTimestamp()
                     });
-                    
+
                     await db.collection('stats').doc('followers').update({
                         count: firebase.firestore.FieldValue.increment(1)
                     });
-                    
+
                     updateFollowUI(true);
-                    
-                    // Burst effect or success sound could be added here
-                    console.log("Follow successful (Anonymous)");
+                    console.log("Follow successful! Global count increased.");
+                } else {
+                    updateFollowUI(true);
                 }
             } catch (err) {
-                console.error("Follow Error:", err);
-                // Fallback to local-only if Firebase fails
+                console.error("Follow Error (Firestore Rules might need to be open):", err);
+                // Even if Firestore fails, show local success to the user
                 updateFollowUI(true);
             }
         });
