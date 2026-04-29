@@ -1457,8 +1457,18 @@ async function initGitHubStats() {
         const followText = document.querySelector('#follow-trigger-pill span');
         if (followText && isFollowing) {
             const parent = followText.closest('.stat-pill');
-            parent.innerHTML = '<span style="color: #4ade80; font-weight:bold;">Following <i class="fas fa-check"></i></span>';
+            // Premium Gradient + Success Color
+            parent.style.background = "linear-gradient(135deg, #059669 0%, #10b981 100%)";
+            parent.style.boxShadow = "0 0 20px rgba(16, 185, 129, 0.4)";
+            parent.style.borderColor = "rgba(255, 255, 255, 0.2)";
+            parent.innerHTML = '<span style="color: white; font-weight:bold; display: flex; align-items: center; gap: 5px;">Following <i class="fas fa-check-circle"></i></span>';
             parent.style.pointerEvents = 'none';
+            
+            // Success animation
+            gsap.fromTo(parent, { scale: 0.8 }, { scale: 1.1, duration: 0.4, ease: "back.out(2)", onComplete: () => {
+                gsap.to(parent, { scale: 1, duration: 0.2 });
+            }});
+            
             localStorage.setItem('yash_followed', 'true');
         }
     };
@@ -1474,11 +1484,27 @@ async function initGitHubStats() {
 
     const followPill = document.getElementById('follow-trigger-pill');
     if (followPill) {
+        // Hover effect (Manual for extra control)
+        followPill.addEventListener('mouseenter', () => {
+            gsap.to(followPill, { scale: 1.15, duration: 0.3, ease: "power2.out" });
+        });
+        followPill.addEventListener('mouseleave', () => {
+            gsap.to(followPill, { scale: 1, duration: 0.3, ease: "power2.in" });
+        });
+
         followPill.addEventListener('click', async (e) => {
             e.preventDefault();
+            
+            // Check Local Storage first for instant response
+            if (localStorage.getItem('yash_followed') === 'true') {
+                alert("You are already following Yash! 🚀");
+                updateFollowUI(true);
+                return;
+            }
+
             try {
-                const provider = new firebase.auth.GoogleAuthProvider();
-                const result = await auth.signInWithPopup(provider);
+                // Anonymous Sign-In (No Popup/Login required)
+                const result = await auth.signInAnonymously();
                 const user = result.user;
                 if (!user) return;
 
@@ -1486,22 +1512,29 @@ async function initGitHubStats() {
                 const doc = await followerRef.get();
 
                 if (doc.exists) {
-                    alert("You are already following Yash! 🚀");
                     updateFollowUI(true);
                 } else {
+                    // Start visual transition
+                    gsap.to(followPill, { scale: 0.9, duration: 0.1 });
+                    
                     await followerRef.set({
-                        email: user.email,
-                        displayName: user.displayName,
+                        isAnonymous: true,
                         followedAt: firebase.firestore.FieldValue.serverTimestamp()
                     });
+                    
                     await db.collection('stats').doc('followers').update({
                         count: firebase.firestore.FieldValue.increment(1)
                     });
+                    
                     updateFollowUI(true);
-                    alert("Thank you for following Yash! ✨");
+                    
+                    // Burst effect or success sound could be added here
+                    console.log("Follow successful (Anonymous)");
                 }
             } catch (err) {
-                if (err.code !== 'auth/popup-closed-by-user') alert("Follow failed. Please try again.");
+                console.error("Follow Error:", err);
+                // Fallback to local-only if Firebase fails
+                updateFollowUI(true);
             }
         });
     }
