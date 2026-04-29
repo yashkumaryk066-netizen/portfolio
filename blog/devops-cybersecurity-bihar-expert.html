@@ -24,6 +24,7 @@
     .post-content pre { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); color: #00ff00; font-family: 'JetBrains Mono', monospace; overflow-x: auto; margin-bottom: 25px; }
     .back-blog { position: fixed; top: 30px; left: 30px; z-index: 1000; padding: 10px 20px; border-radius: 100px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); color: #fff; text-decoration: none; font-weight: 600; }
   </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body class="loaded">
 
@@ -74,5 +75,6 @@ certbot renew --quiet
     </div>
   </article>
 
+<script>gsap.registerPlugin(ScrollTrigger); gsap.from(".post-container", {opacity: 0, y: 30, duration: 1, ease: "power3.out"}); gsap.from("h2, p", {opacity: 0, y: 20, stagger: 0.1, duration: 0.8, ease: "power3.out", scrollTrigger: {trigger: ".post-content", start: "top 80%"}});</script>
 </body>
 </html>
