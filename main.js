@@ -1429,18 +1429,40 @@ async function initGitHubStats() {
         `;
         el.insertAdjacentHTML('afterend', statsHtml);
 
+        // Firebase Configuration (Found from project: splitbalance)
+        const firebaseConfig = {
+            apiKey: "AIzaSyB3ASP-dHS0OryBlWdl3CaPvtEkB_i-ZXs",
+            authDomain: "splitbalance-b552b.firebaseapp.com",
+            projectId: "splitbalance-b552b",
+            storageBucket: "splitbalance-b552b.firebasestorage.app",
+            messagingSenderId: "40872959188",
+            appId: "1:40872959188:web:0bb467c35685a44ac5ef41",
+            measurementId: "G-ZCPR6WVZN3"
+        };
+
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
         // Social Manager: Unique Google-Authenticated Follow
-        const setupFollowAction = () => {
+        const setupFollowAction = async () => {
             const followBtn = document.querySelector('.github-stats-container');
             if (!followBtn) return;
             
-            // Check if already followed (Local Cache)
-            if (localStorage.getItem('yash_followed') === 'true') {
-                updateFollowUI(true);
-            }
+            // Check if already followed (Sync with Auth)
+            auth.onAuthStateChanged(async (user) => {
+                if (user) {
+                    const doc = await db.collection('followers').doc(user.uid).get();
+                    if (doc.exists) {
+                        updateFollowUI(true);
+                    }
+                }
+            });
 
             followBtn.addEventListener('click', async (e) => {
-                // If it's a real click on Follow button (not the repos/following links)
                 if (e.target.closest('.stat-pill')) {
                     const label = e.target.closest('.stat-pill').querySelector('span').innerText;
                     if (label.includes('Follow')) {
@@ -1452,32 +1474,50 @@ async function initGitHubStats() {
         };
 
         const handleFollowFlow = async () => {
-            if (localStorage.getItem('yash_followed') === 'true') {
-                alert("You are already following Yash! Thank you for the support. 🚀");
-                return;
-            }
+            try {
+                const provider = new firebase.auth.GoogleAuthProvider();
+                const result = await auth.signInWithPopup(provider);
+                const user = result.user;
 
-            alert("Redirecting to Google Login for a unique one-time follow... (Firebase required for production)");
-            
-            // LOGIC:
-            // 1. Firebase Auth with Google
-            // 2. Check Firestore for unique follow
-            // 3. Mark as followed
-            
-            // Mocking the success for now so user can see UI
-            localStorage.setItem('yash_followed', 'true');
-            updateFollowUI(true);
-            
-            // Here you would add:
-            // auth.signInWithPopup(provider).then(...)
+                if (!user) return;
+
+                const followerRef = db.collection('followers').doc(user.uid);
+                const doc = await followerRef.get();
+
+                if (doc.exists) {
+                    alert("You are already following Yash! Thank you for the support. 🚀");
+                    updateFollowUI(true);
+                    return;
+                }
+
+                // Register Follow
+                await followerRef.set({
+                    email: user.email,
+                    displayName: user.displayName,
+                    followedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                // Increment Global Count (Optional: handled via Firestore count aggregate or static increment)
+                // For this demo, we'll just update UI. Real global count would be fetched from a stats doc.
+                
+                updateFollowUI(true);
+                alert("Thank you for following Yash! Your support is locked in. ✨");
+
+            } catch (error) {
+                console.error("Follow Error:", error);
+                if (error.code !== 'auth/popup-closed-by-user') {
+                    alert("Authentication failed. Please try again.");
+                }
+            }
         };
 
         const updateFollowUI = (isFollowing) => {
             const followPill = document.querySelector('.stat-pill span:last-child');
             if (followPill && isFollowing) {
                 const parent = followPill.closest('.stat-pill');
-                parent.innerHTML = '<span style="color: #4ade80;">Following <i class="fas fa-check"></i></span>';
+                parent.innerHTML = '<span style="color: #4ade80; font-weight:bold;">Following <i class="fas fa-check"></i></span>';
                 parent.style.pointerEvents = 'none';
+                localStorage.setItem('yash_followed', 'true');
             }
         };
 
