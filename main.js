@@ -1511,6 +1511,13 @@ async function initGitHubStats() {
                         count: firebase.firestore.FieldValue.increment(1)
                     });
 
+                    // Instant UI Increment for feedback
+                    const displayEl = document.getElementById('follower-count-display');
+                    if (displayEl) {
+                        let currentCount = parseInt(displayEl.innerText.replace(/,/g, '')) || 2100;
+                        displayEl.innerText = (currentCount + 1).toLocaleString();
+                    }
+
                     updateFollowUI(true);
                     console.log("Follow successful! Global count increased.");
                 } else {
