@@ -3949,14 +3949,16 @@ body {
 }
 
 .waving-guy-container {
-    width: 250px;
-    height: 250px;
-    margin: -10px auto 20px auto;
+    width: 220px;
+    height: 220px;
+    margin: 20px auto;
     display: flex;
     align-items: center;
     justify-content: center;
     filter: drop-shadow(0 0 30px rgba(46, 91, 255, 0.4));
     transition: transform 0.3s ease;
+    position: relative;
+    z-index: 10;
 }
 
 .waving-guy-container:hover {

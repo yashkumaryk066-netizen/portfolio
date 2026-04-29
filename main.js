@@ -1412,27 +1412,14 @@ async function initGitHubStats() {
         const res = await fetch('https://api.github.com/users/yashkumaryk066-netizen');
         const data = await res.json();
         
-        // Use realistic stats as requested by user
-        let followers = "2.1k"; 
-        
-        // Fetch real-time count from Firestore
-        const statsDoc = await db.collection('stats').doc('followers').get();
-        if (statsDoc.exists) {
-            const rawCount = statsDoc.data().count || 2100;
-            // Show full number for precision (2100, 2101...) unless it's extremely large
-            followers = rawCount >= 100000 ? (rawCount / 1000).toFixed(1) + 'k' : rawCount.toLocaleString();
-        } else {
-            // Initialize if first time
-            await db.collection('stats').doc('followers').set({ count: 2100 });
-        }
-
-        const following = "109";
         const repos = data.public_repos || 6;
+        let followers = "2,100";
+        const following = "109";
 
         const statsHtml = `
             <div class="github-stats-container reveal">
                 <div class="stat-pill"><i class="fab fa-github"></i><div>${repos}</div><span>Repos</span></div>
-                <div class="stat-pill"><i class="fas fa-users"></i><div>${followers}</div><span>Followers</span></div>
+                <div class="stat-pill"><i class="fas fa-users"></i><div id="follower-count-display">${followers}</div><span>Followers</span></div>
                 <div class="stat-pill"><i class="fas fa-code-branch"></i><div>${following}</div><span>Following</span></div>
                 <div class="stat-pill" id="follow-trigger-pill" style="margin-left: 10px; border-left: 1px solid rgba(255,255,255,0.1); padding-left: 15px;">
                     <span style="color: #8b5cf6; font-weight:bold;">Follow +</span>
@@ -1440,6 +1427,18 @@ async function initGitHubStats() {
             </div>
         `;
         el.insertAdjacentHTML('afterend', statsHtml);
+
+        // Fetch real-time count from Firestore in background
+        db.collection('stats').doc('followers').get().then(statsDoc => {
+            if (statsDoc.exists) {
+                const rawCount = statsDoc.data().count || 2100;
+                const formatted = rawCount >= 100000 ? (rawCount / 1000).toFixed(1) + 'k' : rawCount.toLocaleString();
+                const displayEl = document.getElementById('follower-count-display');
+                if (displayEl) displayEl.innerText = formatted;
+            } else {
+                db.collection('stats').doc('followers').set({ count: 2100 });
+            }
+        }).catch(err => console.log("Firestore count fetch failed:", err));
 
         // Firebase Configuration (Found from project: splitbalance)
         const firebaseConfig = {
