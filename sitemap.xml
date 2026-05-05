@@ -1,21 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Main Pages -->
   <url>
     <loc>https://yashamishra.in/</loc>
-    <lastmod>2026-04-27</lastmod>
+    <lastmod>2026-05-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://yashamishra.in/yash_mishra_resume.html</loc>
-    <lastmod>2026-04-27</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://yashamishra.in/blog.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://yashamishra.in/blog.html</loc>
-    <lastmod>2026-04-27</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://yashamishra.in/yash_mishra_resume.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Posts (Critical for SEO Authority) -->
+  <url>
+    <loc>https://yashamishra.in/blog/best-developer-bhagalpur.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://yashamishra.in/blog/flutter-developer-bihar-rangra.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://yashamishra.in/blog/software-developer-katihar-naugachia.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://yashamishra.in/blog/edtech-bihar-ysm-ai.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://yashamishra.in/blog/django-vs-nextjs-startup.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yashamishra.in/blog/tech-services-jaipur-bihar.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yashamishra.in/blog/devops-cybersecurity-bihar-expert.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yashamishra.in/blog/future-of-web-bihar.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://yashamishra.in/blog/secure-coding-practices.html</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>
