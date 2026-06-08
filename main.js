@@ -4,28 +4,39 @@
    ============================================= */
 
 // ===== LOADING & PRELOADER =====
-window.addEventListener('load', () => {
+let progress = 0;
+let isLoaded = false;
+
+const interval = setInterval(() => {
   const loaderBar = document.getElementById('loader-bar');
   const status = document.querySelector('.loader-status');
   
-  // Fake progress for visual appeal
-  let progress = 0;
-  const interval = setInterval(() => {
-    progress += Math.random() * 15;
-    if (progress >= 100) {
-      progress = 100;
-      clearInterval(interval);
-      setTimeout(() => {
-        document.body.classList.add('loaded');
-        console.log("%c Namaste from Jaipur! 🏰 | Portfolio Loaded Successfully.", "color: #8b5cf6; font-weight: bold; font-size: 1.2rem;");
-      }, 500);
-    }
-    if (loaderBar) loaderBar.style.width = progress + '%';
-    if (status && progress > 30) status.textContent = "Neural Synapse Syncing...";
-    if (status && progress > 60) status.textContent = "Quantum UI Rendering...";
-    if (status && progress > 85) status.textContent = "Ready to Launch...";
-  }, 100);
+  if (!isLoaded) {
+    progress += Math.random() * 10;
+    if (progress > 90) progress = 90; // Hold at 90% until fully loaded
+  } else {
+    progress += 20; // Finish quickly
+  }
 
+  if (progress >= 100) {
+    progress = 100;
+    clearInterval(interval);
+    setTimeout(() => {
+      document.body.classList.add('loaded');
+      console.log("%c Namaste from Jaipur! 🏰 | Portfolio Loaded Successfully.", "color: #8b5cf6; font-weight: bold; font-size: 1.2rem;");
+    }, 200);
+  }
+  if (loaderBar) loaderBar.style.width = progress + '%';
+  if (status && progress > 30 && progress < 60) status.textContent = "Neural Synapse Syncing...";
+  if (status && progress > 60 && progress < 85) status.textContent = "Quantum UI Rendering...";
+  if (status && progress >= 85) status.textContent = "Ready to Launch...";
+}, 50);
+
+window.addEventListener('load', () => {
+  isLoaded = true;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
   initAll();
 });
 
