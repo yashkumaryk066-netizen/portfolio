@@ -12,25 +12,23 @@ const interval = setInterval(() => {
   const status = document.querySelector('.loader-status');
   
   if (!isLoaded) {
-    progress += Math.random() * 10;
+    progress += 35; // Increased from Math.random() * 10 to speed up
     if (progress > 90) progress = 90; // Hold at 90% until fully loaded
   } else {
-    progress += 20; // Finish quickly
+    progress += 100; // Instantly finish when loaded
   }
 
   if (progress >= 100) {
     progress = 100;
     clearInterval(interval);
-    setTimeout(() => {
-      document.body.classList.add('loaded');
-      console.log("%c Namaste from Jaipur! 🏰 | Portfolio Loaded Successfully.", "color: #8b5cf6; font-weight: bold; font-size: 1.2rem;");
-    }, 200);
+    document.body.classList.add('loaded');
+    console.log("%c Namaste from Jaipur! 🏰 | Portfolio Loaded Successfully.", "color: #8b5cf6; font-weight: bold; font-size: 1.2rem;");
   }
   if (loaderBar) loaderBar.style.width = progress + '%';
   if (status && progress > 30 && progress < 60) status.textContent = "Neural Synapse Syncing...";
   if (status && progress > 60 && progress < 85) status.textContent = "Quantum UI Rendering...";
   if (status && progress >= 85) status.textContent = "Ready to Launch...";
-}, 50);
+}, 10); // Reduced interval time from 50ms to 10ms for ultra-fast loading
 
 function runInitAll() {
   isLoaded = true;
