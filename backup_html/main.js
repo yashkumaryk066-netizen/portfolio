@@ -32,11 +32,8 @@ const interval = setInterval(() => {
   if (status && progress >= 85) status.textContent = "Ready to Launch...";
 }, 50);
 
-window.addEventListener('load', () => {
-  isLoaded = true;
-});
-
 document.addEventListener('DOMContentLoaded', () => {
+  isLoaded = true;
   initAll();
 });
 
