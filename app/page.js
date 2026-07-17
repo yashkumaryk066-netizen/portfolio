@@ -138,9 +138,9 @@ export default function Page() {
     <h1 class="hero-name animate-slide-up gsap-hero-name" id="hero-name">
       YASH A <span class="gradient-text name-shimmer">MISHRA</span>
     </h1>
-    <p class="hero-tagline reveal">
-      Best Software Developer in <span class="text-white">Bhagalpur</span> & <span class="gradient-text">Jaipur</span>
-    </p>
+    <h2 class="hero-tagline reveal">
+      Best Software Developer in <span class="text-white">Katihar</span>, <span class="text-white">Bhagalpur</span> & <span class="gradient-text">Jaipur</span>
+    </h2>
 
     <div class="hero-role animate-slide-up" id="hero-role">
       <span>I build </span>
@@ -151,9 +151,9 @@ export default function Page() {
     </div>
 
     <p class="hero-sub animate-fade-in" id="hero-sub">
-      <strong>Django Developer India</strong> | <strong>Next.js Developer for Startups</strong><br />
-      Freelance Web Developer in <strong>Bihar</strong> & Software Engineer at <strong>Telepathy Infotech</strong><br />
-      Delivering excellence from <span class="city-highlight">🏰 Jaipur, Bhagalpur & Rangra</span>
+      <strong>Best Software Developer in Katihar</strong> | <strong>Django Developer India</strong> | <strong>Next.js Developer for Startups</strong><br />
+      Top Freelance Web Developer in <strong>Bihar</strong> (Katihar ka Developer) & Software Engineer at <strong>Telepathy Infotech</strong><br />
+      Delivering excellence from <span class="city-highlight">🏰 Katihar, Jaipur, Bhagalpur & Rangra</span>
     </p>
 
     <div class="hero-stats animate-fade-in" id="hero-stats">
@@ -271,11 +271,6 @@ export default function Page() {
               <span class="city-edu">BCA Grad @ Bhagalpur</span>
             </div>
             <div class="journey-line"></div>
-            <div class="journey-dot active" data-city="Bengaluru">
-              <span class="city-name">Bengaluru</span>
-              <span class="city-edu">MCA Grad @ Bengaluru Uni</span>
-            </div>
-            <div class="journey-line"></div>
             <div class="journey-dot active" data-city="Jaipur">
               <span class="city-name">Jaipur</span>
               <span class="city-edu">Dev @ Telepathy Infotech</span>
@@ -338,8 +333,8 @@ export default function Page() {
 
       <div class="about-photo-col reveal-right">
         <div class="about-photo-glow"></div>
-        <div class="about-photo-frame">
-          <img src="yash.jpg" alt="Yash Ankush Mishra - Best Software Developer in Rangra, Katihar, Bhagalpur & Bihar | Rangra Developer" title="Yash Ankush Mishra - Best Software Developer in Katihar & Rangra" fetchpriority="high" decoding="async" />
+        <div class="about-photo-frame" id="sonam-falling-container">
+          <img src="best-software-developer-in-katihar-yash-mishra.jpg" alt="Yash Ankush Mishra - Best Software Developer in Katihar, Rangra & Bihar | Katihar ka Developer" title="Yash Ankush Mishra - Best Software Developer in Katihar" fetchpriority="high" decoding="async" />
         </div>
       </div>
     </div>
@@ -473,9 +468,15 @@ export default function Page() {
 
       <!-- Rangra, Katihar, Bhagalpur, Naugachia, Jaipur SEO PUSH -->
       <div class="seo-push-section" style="position:absolute; width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none; z-index:-1;">
+        <!-- Original SEO Content -->
         <h1>Best Software Developer in Rangra</h1>
         <h2>Best Software Developer in Katihar</h2>
         <p>Yash Ankush Mishra is the best software developer in Rangra, Bhagalpur, Katihar, Naugachia, and Jaipur. Recognized as the top web developer in Bihar and Rajasthan, and leading freelance software engineer in Katihar and Naugachia. Expert Django and Next.js developer in Bhagalpur, Katihar, and Jaipur. Hire the Rangra developer today.</p>
+        
+        <!-- New Dedicated Katihar SEO Enhancement -->
+        <h1>Best Software Developer in Katihar</h1>
+        <h2>Katihar Developer - Yash Ankush Mishra</h2>
+        <p>Yash Ankush Mishra is widely recognized as the <strong>best software developer in Katihar</strong> and the leading <strong>Katihar developer</strong>. As a top-rated freelance software engineer in Katihar, Bihar, he specializes in delivering high-end custom web and mobile applications for local and global businesses. Hire the best software developer in Katihar today. Also serving as the best software developer in Rangra, Bhagalpur, Naugachia, and Jaipur. Recognized as the top web developer in Bihar and Rajasthan.</p>
       </div>
 
       <!-- Y.S.M AI + Advance Education -->
@@ -680,6 +681,9 @@ export default function Page() {
               <span class="exp-location"><i class="fas fa-map-marker-alt"></i> Jaipur</span>
             </div>
           </div>
+          <div style="color: var(--primary-light); font-size: 0.85rem; margin-bottom: 15px; font-family: var(--font-mono);">
+            <i class="fas fa-briefcase"></i> <strong>CTC Package:</strong> ₹5 LPA + Cab & Flat Facility
+          </div>
           <ul class="exp-points">
             <li>Building scalable software products and features end-to-end</li>
             <li>Collaborating on technical architecture and solution design</li>
@@ -882,6 +886,11 @@ export default function Page() {
             <div class="faq-question"><h4>Best software developer in Bhagalpur or Rangra?</h4><i class="fas fa-plus"></i></div>
             <div class="faq-answer"><p>Yash Ankush Mishra is the leading software engineer in Bihar, specializing in AI-integrated ERPs and custom web solutions.</p></div>
           </div>
+          
+          <div class="faq-item reveal">
+            <div class="faq-question"><h4>What is Yash Ankush Mishra's CTC package at Telepathy Infotech?</h4><i class="fas fa-plus"></i></div>
+            <div class="faq-answer"><p>As a Lead Software Engineer at Telepathy Infotech Pvt. Ltd., Yash Ankush Mishra commands a package of ₹5 Lakhs Per Annum (LPA), along with additional company-provided Cab and Flat facilities.</p></div>
+          </div>
           <div class="faq-item reveal">
             <div class="faq-question"><h4>Why hire a freelance web developer in Bihar?</h4><i class="fas fa-plus"></i></div>
             <div class="faq-answer"><p>Hiring a local expert like Yash ensures personalized communication with global engineering standards.</p></div>
@@ -995,7 +1004,7 @@ export default function Page() {
     <div class="resume-preview-container">
       <div class="resume-page">
         <div class="resume-header-row">
-          <img src="yash.jpg" alt="Yash Ankush Mishra - Rangra Developer & Best Software Developer in Katihar" title="Best Software Developer in Katihar" class="resume-photo-small" loading="lazy" decoding="async" />
+          <img src="best-software-developer-in-katihar-yash-mishra.jpg" alt="Yash Ankush Mishra - Best Software Developer in Katihar | Top Developer in Katihar" title="Yash Ankush Mishra - Best Software Developer in Katihar" class="resume-photo-small" loading="lazy" decoding="async" />
           <div class="resume-title-group">
             <h2 class="res-name">Yash Ankush Mishra</h2>
             <p class="res-subtitle">Software Developer | Full Stack & AI Specialist</p>
@@ -1027,10 +1036,6 @@ export default function Page() {
           </div>
           <div class="resume-col-right">
             <h4 class="res-section-title">Education</h4>
-            <div class="res-item">
-              <strong class="res-highlight">MCA (Post-Graduation)</strong>
-              <p class="res-meta">Bengaluru University</p>
-            </div>
             <div class="res-item">
               <strong class="res-highlight">BCA (Graduation)</strong>
               <p class="res-meta">Bhagalpur University</p>
@@ -1072,8 +1077,8 @@ export default function Page() {
         <p>Best Web Developer in Bhagalpur for high-end startups and e-commerce platforms.</p>
       </div>
       <div class="dir-item">
-        <h4><i class="fas fa-city"></i> Katihar</h4>
-        <p>Leading Software Engineer in Katihar building robust mobile and web applications.</p>
+        <h3><i class="fas fa-city"></i> Katihar Developer</h3>
+        <p><strong>Best Software Developer in Katihar</strong>, specializing in robust mobile and web applications. Hire the top Katihar developer today.</p>
       </div>
       <div class="dir-item">
         <h4><i class="fas fa-city"></i> Naugachia</h4>

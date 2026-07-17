@@ -53,6 +53,7 @@ function initAll() {
   setYear();
   // ===== ADVANCED EFFECTS =====
   initScrollProgress();
+  initLenis();
   initGSAP();
   initVanillaTilt();
   initMagneticButtons();
@@ -71,6 +72,7 @@ function initAll() {
   initMoodToggle();
   initGitHubStats();
   initDraggableElements();
+  initSonamFalling();
   
   // Final Layout Refresh
   if (typeof ScrollTrigger !== 'undefined') {
@@ -85,6 +87,91 @@ function initAll() {
 function setYear() {
   const el = document.getElementById('year');
   if (el) el.textContent = new Date().getFullYear();
+}
+
+// ===== SONAM FALLING ANIMATION =====
+function initSonamFalling() {
+  const container = document.getElementById('sonam-falling-container');
+  if (!container) return;
+
+  function createDrop(isInitial = false) {
+    const drop = document.createElement('div');
+    drop.classList.add('sonam-drop');
+    drop.textContent = 'Sonam';
+    
+    // Randomize properties
+    const duration = Math.random() * 2000 + 2000; // 2s to 4s
+    const size = Math.random() * 0.8 + 0.8; // 0.8rem to 1.6rem (smaller since it's inside the photo)
+    drop.style.fontSize = size + 'rem';
+    
+    container.appendChild(drop);
+
+    // Laser physics dimensions
+    const boxWidth = container.offsetWidth || 380;
+    const boxHeight = container.offsetHeight || 480;
+    
+    // Pick completely random start position inside the box
+    const startX = Math.random() * boxWidth;
+    const startY = Math.random() * boxHeight;
+    
+    // Pick a completely random direction angle (0 to 360 degrees)
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = Math.random() * 80 + 50; // 50 to 130 px movement (short distances, thoda thoda)
+    const endX = startX + Math.cos(angle) * distance;
+    const endY = startY + Math.sin(angle) * distance;
+    
+    // Random rotation for the text
+    const rotStart = Math.random() * 180 - 90;
+    const rotEnd = rotStart + (Math.random() * 90 - 45);
+
+    let keyframes;
+    let animDuration = duration;
+
+    if (isInitial) {
+        // Start somewhere randomly along the path so the box is full instantly
+        const progressStart = Math.random();
+        animDuration = duration * (1 - progressStart);
+        
+        const midX = startX + (endX - startX) * progressStart;
+        const midY = startY + (endY - startY) * progressStart;
+        const midRot = rotStart + (rotEnd - rotStart) * progressStart;
+        
+        keyframes = [
+            { transform: `translate(${midX}px, ${midY}px) rotate(${midRot}deg) scale(1)`, opacity: 0.35, filter: 'blur(2px)' },
+            { transform: `translate(${endX}px, ${endY}px) rotate(${rotEnd}deg) scale(0.8)`, opacity: 0, filter: 'blur(4px)' }
+        ];
+    } else {
+        keyframes = [
+            { transform: `translate(${startX}px, ${startY}px) rotate(${rotStart}deg) scale(0.8)`, opacity: 0, filter: 'blur(4px)', offset: 0 },
+            { transform: `translate(${startX + (endX-startX)*0.1}px, ${startY + (endY-startY)*0.1}px) rotate(${rotStart + (rotEnd-rotStart)*0.1}deg) scale(1.1)`, opacity: 0.35, filter: 'blur(1px)', offset: 0.1 },
+            { transform: `translate(${startX + (endX-startX)*0.9}px, ${startY + (endY-startY)*0.9}px) rotate(${rotStart + (rotEnd-rotStart)*0.9}deg) scale(1.1)`, opacity: 0.35, filter: 'blur(1px)', offset: 0.9 },
+            { transform: `translate(${endX}px, ${endY}px) rotate(${rotEnd}deg) scale(0.8)`, opacity: 0, filter: 'blur(4px)', offset: 1 }
+        ];
+    }
+
+    const animation = drop.animate(keyframes, {
+        duration: animDuration,
+        easing: 'linear',
+        fill: 'forwards'
+    });
+
+    animation.onfinish = () => {
+        drop.remove();
+    };
+  }
+
+  // Initial drops
+  for(let i=0; i<4; i++) {
+    createDrop(true);
+  }
+
+  // Continue spawning 3 to 4 names every 2 seconds
+  setInterval(() => {
+    const count = Math.floor(Math.random() * 2) + 3; // 3 or 4
+    for(let i=0; i<count; i++) {
+      createDrop(false);
+    }
+  }, 2000);
 }
 
 // ===== CUSTOM CURSOR =====
@@ -241,12 +328,12 @@ function initTyped() {
   const el = document.getElementById('typed-text');
   if (!el) return;
   const words = [
-    'Bhagalpur\'s Best Dev',
-    'Django Specialist India',
-    'Next.js for Startups',
-    'Freelance Web Dev Bihar',
-    'AI Solutions Expert',
-    'Custom Software Pro',
+    'Real-time Chat Apps',
+    'Cross-Platform Mobile Apps',
+    'Enterprise ERP Systems',
+    'Scalable E-Commerce Platforms',
+    'Full-Stack Web Applications',
+    'AI-Powered Solutions',
   ];
   let wordIndex = 0;
   let charIndex = 0;
@@ -481,6 +568,37 @@ function initScrollProgress() {
   }, { passive: true });
 }
 
+// ===== LENIS SMOOTH SCROLL (CIAO ENERGY FLOW) =====
+function initLenis() {
+  if (typeof Lenis !== 'undefined') {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+    
+    if (typeof ScrollTrigger !== 'undefined') {
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.add((time)=>{
+        lenis.raf(time * 1000)
+      });
+      gsap.ticker.lagSmoothing(0);
+    }
+  }
+}
+
 // ===== GSAP SCROLL ANIMATIONS =====
 function initGSAP() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
@@ -524,12 +642,146 @@ function initGSAP() {
       scrollTrigger: { trigger: '.about-highlights', start: 'top 80%', once: true } }
   );
 
-  // Projects
-  gsap.fromTo('.project-card',
-    { opacity: 0, y: 50 },
-    { opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out',
-      scrollTrigger: { trigger: '#projects', start: 'top 72%', once: true } }
-  );
+  // Projects - Ciao Energy Gamme Horizontal Flow
+  let mm = gsap.matchMedia();
+  
+  mm.add("(min-width: 992px)", () => {
+    const projectsGrid = document.querySelector('.projects-grid');
+    const projectCards = gsap.utils.toArray('.project-card');
+    
+    if(projectsGrid && projectCards.length > 0) {
+      // Force horizontal layout via GSAP for Coverflow
+      gsap.set(projectsGrid, { display: 'flex', flexWrap: 'nowrap', width: 'max-content', gap: '30px', padding: '50px 0', cursor: 'grab', position: 'relative' });
+      
+      const cardWidth = 400;
+      const gap = 30;
+      const step = cardWidth + gap;
+      
+      // Reset margins and origin for zoom effect
+      gsap.set(projectCards, { width: cardWidth + 'px', flexShrink: 0, margin: 0, transformOrigin: "center center" }); 
+
+      // Create Carousel Wrapper
+      let wrapper = projectsGrid.parentElement;
+      if (!wrapper.classList.contains('projects-carousel-wrapper')) {
+        wrapper = document.createElement('div');
+        wrapper.className = 'projects-carousel-wrapper';
+        wrapper.style.overflow = 'hidden';
+        wrapper.style.position = 'relative';
+        wrapper.style.width = '100%';
+        wrapper.style.padding = '20px 0';
+        
+        projectsGrid.parentNode.insertBefore(wrapper, projectsGrid);
+        wrapper.appendChild(projectsGrid);
+
+        // Add slider controls inside the wrapper
+        const controls = document.createElement('div');
+        controls.id = 'gamme-slider-controls';
+        controls.style.position = 'absolute';
+        controls.style.top = '50%';
+        controls.style.left = '0';
+        controls.style.width = '100%';
+        controls.style.display = 'flex';
+        controls.style.justifyContent = 'space-between';
+        controls.style.transform = 'translateY(-50%)';
+        controls.style.pointerEvents = 'none'; // pass clicks through
+        controls.style.zIndex = '20';
+        
+        const btnStyle = "pointer-events: auto; background: rgba(139,92,246,0.8); border: none; color: white; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: background 0.3s;";
+        
+        controls.innerHTML = `
+          <button id="slider-prev" style="${btnStyle}"><i class="fas fa-chevron-left" style="font-size: 1.2rem;"></i></button>
+          <button id="slider-next" style="${btnStyle}"><i class="fas fa-chevron-right" style="font-size: 1.2rem;"></i></button>
+        `;
+        wrapper.appendChild(controls);
+
+        document.getElementById('slider-prev').onmouseenter = function() { this.style.background = '#8b5cf6'; };
+        document.getElementById('slider-prev').onmouseleave = function() { this.style.background = 'rgba(139,92,246,0.8)'; };
+        document.getElementById('slider-next').onmouseenter = function() { this.style.background = '#8b5cf6'; };
+        document.getElementById('slider-next').onmouseleave = function() { this.style.background = 'rgba(139,92,246,0.8)'; };
+      }
+
+      let activeIndex = 0;
+      const totalCards = projectCards.length;
+
+      const updateCardStyles = () => {
+        let gridX = gsap.getProperty(projectsGrid, "x") || 0;
+        let wrapperCenter = wrapper.offsetWidth / 2;
+
+        projectCards.forEach((card, i) => {
+          let cardLeft = gridX + (i * step);
+          let cardCenterPos = cardLeft + (cardWidth / 2);
+          
+          let dist = Math.abs(wrapperCenter - cardCenterPos);
+          let maxDist = step * 1.5;
+          let progress = Math.max(0, 1 - (dist / maxDist)); 
+
+          let scale = 0.85 + (0.15 * progress); // 1.0 when active, 0.85 when inactive
+          let opacity = 0.4 + (0.6 * progress); // 1.0 when active, 0.4 when inactive
+          let zIndex = Math.round(progress * 10);
+
+          gsap.set(card, { scale: scale, opacity: opacity, zIndex: zIndex });
+        });
+      };
+
+      const updateCards = (animate = true) => {
+        let wrapperCenter = wrapper.offsetWidth / 2;
+        let targetX = (wrapperCenter - (cardWidth / 2)) - (activeIndex * step);
+
+        if (animate) {
+          gsap.to(projectsGrid, { x: targetX, duration: 0.6, ease: "power3.out", onUpdate: updateCardStyles });
+        } else {
+          gsap.set(projectsGrid, { x: targetX });
+          updateCardStyles();
+        }
+      };
+
+      // Initialize
+      setTimeout(() => updateCards(false), 50);
+
+      // Refresh styles on window resize to keep it perfectly centered
+      window.addEventListener('resize', () => updateCards(false));
+
+      document.getElementById('slider-prev')?.addEventListener('click', () => {
+        if (activeIndex > 0) activeIndex--;
+        updateCards(true);
+      });
+
+      document.getElementById('slider-next')?.addEventListener('click', () => {
+        if (activeIndex < totalCards - 1) activeIndex++;
+        updateCards(true);
+      });
+
+      // Draggable Swipe Flow with Snapping and Live Zoom
+      if (typeof Draggable !== 'undefined') {
+        setTimeout(() => {
+          Draggable.create(projectsGrid, {
+            type: "x",
+            onDrag: function() {
+              updateCardStyles(); // Real-time zoom effect while dragging!
+            },
+            onDragEnd: function() {
+              let wrapperCenter = wrapper.offsetWidth / 2;
+              let gridX = this.x;
+              
+              // Calculate index closest to center
+              let exactIndex = ((wrapperCenter - (cardWidth / 2)) - gridX) / step;
+              activeIndex = Math.max(0, Math.min(Math.round(exactIndex), totalCards - 1));
+              
+              updateCards(true);
+            }
+          });
+        }, 100);
+      }
+    }
+  });
+
+  mm.add("(max-width: 991px)", () => {
+    gsap.fromTo('.project-card',
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 0.7, stagger: 0.12, ease: 'power3.out',
+        scrollTrigger: { trigger: '#projects', start: 'top 72%', once: true } }
+    );
+  });
 
   // Timeline
   gsap.fromTo('.timeline-item',
@@ -1328,7 +1580,6 @@ function initAIChat() {
     'projects': 'Yash has launched 6 live products including Y.S.M AI, Scan Khana, SettleStack, and Vibe Talk. He is known as the **best software developer in Bhagalpur**.',
     'location': 'Yash provides expert services in **Jaipur**, **Bhagalpur**, **Katihar**, **Naugachia**, and **Rangra**.',
     'contact': 'You can hire Yash for premium development. WhatsApp him at +91 8356926231.',
-    'mca': 'Yash completed his MCA from Bengaluru University and BCA from Bhagalpur University.',
     'devops': 'Yash is an expert in **DevOps & Cybersecurity**, using Docker, Nginx, and Linux scripting to build secure infrastructure.',
     'flutter': 'Yash builds high-performance mobile apps using **Flutter & Dart**, like his live project **RangraGo**.',
     'cyber': 'Yash has a strong background in **Cybersecurity**, writing custom scripts to protect digital assets.',

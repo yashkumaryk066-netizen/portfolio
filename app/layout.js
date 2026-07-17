@@ -3,9 +3,9 @@ import './globals.css'
 
 export const metadata = {
   metadataBase: new URL("https://yashamishra.in"),
-  title: "Best Software Developer in Bihar | Top Software Engineer in Rangra, Katihar & Bhagalpur | Yash Ankush Mishra",
-  description: "Yash Ankush Mishra is the best software developer in Rangra, Katihar, Bhagalpur & Bihar. Ranked #1 for custom software, mobile apps, and AI solutions near you. Expert Django & Next.js Consultant.",
-  keywords: "best software developer in rangra, rangra developer, best software developer in katihar, best software developer in bhagalpur, best software developer in Bihar, top software engineer Patna, best software developer near me, freelance web developer in Bhagalpur, Django consultant India, custom software developer Bihar, affordable web developer Patna, Yash Ankush Mishra, yashankushmishra, yashamishra",
+  title: "Best Software Developer in Katihar & Bihar | Top Software Engineer in Rangra & Bhagalpur | Yash Ankush Mishra",
+  description: "Yash Ankush Mishra is the Best Software Developer in Katihar, Rangra, Bhagalpur & Bihar (Katihar ka Developer). Ranked #1 for custom software, mobile apps, and AI solutions near you. Expert Django & Next.js Consultant.",
+  keywords: "best software developer in katihar, katihar ka developer, top software engineer in katihar, best software developer in rangra, best software developer in Bihar, top software engineer Patna, best software developer near me, freelance web developer in Bhagalpur, Django consultant India, custom software developer Katihar, Yash Ankush Mishra",
   authors: [{ name: "Yash Ankush Mishra" }],
   creator: "Yash Ankush Mishra",
   publisher: "Yash Ankush Mishra",
@@ -29,7 +29,17 @@ export const metadata = {
       },
     ],
     locale: "en_IN",
-    type: "website",
+    type: "profile",
+    firstName: "Yash Ankush",
+    lastName: "Mishra",
+    username: "yashankushmishra",
+  },
+  category: "technology",
+  classification: "Portfolio, Software Development Services",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
   },
   twitter: {
     card: "summary_large_image",
@@ -63,13 +73,13 @@ export const metadata = {
     "msapplication-navbutton-color": "#05050f",
     "theme-color": "#05050f",
     "geo.region": "IN-BR",
-    "geo.placename": "Rangra, Bhagalpur, Patna, Bihar, Jaipur",
+    "geo.placename": "Katihar, Rangra, Bhagalpur, Patna, Bihar, Jaipur",
     "geo.position": "25.3789;87.1643",
     "ICBM": "25.3789, 87.1643",
-    "DC.title": "Yash Ankush Mishra - Best Software Developer in Bhagalpur & Bihar",
+    "DC.title": "Yash Ankush Mishra - Best Software Developer in Katihar, Bhagalpur, Bihar & Jaipur",
     "DC.creator": "Yash Ankush Mishra",
-    "DC.subject": "Software Development, Django, Next.js, AI, Bihar Tech",
-    "DC.description": "Elite software developer specialized in AI, Django and Next.js. Serving all districts of Bihar.",
+    "DC.subject": "Software Development, Katihar Developer, Django, Next.js, AI, Bihar Tech",
+    "DC.description": "Elite Katihar Developer specialized in AI, Django and Next.js. Serving Katihar and all districts of Bihar.",
     "DC.publisher": "Yash Ankush Mishra",
     "DC.language": "en",
     "twitter:label1": "Expertise",
@@ -96,7 +106,7 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
         
         <link rel="stylesheet" href="/style.css" />
-        <link rel="icon" href="/yash.jpg" type="image/jpeg" />
+        <link rel="icon" href="/best-software-developer-in-katihar-yash-mishra.jpg" type="image/jpeg" />
       
         <script
           type="application/ld+json"
@@ -107,16 +117,16 @@ export default function RootLayout({ children }) {
         "@type": "Person",
         "@id": "https://yashamishra.in/#person",
         "name": "Yash Ankush Mishra",
-        "alternateName": ["Yash A. Mishra", "yashankushmishra", "yashamishra", "Rangra Developer", "YSM"],
+        "alternateName": ["Katihar Developer", "Yash A. Mishra", "yashankushmishra", "yashamishra", "Rangra Developer", "YSM"],
         "url": "https://yashamishra.in/",
-        "image": "https://yashamishra.in/yash.jpg",
-        "jobTitle": "Lead Software Developer",
+        "image": "https://yashamishra.in/best-software-developer-in-katihar-yash-mishra.jpg",
+        "jobTitle": "Lead Software Developer (Katihar Developer)",
         "worksFor": {
           "@type": "Organization",
           "name": "Telepathy Infotech Pvt. Ltd."
         },
         "knowsAbout": ["Python", "Django", "React", "Next.js", "Mobile App Development", "AI/ML", "FinTech", "EdTech", "Cybersecurity", "DevOps"],
-        "description": "Yash Ankush Mishra is a top-rated software developer in Bihar and Rajasthan, specializing in AI-driven ERP systems and scalable web applications.",
+        "description": "Yash Ankush Mishra is a top-rated software developer in Katihar, Bihar and Rajasthan, specializing in AI-driven ERP systems and scalable web applications.",
         "sameAs": [
           "https://linkedin.com/in/yash-kumar-342330213",
           "https://github.com/yashkumaryk066",
@@ -128,16 +138,17 @@ export default function RootLayout({ children }) {
       },
       {
         "@type": "ImageObject",
-        "url": "https://yashamishra.in/yash.jpg",
+        "url": "https://yashamishra.in/best-software-developer-in-katihar-yash-mishra.jpg",
         "width": "800",
         "height": "800",
-        "caption": "Yash Ankush Mishra - Best Software Developer in Rangra, Katihar, Bhagalpur & Bihar",
+        "caption": "Yash Ankush Mishra - Best Software Developer in Katihar & Bihar",
         "representativeOfPage": "true"
       },
       {
         "@type": "LocalBusiness",
-        "name": "Yash Ankush Mishra - Best Software Developer in Rangra, Katihar, Bhagalpur & Bihar",
-        "image": "https://yashamishra.in/yash.jpg",
+        "name": "Yash Ankush Mishra - Best Software Developer in Katihar, Rangra & Bihar",
+        "alternateName": "Katihar Developer",
+        "image": "https://yashamishra.in/best-software-developer-in-katihar-yash-mishra.jpg",
         "@id": "https://yashamishra.in/",
         "url": "https://yashamishra.in/",
         "telephone": "+918356926231",
@@ -150,6 +161,13 @@ export default function RootLayout({ children }) {
           "postalCode": "853205",
           "addressCountry": "IN"
         },
+        "areaServed": [
+          { "@type": "City", "name": "Katihar" },
+          { "@type": "City", "name": "Rangra" },
+          { "@type": "City", "name": "Bhagalpur" },
+          { "@type": "State", "name": "Bihar" },
+          { "@type": "City", "name": "Jaipur" }
+        ],
         "geo": {
           "@type": "GeoCoordinates",
           "latitude": 25.3789,
@@ -188,12 +206,34 @@ export default function RootLayout({ children }) {
         ]
       },
       {
+        "@type": "ProfessionalService",
+        "name": "Katihar Developer - Best Software Developer in Katihar",
+        "image": "https://yashamishra.in/best-software-developer-in-katihar-yash-mishra.jpg",
+        "@id": "https://yashamishra.in/#katihardeveloper",
+        "url": "https://yashamishra.in/",
+        "telephone": "+918356926231",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Katihar",
+          "addressRegion": "Bihar",
+          "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 25.5398,
+          "longitude": 87.5739
+        },
+        "areaServed": "Katihar",
+        "description": "Top-rated Katihar Developer. Expert in Next.js, Django, and AI solutions. Voted best software developer in Katihar for custom enterprise products."
+      },
+      {
         "@type": "Service",
         "name": "Custom Software Development Bihar & Rajasthan",
         "serviceType": "Software Engineering",
         "provider": { "@id": "https://yashamishra.in/#person" },
         "areaServed": [
-          "Patna", "Bhagalpur", "Muzaffarpur", "Purnia", "Gaya", "Darbhanga", "Arrah", "Begusarai", "Katihar", "Munger", "Rangra", "Saharsa", "Sasaram", "Hajipur", "Bettiah", "Motihari", "Siwan", "Chapra", "Jehanabad", "Aurangabad", "Banka", "Jamui", "Kishanganj", "Madhepura", "Madhubani", "Nawada", "Rohtas", "Samastipur", "Sheohar", "Sitamarhi", "Supaul", "Vaishali", "West Champaran", "East Champaran", "Jaipur", "Rajasthan", "Mumbai"
+          "Katihar", "Patna", "Bhagalpur", "Muzaffarpur", "Purnia", "Gaya", "Darbhanga", "Arrah", "Begusarai", "Munger", "Rangra", "Saharsa", "Sasaram", "Hajipur", "Bettiah", "Motihari", "Siwan", "Chapra", "Jehanabad", "Aurangabad", "Banka", "Jamui", "Kishanganj", "Madhepura", "Madhubani", "Nawada", "Rohtas", "Samastipur", "Sheohar", "Sitamarhi", "Supaul", "Vaishali", "West Champaran", "East Champaran", "Jaipur", "Rajasthan", "Mumbai"
         ],
         "description": "High-end software development services including Django backends, Next.js frontends, and AI-powered automation for startups and enterprises."
       },
@@ -218,9 +258,21 @@ export default function RootLayout({ children }) {
         }
       },
       {
+        "@type": "ProfilePage",
+        "@id": "https://yashamishra.in/#profile",
+        "url": "https://yashamishra.in/",
+        "name": "Yash Ankush Mishra's Official Portfolio",
+        "about": { "@id": "https://yashamishra.in/#person" },
+        "interactionStatistic": {
+          "@type": "InteractionCounter",
+          "interactionType": "https://schema.org/FollowAction",
+          "userInteractionCount": "5000"
+        }
+      },
+      {
         "@type": "Organization",
         "name": "Yash Ankush Mishra - Tech Solutions",
-        "logo": "https://yashamishra.in/yash.jpg",
+        "logo": "https://yashamishra.in/best-software-developer-in-katihar-yash-mishra.jpg",
         "url": "https://yashamishra.in/"
       },
       {
@@ -289,6 +341,14 @@ export default function RootLayout({ children }) {
           },
           {
             "@type": "Question",
+            "name": "What is Yash Ankush Mishra's CTC package at Telepathy Infotech?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "As a Lead Software Engineer at Telepathy Infotech Pvt. Ltd., Yash Ankush Mishra commands a package of ₹5 Lakhs Per Annum (LPA), along with additional company-provided Cab and Flat facilities."
+            }
+          },
+          {
+            "@type": "Question",
             "name": "How to hire a freelance web developer in Bihar?",
             "acceptedAnswer": {
               "@type": "Answer",
@@ -315,6 +375,7 @@ export default function RootLayout({ children }) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js" defer></script>
+        <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
         <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js" defer></script>
