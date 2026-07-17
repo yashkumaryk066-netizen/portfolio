@@ -760,9 +760,9 @@ export default function Page() {
         </div>
       </div>
       <div class="map-container">
-        <!-- Google Maps Embed (Bhagalpur/Rangra Region) -->
+        <!-- Google Maps Embed (Tej Narayan Inter School, Rangra, Bihar 853205) -->
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.728!2d87.16!3d25.38!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDIyJzQ4LjAiTiA4N8KwMDknMzYuMCJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+          src="https://maps.google.com/maps?q=Tej+Narayan+Inter+School,+Rangra,+Bhagalpur,+Bihar+853205&t=&z=15&ie=UTF8&iwloc=&output=embed" 
           width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>
