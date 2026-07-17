@@ -187,18 +187,30 @@ export default function RootLayout({ children }) {
         "review": [
           {
             "@type": "Review",
+            "itemReviewed": {
+              "@type": "LocalBusiness",
+              "name": "Yash Ankush Mishra - Best Software Developer in Katihar, Rangra & Bihar"
+            },
             "author": { "@type": "Person", "name": "Telepathy Infotech" },
             "reviewRating": { "@type": "Rating", "ratingValue": "5" },
             "reviewBody": "Exceptional skill in Django and AI integration. Yash is our top developer for complex products."
           },
           {
             "@type": "Review",
+            "itemReviewed": {
+              "@type": "LocalBusiness",
+              "name": "Yash Ankush Mishra - Best Software Developer in Katihar, Rangra & Bihar"
+            },
             "author": { "@type": "Person", "name": "Aman Raj" },
             "reviewRating": { "@type": "Rating", "ratingValue": "5" },
             "reviewBody": "Best software developer in Bhagalpur. Delivered my app in record time with perfect UI."
           },
           {
             "@type": "Review",
+            "itemReviewed": {
+              "@type": "LocalBusiness",
+              "name": "Yash Ankush Mishra - Best Software Developer in Katihar, Rangra & Bihar"
+            },
             "author": { "@type": "Person", "name": "Vikram Singh" },
             "reviewRating": { "@type": "Rating", "ratingValue": "5" },
             "reviewBody": "Highly professional Django expert. Recommended for startups in Patna and Bihar."
